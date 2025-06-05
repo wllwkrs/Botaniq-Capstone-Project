@@ -1,0 +1,832 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Placeholder font */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+header {
+    background-color: #129990; /* Apply background color to header */
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.container.nav-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+.logo img {
+    height: 50px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 34px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #FFFBDE;
+    transition: color 0.3s ease, background-color 0.3s ease, padding 0.3s ease;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+nav ul li a:hover {
+    color: rgb(255, 255, 255); /* Keep text color or change as needed */
+    background-color: rgba(255, 255, 255, 0.2); /* Add a subtle background tint on hover */
+    text-decoration: none; /* Ensure no underline on hover */
+    /* Remove text-decoration-thickness */
+}
+
+.profile-section {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.profile-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #FFFBDE;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-circle i {
+    color: #129990;
+    font-size: 20px;
+}
+
+.profile-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+@media screen and (min-width: 1025px) {
+    .mobile-menu-icon {
+        display: none !important; /* Hide the hamburger icon on screens wider than 1024px */
+    }
+}
+
+/* Styles for the main content */
+.hero {
+    background-color: #A0D9D3; /* Greenish background color */
+    padding: 40px 0;
+}
+
+.rekomendasi-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px; /* Adjust as needed */
+    margin: 20px auto; /* Center the card and add some vertical margin */
+    text-align: center;
+}
+
+.rekomendasi-card h2 {
+    color: #129990;
+    margin-bottom: 10px;
+    font-size: 28px; /* Increased font size */
+}
+
+.rekomendasi-card p {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.questions-section .question {
+    margin-bottom: 15px;
+    text-align: left; /* Align labels and selects to the left */
+}
+
+.questions-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+}
+
+.questions-section select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.location-section {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.map-placeholder img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.coordinates {
+    display: flex;
+    justify-content: center; /* Center the coordinate inputs */
+    gap: 20px; /* Space between longitude and latitude inputs */
+}
+
+.coord-input label {
+     display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+}
+
+.coord-input input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center; /* Center the placeholder/value text */
+}
+
+.search-button {
+    background-color: #129990;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #0e7e75;
+}
+
+/* Responsive adjustments (optional, based on need) */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .rekomendasi-card {
+        padding: 20px;
+    }
+
+    .coordinates {
+        flex-direction: column; /* Stack inputs on smaller screens */
+        gap: 10px;
+    }
+
+    .coord-input input[type="text"] {
+        width: 100%; /* Make inputs full width on smaller screens */
+        box-sizing: border-box;
+    }
+
+    /* Adjusted Footer Styles for Mobile */
+    footer {
+        padding: 30px 0 15px 0; /* Adjust footer padding */
+    }
+
+    .footer-container {
+        flex-direction: column; /* Stack footer sections vertically */
+        align-items: center; /* Center items horizontally */
+        gap: 30px; /* Space between stacked sections */
+        width: 100%;
+        padding: 0 20px; /* Add horizontal padding */
+        box-sizing: border-box;
+    }
+
+    .footer-about,
+    .footer-links,
+    .footer-social {
+        flex: none; /* Remove flex grow */
+        width: 100%; /* Full width for stacked sections */
+        max-width: 300px; /* Optional: Limit max width */
+        text-align: center; /* Center text within sections */
+    }
+
+    .footer-logo {
+        justify-content: center; /* Center logo within about section */
+        margin-bottom: 15px; /* Space below logo */
+    }
+
+    .footer-about p {
+        text-align: center; /* Center about text */
+        margin-left: 0; /* Remove left margin */
+        margin-bottom: 20px; /* Space below paragraph */
+    }
+
+    .subscribe {
+        flex-direction: column; /* Stack subscribe input and button */
+        gap: 10px; /* Space between input and button */
+        align-items: stretch; /* Stretch items to fill width */
+    }
+
+    .subscribe input[type="text"] {
+        width: 100%; /* Full width input */
+        box-sizing: border-box;
+        padding: 10px; /* Adjust padding */
+        margin-left: 0; /* Remove left margin */
+        border-radius: 5px; /* Adjust border radius */
+        text-align: center; /* Center placeholder/text */
+    }
+
+    .subscribe button {
+        position: static; /* Remove absolute positioning */
+        width: 100%; /* Full width button */
+        padding: 10px; /* Adjust padding */
+        border-radius: 5px; /* Adjust border radius */
+        margin-top: 0; /* Remove top margin */
+        border-left: none; /* Remove border */
+    }
+
+    .footer-links {
+        display: flex; /* Use flex for link groups */
+        flex-direction: column; /* Stack link groups */
+        gap: 20px; /* Space between link groups */
+        margin-left: 0; /* Remove left margin */
+    }
+
+    .footer-links .link-group {
+        text-align: center; /* Center link group text */
+        padding: 0; /* Remove padding */
+    }
+
+     .footer-links .link-group h3 {
+          text-align: center; /* Center link group heading */
+          margin-bottom: 10px; /* Space below heading */
+      }
+
+      .footer-links .link-group ul {
+          padding: 0; /* Remove padding */
+      }
+
+      .footer-links .link-group ul li {
+          margin-bottom: 8px; /* Space between list items */
+      }
+
+      .footer-links .link-group ul li a {
+          font-size: 16px; /* Adjust font size */
+      }
+
+    .footer-social {
+        justify-content: center; /* Center social icons */
+        margin-top: 20px; /* Space above social icons */
+        margin-left: 0; /* Remove left margin */
+    }
+
+    .copyright {
+        font-size: 14px; /* Adjust copyright font size */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer-links {
+        flex-direction: column; /* Ensure column layout for links on very small screens */
+        align-items: center; /* Center link groups */
+    }
+
+    .link-group {
+        text-align: center; /* Center text within link groups */
+    }
+}
+
+/* Additional adjustments for smaller mobile screens if needed */
+@media screen and (max-width: 468px) {
+    /* Specific styles for 468px if different from 768px */
+    /* Most styles from 768px should apply */
+}
+
+/* Styles for Mobile Menu */
+@media screen and (max-width: 1024px) {
+    .desktop-nav {
+        display: none !important; /* Hide desktop navigation on smaller screens */
+    }
+
+    .mobile-menu-icon {
+        display: block; /* Show hamburger icon on smaller screens */
+        order: -1; /* Move hamburger icon to the beginning in flex order */
+        cursor: pointer;
+        font-size: 24px;
+        color: #FFFBDE; /* Match navbar text color */
+        margin-left: 0; /* Remove left margin */
+        margin-right: auto; /* Push other items to the right */
+    }
+
+    .mobile-nav {
+        display: block;
+        /* Remove flex properties from .mobile-nav */
+        /* display: flex; */
+        /* flex-direction: column; */
+    }
+
+    .logo {
+        display: none; /* Hide the main header logo in mobile view */
+    }
+
+    .mobile-nav ul {
+        display: flex; /* Apply flexbox for column layout in mobile view */
+        flex-direction: column; /* Stack items vertically in mobile view */
+    }
+
+    .container.nav-container {
+        justify-content: space-between; /* Distribute items with space between */
+        align-items: center; /* Vertically center items */
+    }
+
+    .profile-section {
+        margin-left: 0; /* Remove auto margin */
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .mobile-nav {
+        display: none; /* Hide mobile navigation on screens wider than 1024px */
+    }
+
+    .mobile-sidebar .sidebar-header img {
+        height: 40px; /* Adjust logo size in mobile sidebar */
+        margin-right: 10px;
+    }
+
+    .mobile-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0; /* Stack items vertically */
+        /* Remove flexbox properties from here */
+        /* display: flex; */
+        /* flex-direction: column; */
+    }
+
+    .mobile-nav li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-nav li:last-child {
+        border-bottom: none;
+    }
+}
+
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initially hidden off-screen */
+    width: 250px;
+    height: 100%;
+    background-color: #129990; /* Match navbar background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+    z-index: 1000; /* Ensure it's above other content */
+    padding-top: 60px; /* Space for close button */
+}
+
+.mobile-sidebar .sidebar-header {
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Vertically center items */
+    padding: 10px 20px; /* Adjust top padding to move logo slightly up */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Optional: Add a separator line */
+}
+
+.mobile-sidebar .sidebar-header img {
+    height: 40px; /* Adjust logo size in mobile sidebar */
+    margin-right: 10px; /* Space between logo and title */
+    font-size: 24px;
+    color: #FFFBDE;
+    cursor: pointer;
+}
+
+.mobile-sidebar .sidebar-header h3 {
+    color: #FFFBDE; /* Match title color */
+    margin: 0; /* Remove default margin */
+}
+
+.mobile-sidebar .close-sidebar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: #FFFBDE;
+    cursor: pointer;
+}
+
+.mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav li:last-child {
+    border-bottom: none;
+}
+
+.mobile-nav a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #FFFBDE;
+    transition: background-color 0.3s ease;
+}
+
+.mobile-nav a:hover {
+    background-color: #0e7e75;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none; /* Initially hidden */
+    z-index: 999; /* Below sidebar */
+}
+
+/* Footer Styles */
+footer {
+    background-color: #004d40; /* Placeholder background color */
+    color: white;
+    padding: 50px 0 20px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+.footer-about {
+    flex: 2;
+}
+
+.footer-about p {
+    font-size: 16px;
+    color: #FFFBDE;
+}
+
+.footer-about img {
+    height: 50px; /* Adjust as needed */
+    margin-bottom: 15px;
+}
+
+.subscribe {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.subscribe input[type="text"] {
+    margin-top: 24px;
+    padding: 10px 10px 10px 24px;
+    width: 538px;
+    height: 30px;
+    background-color: #FFFBDE;
+    border: none;
+    border-radius: 15px;
+    padding-right: 50px;
+}
+
+.subscribe input[type="text"]::placeholder {
+    color: #129990;
+}
+
+.subscribe button {
+    position: absolute;
+    right: 10px;
+    top: 29px;
+    padding: 0 15px;
+    height: 40px;
+    border: none;
+    border-radius: 15px;
+    background-color: #129990;
+    color: #FFFBDE;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 2px solid #FFFBDE;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subscribe button:hover {
+    background-color: #FFFBDE;
+    color: #129990;
+    border: 2px solid #129990;
+}
+
+.footer-links {
+    flex: 3;
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+.link-group h3 {
+    margin-bottom: 15px;
+}
+
+.link-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.link-group ul li {
+    margin-bottom: 10px;
+}
+
+.link-group ul li a {
+    text-decoration: none;
+    color: #FFFBDE;
+}
+
+.footer-social {
+    display: flex;
+    gap: 30px;
+    margin-top: 35px;
+    margin-left: 50px;
+    align-items: flex-start;
+}
+
+.footer-social a {
+    color: white;
+    font-size: 1.5em;
+    margin-left: 0;
+}
+
+.copyright {
+    text-align: center;
+    font-size: 0.9em;
+    padding-top: 12px;
+    margin-top: 24px;
+    border-top: 1px solid rgba(255, 251, 222, 0.3);
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.footer-logo img {
+    height: 100px;
+    width: auto;
+}
+
+.footer-logo h3 {
+    color: #FFFBDE;
+    font-size: 48px;
+    margin: 0;
+}
+
+@media screen and (max-width: 480px) {
+    .footer-links {
+        flex-direction: column; /* Stack link groups on very small screens */
+        align-items: center;
+    }
+
+    .link-group {
+        text-align: center; /* Center text within link groups */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .rekomendasi-card {
+        padding: 20px;
+    }
+
+    .coordinates {
+        flex-direction: column; /* Stack inputs on smaller screens */
+        gap: 10px;
+    }
+
+    .coord-input input[type="text"] {
+        width: 100%; /* Make inputs full width on smaller screens */
+        box-sizing: border-box;
+    }
+
+    /* Adjusted Footer Styles for Mobile */
+    footer {
+        padding: 30px 0 15px 0; /* Adjust footer padding */
+    }
+
+    .footer-container {
+        flex-direction: column; /* Stack footer sections vertically */
+        align-items: center; /* Center items horizontally */
+        gap: 30px; /* Space between stacked sections */
+        width: 100%;
+        padding: 0 20px; /* Add horizontal padding */
+        box-sizing: border-box;
+    }
+
+    .footer-about,
+    .footer-links,
+    .footer-social {
+        flex: none; /* Remove flex grow */
+        width: 100%; /* Full width for stacked sections */
+        max-width: 300px; /* Optional: Limit max width */
+        text-align: center; /* Center text within sections */
+    }
+
+    .footer-logo {
+        justify-content: center; /* Center logo within about section */
+        margin-bottom: 15px; /* Space below logo */
+    }
+
+    .footer-about p {
+        text-align: center; /* Center about text */
+        margin-left: 0; /* Remove left margin */
+        margin-bottom: 20px; /* Space below paragraph */
+    }
+
+    .subscribe {
+        flex-direction: column; /* Stack subscribe input and button */
+        gap: 10px; /* Space between input and button */
+        align-items: stretch; /* Stretch items to fill width */
+    }
+
+    .subscribe input[type="text"] {
+        width: 100%; /* Full width input */
+        box-sizing: border-box;
+        padding: 10px; /* Adjust padding */
+        margin-left: 0; /* Remove left margin */
+        border-radius: 5px; /* Adjust border radius */
+        text-align: center; /* Center placeholder/text */
+    }
+
+    .subscribe button {
+        position: static; /* Remove absolute positioning */
+        width: 100%; /* Full width button */
+        padding: 10px; /* Adjust padding */
+        border-radius: 5px; /* Adjust border radius */
+        margin-top: 0; /* Remove top margin */
+        border-left: none; /* Remove border */
+    }
+
+    .footer-links {
+        display: flex; /* Use flex for link groups */
+        flex-direction: column; /* Stack link groups */
+        gap: 20px; /* Space between link groups */
+        margin-left: 0; /* Remove left margin */
+    }
+
+    .footer-links .link-group {
+        text-align: center; /* Center link group text */
+        padding: 0; /* Remove padding */
+    }
+
+     .footer-links .link-group h3 {
+          text-align: center; /* Center link group heading */
+          margin-bottom: 10px; /* Space below heading */
+      }
+
+      .footer-links .link-group ul {
+          padding: 0; /* Remove padding */
+      }
+
+      .footer-links .link-group ul li {
+          margin-bottom: 8px; /* Space between list items */
+      }
+
+      .footer-links .link-group ul li a {
+          font-size: 16px; /* Adjust font size */
+      }
+
+    .footer-social {
+        justify-content: center; /* Center social icons */
+        margin-top: 20px; /* Space above social icons */
+        margin-left: 0; /* Remove left margin */
+    }
+
+    .copyright {
+        font-size: 14px; /* Adjust copyright font size */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer-links {
+        flex-direction: column; /* Ensure column layout for links on very small screens */
+        align-items: center; /* Center link groups */
+    }
+
+    .link-group {
+        text-align: center; /* Center text within link groups */
+    }
+}
+
+/* Additional adjustments for smaller mobile screens if needed */
+@media screen and (max-width: 468px) {
+    /* Specific styles for 468px if different from 768px */
+    /* Most styles from 768px should apply */
+}
+
+/* Styles for Mobile Menu */
+@media screen and (max-width: 1024px) {
+    .desktop-nav {
+        display: none !important; /* Hide desktop navigation on smaller screens */
+    }
+
+    .mobile-menu-icon {
+        display: block; /* Show hamburger icon on smaller screens */
+        order: -1; /* Move hamburger icon to the beginning in flex order */
+        cursor: pointer;
+        font-size: 24px;
+        color: #FFFBDE; /* Match navbar text color */
+        margin-left: 0; /* Remove left margin */
+        margin-right: auto; /* Push other items to the right */
+    }
+
+    .mobile-nav {
+        display: block;
+        /* Remove flex properties from .mobile-nav */
+        /* display: flex; */
+        /* flex-direction: column; */
+    }
+
+    .logo {
+        display: none; /* Hide the main header logo in mobile view */
+    }
+
+    .mobile-nav ul {
+        display: flex; /* Apply flexbox for column layout in mobile view */
+        flex-direction: column; /* Stack items vertically in mobile view */
+    }
+
+    .container.nav-container {
+        justify-content: space-between; /* Distribute items with space between */
+        align-items: center; /* Vertically center items */
+    }
+
+    .profile-section {
+        margin-left: 0; /* Remove auto margin */
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .mobile-nav {
+        display: none; /* Hide mobile navigation on screens wider than 1024px */
+    }
+
+    .mobile-sidebar .sidebar-header img {
+        height: 40px; /* Adjust logo size in mobile sidebar */
+        margin-right: 10px;
+    }
+
+    .mobile-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0; /* Stack items vertically */
+        /* Remove flexbox properties from here */
+        /* display: flex; */
+        /* flex-direction: column; */
+    }
+
+    .mobile-nav li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-nav li:last-child {
+        border-bottom: none;
+    }
+}

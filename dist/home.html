@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BotaniQ - Grow With Confidence</title>
+    <!-- <link rel="stylesheet" href="assets/css/style.css"> Assuming a CSS file for styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For icons -->
+<script defer src="home.bundle.js"></script></head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="assets/img/image 6.svg" alt="BotaniQ Logo">
+            </div>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#quick-access">Quick Access</a></li>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#contact-us">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons desktop-auth">
+                <button class="btn secondary" id="signin-button" >Sign In</button>
+                <button class="btn primary" id="signup-button" >Sign Up</button>
+            </div>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i> <!-- Hamburger icon -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar">
+        <div class="sidebar-header">
+            <img src="assets/img/image 6.svg" alt="BotaniQ Logo">
+            <i class="fas fa-times close-sidebar"></i> <!-- Close icon -->
+        </div>
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#quick-access">Quick Access</a></li>
+                <li><a href="#about-us">About Us</a></li>
+                <li><a href="#contact-us">Contact Us</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Overlay to darken background when sidebar is open -->
+    <div class="overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Grow With Confidence Powered by Nature, <br>Guided by BotaniQ.</h1>
+            <p>Our smart gardening assistant helps you detect the perfect environment for your plants-before you even get your hands dirty. From sunlight to soil conditions, we provide insights to help your flowers, herbs, and indoor plants thrive. No guesswork. No stress. Just an easy, enjoyable way to grow greenery in your space.</p>
+            <div class="search-bar">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+                <button class="btn primary">Get Started</button>
+            </div>
+            <div class="hero-images">
+                <img src="assets/img/a50f38827a2283b25d9640bc9572da77 1.png" alt="Gardening Image"> <!-- Placeholder -->
+                <img src="assets/img/ba5d5232acf911e647e12359ed69e535 1.png" alt="Gardening Image"> <!-- Placeholder -->
+                <img src="assets/img/WhatsApp Image 2025-05-22 at 19.57.31_90bd0e09 1.png" alt="Gardening Image"> <!-- Placeholder -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access Section -->
+    <section class="quick-access" id="quick-access">
+        <div class="container">
+            <h2>Quick Access What You Need</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <i class="fas fa-camera"></i>
+                    <h3>Identifikasi Kebun</h3>
+                    <p>Curious about a plant you found or have at home? Simply snap or upload a picture, and get instant identification along with helpful info to understand it better.....</p>
+                    <button class="btn-try-now">Try It Now</button>
+                </div>
+                <div class="card">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Rekomendasi Tanaman</h3>
+                    <p>Tell us where you live, and we'll suggest the most suitable plants for your region based on weather, sunlight, and local conditions. Perfect for beginners and curious gardeners!</p>
+                    <button class="btn-try-now">Try It Now</button>
+                </div>
+                <div class="card">
+                    <i class="fas fa-spa"></i>
+                    <h3>Manajemen Kebun</h3>
+                    <p>Your digital garden, organized. See all your plants, schedule when to water or fertilize them, and get notified when it's time. You'll never forget to care for your green friends again!</p>
+                    <button class="btn-try-now">Try It Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose BotaniQ Section -->
+    <section class="why-choose" id="about-us">
+        <div class="container">
+            <div class="why-choose-card">
+                <div class="why-choose-content">
+                    <img src="assets/img/logo_botaniQ_ver.2-removebg-preview 3.svg" alt="BotaniQ Logo"> <!-- Placeholder -->
+                    <div>
+                        <h2>Why Choose BotaniQ</h2>
+                        <p>We built botaniq to help plant lovers of all levels, from curious beginners to seasoned gardeners, take care of their green companions with confidence and ease. Powered by smart technology and designed with simplicity in mind, botaniQ is more than just a tool - it's your personal plant assistant.</p>
+                        <button class="btn primary">Contact Us</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section class="contact-us" id="contact-us">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <div class="contact-container">
+                <div class="get-in-touch">
+                    <h2>Get in Touch With Us</h2>
+                    <form>
+                        <div class="name-inputs">
+                            <input type="text" placeholder="First Name">
+                            <input type="text" placeholder="Last Name">
+                        </div>
+                        <input type="email" placeholder="Email Address">
+                        <input type="tel" placeholder="Phone Number">
+                        <textarea placeholder="Your Message"></textarea>
+                        <button type="submit" class="btn-contact-us">Send Message</button>
+                    </form>
+                </div>
+
+                <!-- lokasi -->
+                <div class="our-location">
+                    <h2>Our Location</h2>
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.666667!2d106.666667!3d-6.166667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTAnMDAuMCJTIDEwNsKwNDAnMDAuMCJF!5e0!3m2!1sen!2sid!4v1234567890"
+                            width="100%" 
+                            height="450" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="assets/img/image 6.svg" alt="BotaniQ Logo">
+                    <h3>BotaniQ</h3>
+                </div>
+                <p>Whether you're just getting started or a seasoned grower, we provide the tools, insights, and support you need to nurture your green space with ease and confidence.</p>
+                <div class="subscribe">
+                    <input type="text" placeholder="Type your text....">
+                    <button><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Solutions</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Jobs</h3>
+                    <ul>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Out Team</a></li>
+                        <li><a href="#">Press Release</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Terms of Use</h3>
+                    <ul>
+                        <li><a href="#">Cookies Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2025 BotaniQ. Let's grow something beautiful together. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- <script src="assets/js/home.js"></script> -->
+</body>
+</html>

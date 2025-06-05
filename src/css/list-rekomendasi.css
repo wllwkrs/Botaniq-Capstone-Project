@@ -1,0 +1,585 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Placeholder font */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+header {
+    background-color: #129990; /* Apply background color to header */
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.container.nav-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+.logo img {
+    height: 50px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 34px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #FFFBDE;
+    transition: color 0.3s ease, background-color 0.3s ease, padding 0.3s ease;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+nav ul li a:hover {
+    color: rgb(255, 255, 255); /* Keep text color or change as needed */
+    background-color: rgba(255, 255, 255, 0.2); /* Add a subtle background tint on hover */
+    text-decoration: none; /* Ensure no underline on hover */
+    /* Remove text-decoration-thickness */
+}
+
+.profile-section {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.profile-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #FFFBDE;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-circle i {
+    color: #129990;
+    font-size: 20px;
+}
+
+.profile-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Styles for Recommendation List Page */
+.main-content {
+    background-color: #A0D9D3; /* Match the background of the recommendation form page */
+    padding: 40px 0; /* Add vertical padding */
+}
+
+.recommendation-header {
+    margin-bottom: 30px; /* Space below the header */
+}
+
+.recommendation-header .back-link {
+    text-decoration: none;
+    color: #004d40; /* Dark green color */
+    font-size: 18px; /* Adjust font size */
+    display: flex;
+    align-items: center;
+}
+
+.recommendation-header .back-link i {
+    margin-right: 8px; /* Space between icon and text */
+}
+
+.recommendation-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Space between cards */
+    display: flex; /* Use flexbox for horizontal layout */
+    align-items: center; /* Vertically align items */
+    gap: 20px; /* Space between image and details */
+}
+
+.recommendation-card .plant-image {
+    flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.recommendation-card .plant-image img {
+    width: 150px; /* Set image width */
+    height: 150px; /* Set image height */
+    object-fit: cover; /* Crop image to fit */
+    border-radius: 8px; /* Rounded corners for image */
+}
+
+.recommendation-card .plant-details {
+    flex-grow: 1; /* Allow details to take up available space */
+}
+
+.recommendation-card .plant-details h3 {
+    color: #129990; /* Plant name color */
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.recommendation-card .plant-details p {
+    color: #333;
+    margin-bottom: 5px; /* Space between info lines */
+    font-size: 14px;
+}
+
+.recommendation-card .plant-details p:last-child {
+    margin-bottom: 0; /* Remove bottom margin from last info line */
+}
+
+.recommendation-card .card-actions {
+    flex-shrink: 0; /* Prevent actions from shrinking */
+    align-self: flex-end; /* Align button to the bottom right */
+}
+
+.recommendation-card .card-actions .action-button {
+    background-color: #129990;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.recommendation-card .card-actions .action-button:hover {
+    background-color: #0e7e75;
+}
+
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initially hidden off-screen */
+    width: 250px;
+    height: 100%;
+    background-color: #129990; /* Match navbar background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+    z-index: 1000; /* Ensure it's above other content */
+    padding-top: 60px; /* Space for close button */
+}
+
+.mobile-sidebar .sidebar-header {
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Vertically center items */
+    padding: 10px 20px; /* Adjust top padding to move logo slightly up */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Optional: Add a separator line */
+}
+
+.mobile-sidebar .sidebar-header img {
+    height: 40px; /* Adjust logo size in mobile sidebar */
+    margin-right: 10px; /* Space between logo and title */
+    font-size: 24px;
+    color: #FFFBDE;
+    cursor: pointer;
+}
+
+.mobile-sidebar .sidebar-header h3 {
+    color: #FFFBDE; /* Match title color */
+    margin: 0; /* Remove default margin */
+}
+
+.mobile-sidebar .close-sidebar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: #FFFBDE;
+    cursor: pointer;
+}
+
+.mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav li:last-child {
+    border-bottom: none;
+}
+
+.mobile-nav a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #FFFBDE;
+    transition: background-color 0.3s ease;
+}
+
+.mobile-nav a:hover {
+    background-color: #0e7e75;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none; /* Initially hidden */
+    z-index: 999; /* Below sidebar */
+}
+
+/* Footer Styles */
+footer {
+    background-color: #004d40; /* Placeholder background color */
+    color: white;
+    padding: 50px 0 20px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+.footer-about {
+    flex: 2;
+}
+
+.footer-about p {
+    font-size: 16px;
+    color: #FFFBDE;
+}
+
+.footer-about img {
+    height: 50px; /* Adjust as needed */
+    margin-bottom: 15px;
+}
+
+.subscribe {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.subscribe input[type="text"] {
+    margin-top: 24px;
+    padding: 10px 10px 10px 24px;
+    width: 538px;
+    height: 30px;
+    background-color: #FFFBDE;
+    border: none;
+    border-radius: 15px;
+    padding-right: 50px;
+}
+
+.subscribe input[type="text"]::placeholder {
+    color: #129990;
+}
+
+.subscribe button {
+    position: absolute;
+    right: 10px;
+    top: 29px;
+    padding: 0 15px;
+    height: 40px;
+    border: none;
+    border-radius: 15px;
+    background-color: #129990;
+    color: #FFFBDE;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 2px solid #FFFBDE;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subscribe button:hover {
+    background-color: #FFFBDE;
+    color: #129990;
+    border: 2px solid #129990;
+}
+
+.footer-links {
+    flex: 3;
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+.link-group h3 {
+    margin-bottom: 15px;
+}
+
+.link-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.link-group ul li {
+    margin-bottom: 10px;
+}
+
+.link-group ul li a {
+    text-decoration: none;
+    color: #FFFBDE;
+}
+
+.footer-social {
+    display: flex;
+    gap: 30px;
+    margin-top: 35px;
+    margin-left: 50px;
+    align-items: flex-start;
+}
+
+.footer-social a {
+    color: white;
+    font-size: 1.5em;
+    margin-left: 0;
+}
+
+.copyright {
+    text-align: center;
+    font-size: 0.9em;
+    padding-top: 12px;
+    margin-top: 24px;
+    border-top: 1px solid rgba(255, 251, 222, 0.3);
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.footer-logo img {
+    height: 100px;
+    width: auto;
+}
+
+.footer-logo h3 {
+    color: #FFFBDE;
+    font-size: 48px;
+    margin: 0;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .desktop-nav {
+        display: none !important; /* Hide desktop navigation on smaller screens */
+    }
+
+    .mobile-menu-icon {
+        display: block; /* Show hamburger icon on smaller screens */
+        order: -1; /* Move hamburger icon to the beginning in flex order */
+        cursor: pointer;
+        font-size: 24px;
+        color: #FFFBDE; /* Match navbar text color */
+        margin-left: 0; /* Remove left margin */
+        margin-right: auto; /* Push other items to the right */
+    }
+
+    .mobile-nav {
+        display: block;
+        /* Remove flex properties from .mobile-nav */
+        /* display: flex; */
+        /* flex-direction: column; */
+    }
+
+    .logo {
+        display: none; /* Hide the main header logo in mobile view */
+    }
+
+    .mobile-nav ul {
+        display: flex; /* Apply flexbox for column layout in mobile view */
+        flex-direction: column; /* Stack items vertically in mobile view */
+    }
+
+    .container.nav-container {
+        justify-content: space-between; /* Distribute items with space between */
+        align-items: center; /* Vertically center items */
+    }
+
+    .profile-section {
+        margin-left: 0; /* Remove auto margin */
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .mobile-nav {
+        display: none; /* Hide mobile navigation on screens wider than 1024px */
+    }
+
+    .mobile-sidebar .sidebar-header img {
+        height: 40px; /* Adjust logo size in mobile sidebar */
+        margin-right: 10px;
+    }
+
+    .mobile-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0; /* Stack items vertically */
+        /* Remove flexbox properties from here */
+        /* display: flex; */
+        /* flex-direction: column; */
+    }
+
+    .mobile-nav li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-nav li:last-child {
+        border-bottom: none;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .mobile-menu-icon {
+        display: none !important; /* Hide the hamburger icon on screens wider than 1024px */
+    }
+}
+
+
+/* Responsive adjustments for recommendation cards */
+@media screen and (max-width: 600px) {
+    .recommendation-card {
+        flex-direction: column; /* Stack image and details vertically on smaller screens */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    .recommendation-card .plant-image {
+        margin-bottom: 15px; /* Space below image */
+    }
+
+    .recommendation-card .card-actions {
+        align-self: stretch; /* Stretch button container to full width */
+        text-align: center; /* Center button horizontally */
+        margin-top: 15px; /* Space above button */
+    }
+
+    .recommendation-card .card-actions .action-button {
+        width: 100%; /* Make button full width */
+        box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .name-inputs input {
+        flex: 1; /* Allow inputs to share space */
+    }
+
+    .footer-container {
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px 15px;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: row; /* Horizontal layout */
+        gap: 15px;
+        align-items: flex-start; /* Align items to the top */
+        justify-content: space-around; /* Distribute space */
+        margin-left: 70px;
+        margin-right: 0; /* Ensure no extra margin */
+        flex-wrap: wrap; /* Allow wrapping if needed */
+    }
+
+    .footer-links .link-group {
+        flex: 1; /* Share horizontal space */
+        padding: 0 5px; /* Add padding within groups */
+        box-sizing: border-box;
+        text-align: left; /* Align text to the left */
+        min-width: 120px; /* Prevent shrinking too much */
+    }
+
+     .footer-links .link-group h3 {
+         margin-bottom: 10px;
+         text-align: left; /* Ensure heading is left-aligned */
+     }
+
+     .footer-links .link-group ul {
+         padding: 0;
+         list-style: none;
+     }
+
+     .footer-links .link-group ul li {
+         margin-bottom: 5px;
+     }
+
+     .footer-links .link-group ul li a {
+         color: #FFFBDE;
+         text-decoration: none;
+         font-size: 14px;
+     }
+
+    .footer-logo {
+        align-items: left;
+    }
+
+    .subscribe {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .subscribe input[type="text"] {
+        width: 90%;
+        padding-right: 10px;
+        margin-left: 15px;
+    }
+
+    .subscribe button:hover,
+    .subscribe button:active { /* Added :active for Subscribe button */
+        background-color: #FFFBDE;
+        color: #129990;
+        border: 2px solid #129990;
+    }
+
+     .footer-about p {
+         padding: 0;
+         text-align: left;
+         margin-left: 14px;
+     }
+
+     .footer-social {
+         display: flex; /* Ensure flex display */
+         justify-content: center; /* Center social icons horizontally */
+         margin-top: 20px;
+         margin-left: 0; /* Ensure no extra margin */
+         margin-right: 0; /* Ensure no extra margin */
+     }
+}

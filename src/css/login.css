@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0; /* Light grey background */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.login-container {
+    display: flex;
+    margin: 42px auto;
+    align-items: flex-start; /* Align items to the top */
+    padding: 0; /* Remove padding */
+    width: fit-content; /* Allow container to size based on content */
+    max-width: 95%; /* Add max-width for overall responsiveness */
+}
+
+.illustration-section {
+    background-color: transparent;
+    display: flex;
+    justify-content: center; /* Center illustration horizontally within its flex container */
+    align-items: center; /* Center illustration vertically within its flex container */
+    padding: 0;
+    width: 550px; /* Slightly reduced width */
+    height: 380px; /* Adjusted height */
+    flex-shrink: 0;
+    position: relative;
+    margin-top: 100px;
+    margin-left: 100px;
+    margin-right: 87px;
+}
+
+.illustration-section img {
+    width: 100%; /* Make image responsive within its container */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    position: static; /* Use static positioning */
+    transform: none; /* Remove transform */
+}
+
+.form-section {
+    width: 530px;
+    height: fit-content;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 50px;
+    flex-shrink: 0;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.login-header {
+    /* Align header content to the left */
+    text-align: left;
+    width: 100%; /* Ensure header takes full width to left align contents */
+}
+
+.login-header h2 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.login-header .logo {
+    width: 160px; /* Adjust logo size */
+    display: block; /* Ensure logo is treated as a block for alignment */
+    margin-left: 0; /* Ensure logo is left-aligned */
+    margin-right: auto; /* Auto right margin helps left-align */
+}
+
+.login-header .slogan {
+    margin: 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    width: 100%; /* Ensure form groups take full width */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 8px 10px;
+    width: 100%; /* Ensure input wrapper takes full width of form group */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.input-wrapper .icon {
+    margin-right: 10px;
+    color: #888;
+}
+
+.input-wrapper input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    padding: 5px 0;
+    width: 100%;
+    width: 470px;
+    box-sizing: border-box;
+}
+
+.input-wrapper .toggle-password {
+    cursor: pointer;
+    color: #888;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Ensure remember me takes full width */
+    margin-bottom: 20px; /* Add bottom margin */
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.login-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #129990; /* Button color based on image */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Reduce space above the button */
+    margin-bottom: 20px; /* Add space below the button */
+}
+
+.login-button:hover {
+    background-color: #1a8f86;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+    width: 100%; /* Ensure signup link takes full width for centering */
+}
+
+.signup-link a {
+    color: #20a89e; /* Link color based on button color */
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1280px) { /* Adjusted breakpoint */
+    .login-container {
+        flex-direction: column;
+        margin: 20px auto; /* Adjust container margin for smaller screens */
+        align-items: center; /* Center items when stacked */
+        width: 95%; /* Allow container to take up more width */
+    }
+
+    .illustration-section {
+        display: flex; /* Keep illustration visible */
+        margin: 0 auto 20px auto; /* Center illustration and add bottom margin */
+        width: 100%; /* Allow illustration section to take full width */
+        height: auto; /* Allow height to adjust */
+        justify-content: center;
+        align-items: center; /* Center image within the section */
+        position: static; /* Remove absolute positioning */
+    }
+
+    .illustration-section img {
+        width: 100%; /* Make image responsive */
+        height: auto; /* Maintain aspect ratio */
+        position: static; /* Remove absolute positioning */
+        transform: none; /* Remove transform */
+    }
+
+    .form-section {
+        flex: 1 0 auto; /* Allow form to take up space */
+        width: 100%; /* Make form take full width */
+        height: auto; /* Remove fixed height */
+        margin: 0 auto; /* Center form horizontally */
+        padding: 20px;
+    }
+
+    .login-header {
+        text-align: center; /* Center header again on smaller screens */
+    }
+
+    .login-header .logo {
+         margin-left: auto; /* Center logo when header is centered */
+         margin-right: auto;
+    }
+
+    .form-group,
+    .input-wrapper,
+    .input-wrapper input,
+    .remember-me,
+    .login-button,
+    .signup-link {
+        width: 100%; /* Ensure elements take full width */
+        box-sizing: border-box;
+    }
+}

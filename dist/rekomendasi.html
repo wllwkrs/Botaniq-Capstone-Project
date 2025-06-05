@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BotaniQ - Grow With Confidence</title>
+    <!-- <link rel="stylesheet" href="assets/css/rekomendasi.css">  -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For icons -->
+<script defer src="rekomendasi.bundle.js"></script></head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="assets/img/image 6.svg" alt="BotaniQ Logo" id="beranda">
+            </div>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="/manajemen-kebun.html">Manajemen Kebun</a></li>
+                    <li><a href="/rekomendasi.html">Rekomendasi</a></li>
+                </ul>
+            </nav>
+            <div class="profile-section">
+                <div class="profile-circle">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i> <!-- Hamburger icon -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar">
+        <div class="sidebar-header">
+            <img src="assets/img/image 6.svg" alt="BotaniQ Logo">
+            <i class="fas fa-times close-sidebar"></i> <!-- Close icon -->
+        </div>
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="/manajemen-kebun.html">Manajemen Kebun</a></li>
+                <li><a href="/rekomendasi.html">Rekomendasi</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Overlay to darken background when sidebar is open -->
+    <div class="overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="rekomendasi-card">
+                <h2>Rekomendasi Tanaman</h2>
+                <p>Silakan jawab beberapa pertanyaan untuk mendapatkan rekomendasi tanaman yang cocok.</p>
+
+                <div class="questions-section">
+                    <!-- Placeholder dropdowns -->
+                    <div class="question">
+                        <label for="q1">Seberapa sering Anda dapat merawat tanaman?</label>
+                        <select id="q1">
+                            <option value="">Pilih Jawaban</option>
+                            <!-- Add more options here -->
+                        </select>
+                    </div>
+                    <div class="question">
+                        <label for="q2">Seberapa sering Anda dapat merawat tanaman?</label>
+                        <select id="q2">
+                            <option value="">Pilih Jawaban</option>
+                            <!-- Add more options here -->
+                        </select>
+                    </div>
+                    <div class="question">
+                        <label for="q3">Seberapa sering Anda dapat merawat tanaman?</label>
+                        <select id="q3">
+                            <option value="">Pilih Jawaban</option>
+                            <!-- Add more options here -->
+                        </select>
+                    </div>
+                     <div class="question">
+                        <label for="q4">Seberapa sering Anda dapat merawat tanaman?</label>
+                        <select id="q4">
+                            <option value="">Pilih Jawaban</option>
+                            <!-- Add more options here -->
+                        </select>
+                    </div>
+                    <div class="question">
+                        <label for="q5">Seberapa sering Anda dapat merawat tanaman?</label>
+                        <select id="q5">
+                            <option value="">Pilih Jawaban</option>
+                            <!-- Add more options here -->
+                        </select>
+                    </div>
+                    <div class="question">
+                        <label for="q6">Seberapa sering Anda dapat merawat tanaman?</label>
+                        <select id="q6">
+                            <option value="">Pilih Jawaban</option>
+                            <!-- Add more options here -->
+                        </select>
+                    </div>
+                    <div class="question">
+                        <label for="q7">Seberapa sering Anda dapat merawat tanaman?</label>
+                        <select id="q7">
+                            <option value="">Pilih Jawaban</option>
+                            <!-- Add more options here -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="location-section">
+                    <!-- Placeholder for map -->
+                    <div class="map-placeholder">
+                        <!-- Map will be embedded here -->
+                        <img src="https://via.placeholder.com/600x300?text=Map+Placeholder" alt="Satellite Map Placeholder">
+                    </div>
+                    <div class="coordinates">
+                        <div class="coord-input">
+                            <label for="longitude">Longitude:</label>
+                            <input type="text" id="longitude" value="" placeholder="xxxxxxxxx">
+                        </div>
+                        <div class="coord-input">
+                            <label for="latitude">Latitude:</label>
+                            <input type="text" id="latitude" value="" placeholder="xxxxxxxxx">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="search-button">Cari Rekomendasi</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="assets/img/image 6.svg" alt="BotaniQ Logo">
+                    <h3>BotaniQ</h3>
+                </div>
+                <p>Whether you're just getting started or a seasoned grower, we provide the tools, insights, and support you need to nurture your green space with ease and confidence.</p>
+                <div class="subscribe">
+                    <input type="text" placeholder="Type your text....">
+                    <button><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Solutions</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Jobs</h3>
+                    <ul>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Out Team</a></li>
+                        <li><a href="#">Press Release</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Terms of Use</h3>
+                    <ul>
+                        <li><a href="#">Cookies Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2025 BotaniQ. Let's grow something beautiful together. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- <script src="assets/js/rekomendasi.js"></script> -->
+</body>
+</html>

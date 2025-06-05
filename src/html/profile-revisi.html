@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Profil - Profil Saya</title>
+        <!-- <link rel="stylesheet" href="assets/css/profile.css"> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        </head>
+    <body>
+
+        <header>
+            <div class="container nav-container">
+                <div class="logo">
+                    <img src="../img/image 6.svg" alt="BotaniQ Logo">
+                </div>
+                <nav class="desktop-nav">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Rekomendasi Tanaman</a></li>
+                        <li><a href="#">Manajemen Kebun</a></li>
+                        <li><a href="#">Profil</a></li>
+                    </ul>
+                </nav>
+                <div class="profile-section">
+                    <div class="profile-circle">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <div class="mobile-menu-icon">
+                    <i class="fas fa-bars"></i> <!-- Hamburger icon -->
+                </div>
+            </div>
+        </header>
+
+    <!-- Mobile Sidebar -->
+        <div class="mobile-sidebar">
+            <div class="sidebar-header">
+                <img src="../img/image 6.svg" alt="BotaniQ Logo">
+                <i class="fas fa-times close-sidebar"></i> <!-- Close icon -->
+            </div>
+            <nav class="mobile-nav">
+                <ul>
+                    <li><a href="#">Rekomendasi Tanaman</a></li>
+                    <li><a href="#">Manajemen Kebun</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Overlay to darken background when sidebar is open -->
+        <div class="overlay"></div>
+            <div class="container" id="popup-edit-profile">
+            <h1>My Profile</h1>
+
+            <!-- General Profile Section -->
+            <div class="profile-card">
+                <div class="card-header">
+                    <img src="../img/profile.jpeg" alt="Profile Avatar" class="profile-avatar-card">
+                    <div class="profile-info-header">
+                        <span class="profile-name" id="nama-profile">Memuat...</span>
+                        <span class="profile-role">Petani</span>
+                        <span class="profile-location" id="alamat">Memuat...</span>
+                    </div>
+                    <button class="edit-card-btn" data-popup="general">Edit <i class="fas fa-pencil-alt"></i></button>
+                </div>
+            </div>
+
+            <!-- Personal Information Section -->
+            <div class="profile-card">
+                <div class="card-header-title">
+                    <h2>Personal information</h2>
+                    <button class="edit-card-btn" data-popup="personal">Edit <i class="fas fa-pencil-alt"></i></button>
+                </div>
+                <div class="card-details">
+                    <div class="detail-row">
+                        <div class="detail-item">
+                            <span class="detail-label-card">Nama Depan</span>
+                            <span class="detail-value-card" id="nama-depan" >Memuat...</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label-card">Nama Belakang</span>
+                            <span class="detail-value-card" id="nama-belakang">memuat...</span>
+                        </div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-item">
+                            <span class="detail-label-card">Email</span>
+                            <span class="detail-value-card" id="email">memuat...</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label-card">Telepon</span>
+                            <span class="detail-value-card" id="telepon">memuat...</span>
+                        </div>
+                    </div>
+                     <div class="detail-row">
+                        <div class="detail-item full-width">
+                            <span class="detail-label-card">Role</span>
+                            <span class="detail-value-card">Petani</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Address Section -->
+            <div class="profile-card">
+                 <div class="card-header-title">
+                    <h2>Address</h2>
+                    <button class="edit-card-btn" data-popup="address">Edit <i class="fas fa-pencil-alt"></i></button>
+                </div>
+                 <div class="card-details">
+                    <div class="detail-row">
+                        <div class="detail-item">
+                            <span class="detail-label-card">Negara</span>
+                            <span class="detail-value-card" id="negara">memuat...</span>
+                        </div>
+                         <div class="detail-item">
+                            <span class="detail-label-card">Kota</span>
+                            <span class="detail-value-card" id="kota">memuat...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- General Profile Edit Popup -->
+        <div class="edit-popup-overlay" id="general-popup">
+            <div class="edit-popup-card">
+                <div class="edit-popup-header">
+                    <h3>Edit General Profile</h3>
+                    <button class="close-popup">&times;</button>
+                </div>
+                <form class="edit-popup-form">
+                    <div class="profile-picture-edit">
+                        <div class="current-profile-pic">
+                            <img src="../img/profile.jpeg" alt="Profile Avatar" id="preview-profile-pic">
+                        </div>
+                        <div class="upload-profile-pic">
+                            <label for="profile-pic-upload" class="upload-btn">
+                                <i class="fas fa-camera"></i>
+                                <span>Change Photo</span>
+                            </label>
+                            <input type="file" id="profile-pic-upload" accept="image/*" hidden>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullName">Nama Lengkap</label>
+                        <input type="text" id="nama-detail" name="fullName" value="nama">
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <input type="text" id="role" name="role" value="Petani">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Alamat</label>
+                        <input type="text" id="alamat-detail" name="location" value="alamat">
+                    </div>
+                    <div class="popup-buttons">
+                        <button type="button" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="save-btn">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Personal Information Edit Popup -->
+        <div class="edit-popup-overlay" id="personal-popup">
+            <div class="edit-popup-card">
+                <div class="edit-popup-header">
+                    <h3>Edit Personal Information</h3>
+                    <button class="close-popup">&times;</button>
+                </div>
+                <form class="edit-popup-form">
+                    <div class="form-group">
+                        <label for="firstName">Nama Depan</label>
+                        <input type="text" id="nama-depan-detail" name="firstName" value="nama">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Nama Belakang</label>
+                        <input type="text" id="nama-belakang-detail" name="lastName" value="nama_belakang">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email-detail" name="email" value="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telepon</label>
+                        <input type="tel" id="telepon-detail" name="phone" value="telepon">
+                    </div>
+                    <div class="popup-buttons">
+                        <button type="button" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="save-btn">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Address Edit Popup -->
+        <div class="edit-popup-overlay" id="address-popup">
+            <div class="edit-popup-card">
+                <div class="edit-popup-header">
+                    <h3>Edit Address</h3>
+                    <button class="close-popup">&times;</button>
+                </div>
+                <form class="edit-popup-form">
+                    <div class="form-group">
+                        <label for="country">Negara</label>
+                        <input type="text" id="negara-detail" name="country" value="negara">
+                    </div>
+                    <div class="form-group">
+                        <label for="cityState">Kota</label>
+                        <input type="text" id="kota-detail" name="cityState" value="kota">
+                    </div>
+                    <div class="popup-buttons">
+                        <button type="button" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="save-btn">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- <script src="assets/js/profile-revisi.js"></script> -->
+        <script>
+            // Show popup when edit button is clicked
+            document.querySelectorAll('.edit-card-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const popupId = button.getAttribute('data-popup') + '-popup';
+                    const popup = document.getElementById(popupId);
+                    if (popup) {
+                        popup.classList.add('active');
+                    }
+                });
+            });
+
+            // Close popup when close button or cancel button is clicked
+            document.querySelectorAll('.close-popup, .cancel-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const popup = button.closest('.edit-popup-overlay');
+                    if (popup) {
+                        popup.classList.remove('active');
+                    }
+                });
+            });
+
+            // Close popup when clicking outside the popup card
+            document.querySelectorAll('.edit-popup-overlay').forEach(overlay => {
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) {
+                        overlay.classList.remove('active');
+                    }
+                });
+            });
+
+            // Profile picture upload preview
+            const profilePicUpload = document.getElementById('profile-pic-upload');
+            const previewProfilePic = document.getElementById('preview-profile-pic');
+
+            profilePicUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewProfilePic.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        </script>
+    </body>
+</html>
