@@ -1,6 +1,27 @@
+// import Map from './map.js';
+// import 'leaflet/dist/leaflet.css';
 import '../css/rekomendasi.css';
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Inisialisasi peta
+   if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                console.log('Latitude:', latitude);
+                console.log('Longitude:', longitude);
+
+                // Simpan lokasi di localStorage / kirim ke backend / tampilkan
+            },
+            function (error) {
+                console.error('Gagal mendapatkan lokasi:', error.message);
+            }
+        );
+    } else {
+        console.error('Geolocation tidak didukung browser ini.');
+    }
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('password');
 
@@ -81,6 +102,8 @@ document.addEventListener('DOMContentLoaded', function () {
     //         console.log('Form submitted');
     //     });
     // }
+
+    
 }); 
 document.getElementById("beranda").addEventListener("click", function() {
     window.location.href = "beranda.html";

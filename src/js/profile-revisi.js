@@ -1,6 +1,25 @@
 import '../css/profile.css';
 
 document.addEventListener("DOMContentLoaded", function () {
+   if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                console.log('Latitude:', latitude);
+                console.log('Longitude:', longitude);
+
+                // Simpan lokasi di localStorage / kirim ke backend / tampilkan
+            },
+            function (error) {
+                console.error('Gagal mendapatkan lokasi:', error.message);
+            }
+        );
+    } else {
+        console.error('Geolocation tidak didukung browser ini.');
+    }
+    
   const token = localStorage.getItem("token");
   if (!token) {
     alert("Token tidak ditemukan. Silakan login ulang.");

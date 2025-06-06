@@ -88,8 +88,16 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("profil")?.addEventListener("click", function() {
         window.location.href = "profile-revisi.html";
     });
-
+    document.getElementById("profile")?.addEventListener("click", function() {
+        window.location.href = "profile-revisi.html";
+    });
     document.getElementById("beranda")?.addEventListener("click", function() {
         window.location.href = "beranda.html";
+    });
+    document.getElementById("manajemen").addEventListener("click", function() {
+    window.location.href = "manajemen-kebun.html";
+    });
+    document.getElementById("rekomendasi").addEventListener("click", function() {
+    window.location.href = "rekomendasi.html";
     });
 });
