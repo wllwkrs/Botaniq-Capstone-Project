@@ -18,7 +18,7 @@
             <nav class="desktop-nav">
                 <ul>
                     <li><a href="beranda.html">Home</a></li>
-                    <li><a href="manajemen-kebun.html">Manajemen Kebun</a></li>
+                    <li><a href="#">Manajemen Kebun</a></li>
                     <li><a href="rekomendasi.html">Rekomendasi</a></li>
                 </ul>
             </nav>
@@ -43,7 +43,7 @@
         <nav class="mobile-nav">
             <ul>
                 <li><a href="beranda.html">Home</a></li>
-                <li><a href="manajemen-kebun.html">Manajemen Kebun</a></li>
+                <li><a href="#">Manajemen Kebun</a></li>
                 <li><a href="rekomendasi.html">Rekomendasi</a></li>
             </ul>
         </nav>
@@ -61,62 +61,182 @@
                 </a>
             </div>
 
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" placeholder="Cari tanaman...">
+                <button>Cari</button>
+            </div>
+
+            <div class="filter-dropdowns">
+                <div class="filter-dropdown">
+                    <select class="filter-select">
+                        <option value="">Growth Rate</option>
+                        <option value="slow">Slow</option>
+                        <option value="fast">Fast</option>
+                        <option value="moderate">Moderate</option>
+                    </select>
+                    <button class="clear-filter" title="Clear selection">×</button>
+                </div>
+                <div class="filter-dropdown">
+                    <select class="filter-select">
+                        <option value="">Soil Type</option>
+                        <option value="sandy">Sandy</option>
+                        <option value="well-drained">Well-drained</option>
+                        <option value="loamy">Loamy</option>
+                        <option value="acidic">Acidic</option>
+                        <option value="moist">Moist</option>
+                    </select>
+                    <button class="clear-filter" title="Clear selection">×</button>
+                </div>
+                <div class="filter-dropdown">
+                    <select class="filter-select">
+                        <option value="">Sunlight</option>
+                        <option value="indirect">Indirect Sunlight</option>
+                        <option value="full">Full Sunlight</option>
+                        <option value="partial">Partial Sunlight</option>
+                    </select>
+                    <button class="clear-filter" title="Clear selection">×</button>
+                </div>
+                <div class="filter-dropdown">
+                    <select class="filter-select">
+                        <option value="">Watering</option>
+                        <option value="weekly">Water Weekly</option>
+                        <option value="evenly-moist">Keep Soil Evenly Moist</option>
+                        <option value="dry-between">Let Soil Dry Between Watering</option>
+                        <option value="consistently-moist">Keep Soil Consistently Moist</option>
+                        <option value="topsoil-dry">Water When Topsoil is Dry</option>
+                    </select>
+                    <button class="clear-filter" title="Clear selection">×</button>
+                </div>
+                <div class="filter-dropdown">
+                    <select class="filter-select">
+                        <option value="">Fertilization</option>
+                        <option value="balanced">Balanced</option>
+                        <option value="organic">Organic</option>
+                        <option value="no">No Fertilization</option>
+                        <option value="low-nitrogen">Low-nitrogen</option>
+                        <option value="acidic">Acidic</option>
+                    </select>
+                    <button class="clear-filter" title="Clear selection">×</button>
+                </div>
+            </div>
+
             <!-- Plant recommendation cards will go here -->
+            <div class="recommendation-grid">
             <div class="recommendation-card">
-                <div class="plant-image">
-                    <img src="https://via.placeholder.com/150x150" alt="Plant Image">
-                </div>
                 <div class="plant-details">
                     <h3>Rafflesia arnoldii</h3>
-                    <p>Suhu : x-x</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
+                </div>
+                <div class="plant-image">
+                    <img src="../img/a50f38827a2283b25d9640bc9572da77 1.png" alt="Plant Image">
                 </div>
                 <div class="card-actions">
                     <button class="action-button">Tanam dan Pantau</button>
+                </div>
+                <div class="plant-details">
+                    <p>Suhu : x-x</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
                 </div>
             </div>
 
             <div class="recommendation-card">
-                <div class="plant-image">
-                    <img src="https://via.placeholder.com/150x150" alt="Plant Image">
-                </div>
                 <div class="plant-details">
                     <h3>Rafflesia arnoldii</h3>
-                    <p>Suhu : x-x</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
+                </div>
+                <div class="plant-image">
+                    <img src="../img/ba5d5232acf911e647e12359ed69e535 1.png" alt="Plant Image">
                 </div>
                 <div class="card-actions">
                     <button class="action-button">Tanam dan Pantau</button>
+                </div>
+                <div class="plant-details">
+                    <p>Suhu : x-x</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
                 </div>
             </div>
 
             <div class="recommendation-card">
-                <div class="plant-image">
-                    <img src="https://via.placeholder.com/150x150" alt="Plant Image">
-                </div>
                 <div class="plant-details">
                     <h3>Rafflesia arnoldii</h3>
-                    <p>Suhu : x-x</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxx</p>
+                </div>
+                <div class="plant-image">
+                    <img src="../img/a50f38827a2283b25d9640bc9572da77 1.png" alt="Plant Image">
                 </div>
                 <div class="card-actions">
                     <button class="action-button">Tanam dan Pantau</button>
                 </div>
+                <div class="plant-details">
+                    <p>Suhu : x-x</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                </div>
+            </div>
+            
+            <div class="recommendation-card">
+                <div class="plant-details">
+                    <h3>Rafflesia arnoldii</h3>
+                </div>
+                <div class="plant-image">
+                    <img src="../img/a50f38827a2283b25d9640bc9572da77 1.png" alt="Plant Image">
+                </div>
+                <div class="card-actions">
+                    <button class="action-button">Tanam dan Pantau</button>
+                </div>
+                <div class="plant-details">
+                    <p>Suhu : x-x</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                </div>
+            </div>
+
+            <div class="recommendation-card">
+                <div class="plant-details">
+                    <h3>Rafflesia arnoldii</h3>
+                </div>
+                <div class="plant-image">
+                    <img src="../img/a50f38827a2283b25d9640bc9572da77 1.png" alt="Plant Image">
+                </div>
+                <div class="card-actions">
+                    <button class="action-button">Tanam dan Pantau</button>
+                </div>
+                <div class="plant-details">
+                    <p>Suhu : x-x</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                </div>
+            </div>
+
             </div>
 
         </div>
+
+        <div class="scroll-buttons-container">
+            <button id="prevBtn" class="scroll-button"><i class="fas fa-chevron-left"></i></button>
+            <button id="nextBtn" class="scroll-button"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
     </section>
 
     <!-- Footer (structure similar to rekomendasi.html) -->

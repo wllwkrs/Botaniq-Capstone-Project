@@ -98,6 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
     window.location.href = "manajemen-kebun.html";
     });
     document.getElementById("rekomendasi").addEventListener("click", function() {
-    window.location.href = "rekomendasi.html";
+    window.location.href = "list-rekomendasi.html";
     });
 });

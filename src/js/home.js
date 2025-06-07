@@ -67,3 +67,9 @@ document.getElementById("signup-button").addEventListener("click", function() {
 document.getElementById("signin-button").addEventListener("click", function() {
     window.location.href = "login.html";
 });
+document.getElementById("rekomendasi").addEventListener("click", function() {
+    window.location.href = "login.html";
+});
+document.getElementById("manajemen").addEventListener("click", function() {
+    window.location.href = "login.html";
+});
