@@ -5,7 +5,7 @@ import '../css/beranda.css';
 document.addEventListener('DOMContentLoaded', function () {
     const token = localStorage.getItem("token");
     const BASE_API_URL = 'https://previously-notable-hound.ngrok-free.app'; 
-    
+   
     if (!token) {
         alert("Token tidak ditemukan. Silakan login ulang.");
         window.location.href = "login.html"; 

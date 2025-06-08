@@ -136,6 +136,23 @@ body {
     z-index: 10; /* Ensure logo is above other content */
 }
 
+.password-strength-feedback {
+    display: block;
+    font-size: 0.85em;
+    color: #666; /* Warna default */
+    margin-top: 5px;
+    text-align: left;
+}
+.password-strength-feedback.invalid {
+    color: red;
+}
+.form-group input#password:invalid {
+    border-color: red;
+}
+.form-group input#password:valid {
+    border-color: green; 
+}
+
 /* Responsive adjustments for register page */
 @media (max-width: 1280px) {
     .register-container {

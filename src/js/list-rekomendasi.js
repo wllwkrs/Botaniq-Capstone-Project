@@ -127,4 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("tanam").addEventListener("click", function() {
     window.location.href = "detail-kebun.html";
 });
+document.getElementById("profileImage")?.addEventListener("click", function() {
+        window.location.href = "profile-revisi.html";
+    });
 }); 

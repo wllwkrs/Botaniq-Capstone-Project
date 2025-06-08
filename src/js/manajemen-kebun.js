@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    
+
     if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(
             function (position) {
@@ -125,7 +125,30 @@ document.addEventListener('DOMContentLoaded', function () {
     //         console.log('Form submitted');
     //     });
     // }
-}); 
+    document.getElementById("profileImage")?.addEventListener("click", function() {
+    window.location.href = "profile-revisi.html";
+});
 document.getElementById("beranda").addEventListener("click", function() {
     window.location.href = "beranda.html";
+});
+
+}); 
+document.getElementById("tanam1").addEventListener("click", function() {
+    window.location.href = "detail-kebun.html";
+});
+
+document.getElementById("tanam2").addEventListener("click", function() {
+    window.location.href = "detail-kebun.html";
+});
+document.getElementById("tanam3").addEventListener("click", function() {
+    window.location.href = "detail-kebun.html";
+});
+document.getElementById("tanam4").addEventListener("click", function() {
+    window.location.href = "detail-kebun.html";
+});
+document.getElementById("tanam5").addEventListener("click", function() {
+    window.location.href = "detail-kebun.html";
+});
+document.getElementById("tanam6").addEventListener("click", function() {
+    window.location.href = "detail-kebun.html";
 });
