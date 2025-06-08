@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("negara").textContent = profile.negara || "-";
     document.getElementById("kota").textContent = profile.kota || "-";
 
-    
     const profileImageUrl = profile.foto ? `${BASE_API_URL}/uploads/${profile.foto}` : "../img/profile.jpeg";
     document.querySelectorAll(".profile-avatar-card, #preview-profile-pic").forEach(img => {
       img.src = profileImageUrl;
@@ -45,70 +44,64 @@ document.addEventListener("DOMContentLoaded", function () {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+      // "Content-Type": "application/json",
       "ngrok-skip-browser-warning": "true"
     }
   })
-    .then(res => {
-      if (!res.ok) throw new Error("Gagal mengambil profil");
-      return res.json();
-    })
-    .then(data => {
-      const profile = data.data || {};
-      userId = profile.id;
+  .then(res => {
+    if (!res.ok) throw new Error("Gagal mengambil profil");
+    return res.json();
+  })
+  .then(data => {
+    const profile = data.data || {};
+    userId = profile.id;
 
-      updateProfileUI(profile);
-      fillEditForm(profile);
-    })
-    .catch(err => {
-      console.error("Gagal mengambil profil:", err);
-      alert("Gagal mengambil profil, silakan coba lagi.");
-    });
+    updateProfileUI(profile);
+    fillEditForm(profile);
+  })
+  .catch(err => {
+    console.error("Gagal mengambil profil:", err);
+    alert("Gagal mengambil profil, silakan coba lagi.");
+  });
 
-  // Fungsi umum untuk update profil via API
-  async function updateProfile(updatedData, file = null) { 
+  
+  async function updateProfile(updatedData, file = null) {
     if (!userId) {
       alert("ID pengguna tidak ditemukan.");
       return Promise.reject("User ID null");
     }
 
-    let bodyData;
-    let headers = {
-      Authorization: `Bearer ${token}`,
-      "ngrok-skip-browser-warning": "true"
-    };
-
+    const bodyData = new FormData();
+    for (const key in updatedData) {
+      bodyData.append(key, updatedData[key]);
+    }
     if (file) {
-      // Jika ada file, gunakan FormData dan masukkan semua data
-      bodyData = new FormData();
-      for (const key in updatedData) {
-        bodyData.append(key, updatedData[key]);
-      }
-      bodyData.append("foto", file); 
-    } else {
-      // Jika tidak ada file, kirim sebagai JSON
-      bodyData = JSON.stringify(updatedData);
-      headers["Content-Type"] = "application/json"; // Set Content-Type untuk JSON
+      bodyData.append("foto", file);
     }
 
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "ngrok-skip-browser-warning": "true"
+      
+    };
+
     try {
-      const res = await fetch(`${BASE_API_URL}/users/${userId}`, { 
-        method: "PUT", 
+      const res = await fetch(`${BASE_API_URL}/users/${userId}`, {
+        method: "PUT",
         headers: headers,
-        body: bodyData
+        body: bodyData,
       });
 
       if (!res.ok) {
-        const errorText = await res.text(); // Ambil teks error dari respons
+        const errorText = await res.text();
         throw new Error(`Gagal update profil: ${res.status} - ${errorText}`);
       }
 
-      // Setelah update berhasil, ambil ulang profil lengkap
-      const profileRes = await fetch(`${BASE_API_URL}/profile`, { 
+      
+      const profileRes = await fetch(`${BASE_API_URL}/profile`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
           "ngrok-skip-browser-warning": "true"
         }
       });
@@ -129,8 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-
-  // Event listener untuk form general-popup (update nama, alamat, dan foto)
+  
   document.getElementById("general-popup").addEventListener("submit", async function (e) {
     e.preventDefault();
 
@@ -141,12 +133,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const file = document.getElementById("profile-pic-upload").files[0];
 
-    
-    updateProfile(updatedData, file); 
+    updateProfile(updatedData, file);
   });
 
-
-  // Event listener untuk form personal-popup (update nama_belakang, email, telepon)
+ 
   document.getElementById("personal-popup").addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -157,10 +147,10 @@ document.addEventListener("DOMContentLoaded", function () {
       telepon: document.getElementById("telepon-detail").value.trim(),
     };
 
-    updateProfile(updatedData); // Panggil tanpa file
+    updateProfile(updatedData); 
   });
 
-  // Event listener untuk form address-popup (update negara, kota)
+ 
   document.getElementById("address-popup").addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -169,6 +159,6 @@ document.addEventListener("DOMContentLoaded", function () {
       kota: document.getElementById("kota-detail").value.trim()
     };
 
-    updateProfile(updatedData); // Panggil tanpa file
+    updateProfile(updatedData); 
   });
 });
