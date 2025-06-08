@@ -1,7 +1,52 @@
 import '../css/manajemen-kebun.css';
 
 document.addEventListener('DOMContentLoaded', function () {
-     if ('geolocation' in navigator) {
+    const token = localStorage.getItem("token");
+    const BASE_API_URL = 'https://previously-notable-hound.ngrok-free.app'; 
+    if (!token) {
+        alert("Token tidak ditemukan. Silakan login ulang.");
+        window.location.href = "login.html"; 
+        return;
+    } 
+    fetch(`${BASE_API_URL}/profile`, { 
+        method: 'GET',
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "ngrok-skip-browser-warning": "true"
+        }
+    })
+    .then(res => {
+        if (!res.ok) {
+            if (res.status === 401) {
+                alert("Sesi Anda telah berakhir, silakan login ulang.");
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+            }
+            throw new Error(`Gagal mengambil profil: ${res.statusText}`);
+        }
+        return res.json();
+    })
+    .then(data => {
+        const profile = data.data || {}; 
+
+        const profileImageUrl = profile.foto ? `${BASE_API_URL}/uploads/${profile.foto}` : "../img/profile.jpeg";
+        document.querySelectorAll(".profile-circle img").forEach(img => { 
+            img.src = profileImageUrl;
+        });
+        document.querySelectorAll(".profile-avatar-card").forEach(img => {
+            img.src = profileImageUrl;
+        });
+    })
+    .catch(err => {
+        console.error("Gagal ambil data user atau profil:", err);
+        document.getElementById("greeting").textContent = "Gagal memuat profil ❌";
+        document.querySelectorAll(".profile-circle img, .profile-avatar-card").forEach(img => {
+            img.src = "../img/profile.jpeg"; // Path ke gambar default 
+        });
+    });
+
+    
+    if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(
             function (position) {
                 const latitude = position.coords.latitude;
