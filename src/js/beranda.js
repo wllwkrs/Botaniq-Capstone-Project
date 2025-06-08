@@ -4,24 +4,54 @@ import '../css/beranda.css';
 
 document.addEventListener('DOMContentLoaded', function () {
     const token = localStorage.getItem("token");
+    const BASE_API_URL = 'https://previously-notable-hound.ngrok-free.app'; 
+    
+    if (!token) {
+        alert("Token tidak ditemukan. Silakan login ulang.");
+        window.location.href = "login.html"; 
+        return;
+    }
 
-    fetch("https://previously-notable-hound.ngrok-free.app/profile", {
+    fetch(`${BASE_API_URL}/profile`, { 
         method: 'GET',
         headers: {
             "Authorization": `Bearer ${token}`,
             "ngrok-skip-browser-warning": "true"
         }
     })
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            if (res.status === 401) {
+                alert("Sesi Anda telah berakhir, silakan login ulang.");
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+            }
+            throw new Error(`Gagal mengambil profil: ${res.statusText}`);
+        }
+        return res.json();
+    })
     .then(data => {
-        const nama = data?.data?.nama || "Pengguna";
+        const profile = data.data || {}; 
+        const nama = profile.nama || "Pengguna";
         document.getElementById("greeting").textContent = `Selamat Datang ${nama} 👋`;
+
+        const profileImageUrl = profile.foto ? `${BASE_API_URL}/uploads/${profile.foto}` : "../img/profile.jpeg";
+        document.querySelectorAll(".profile-circle img").forEach(img => { 
+            img.src = profileImageUrl;
+        });
+        document.querySelectorAll(".profile-avatar-card").forEach(img => {
+            img.src = profileImageUrl;
+        });
     })
     .catch(err => {
-        console.error("Gagal ambil data user:", err);
+        console.error("Gagal ambil data user atau profil:", err);
         document.getElementById("greeting").textContent = "Gagal memuat profil ❌";
+        document.querySelectorAll(".profile-circle img, .profile-avatar-card").forEach(img => {
+            img.src = "../img/profile.jpeg"; // Path ke gambar default 
+        });
     });
-
+   
+   
     // Toggle Password Visibility
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('password');
@@ -85,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
     // Navigasi halaman
-    document.getElementById("profil")?.addEventListener("click", function() {
+    document.getElementById("profileImage")?.addEventListener("click", function() {
         window.location.href = "profile-revisi.html";
     });
     document.getElementById("profile")?.addEventListener("click", function() {

@@ -69,28 +69,53 @@ nav ul li a:hover {
     align-items: center;
 }
 
+/* Pastikan .profile-circle memiliki bentuk dan sifat overflow */
 .profile-circle {
     width: 40px;
     height: 40px;
     background-color: #FFFBDE;
     border-radius: 50%;
-    display: flex;
+    overflow: hidden; /* Penting untuk memotong gambar yang berlebihan */
+    display: flex; /* Untuk memposisikan gambar di tengah */
+    /* display: flex; <== Hapus baris ini, duplikat */
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    /* Tambahan: Pastikan tidak ada padding di parent jika ada */
+    padding: 0; 
+}
+
+.profile-circle img {
+    width: 100%; /* Pastikan gambar mengisi seluruh lebar lingkaran */
+    height: 100%; /* Pastikan gambar mengisi seluruh tinggi lingkaran */
+    object-fit: cover; /* Penting! Memastikan gambar memenuhi area tanpa terdistorsi */
+    display: block; /* Menghilangkan spasi ekstra di bawah gambar */
+    /* *** TAMBAHAN INI YANG PENTING *** */
+    margin: 0; /* Pastikan tidak ada margin yang mendorong gambar menjauh dari tepi */
+    padding: 0; /* Pastikan tidak ada padding internal pada gambar */
+    flex-shrink: 0; /* Mencegah gambar menyusut jika ada ruang terbatas */
+    vertical-align: middle; /* Membantu alignment vertikal pada beberapa browser */
 }
 
 .profile-circle i {
     color: #129990;
     font-size: 20px;
+    /* Jika Anda ingin icon tersembunyi saat gambar dimuat, 
+       ini bisa dikontrol oleh JavaScript: */
+    /* display: none; */ 
 }
 
 .profile-circle:hover {
     transform: scale(1.1);
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
-
+.profile-avatar-card {
+    width: 100%; /* Pastikan aturan ini juga berlaku untuk gambar di preview */
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* Untuk membuat preview juga lingkaran */
+}
 /* main content - Improved Profile Styles (Keeping card styles) */
 .profile-container {
     background-color: #ffffff; /* White background for a cleaner look */

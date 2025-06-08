@@ -1,25 +1,6 @@
 import '../css/profile.css';
 
 document.addEventListener("DOMContentLoaded", function () {
-   if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(
-            function (position) {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
-
-                console.log('Latitude:', latitude);
-                console.log('Longitude:', longitude);
-
-                // Simpan lokasi di localStorage / kirim ke backend / tampilkan
-            },
-            function (error) {
-                console.error('Gagal mendapatkan lokasi:', error.message);
-            }
-        );
-    } else {
-        console.error('Geolocation tidak didukung browser ini.');
-    }
-    
   const token = localStorage.getItem("token");
   if (!token) {
     alert("Token tidak ditemukan. Silakan login ulang.");
@@ -27,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   let userId = null;
+  const BASE_API_URL = 'https://previously-notable-hound.ngrok-free.app';
 
   // Fungsi untuk update tampilan profil di halaman
   function updateProfileUI(profile) {
@@ -38,6 +20,15 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("alamat").textContent = profile.alamat || "-";
     document.getElementById("negara").textContent = profile.negara || "-";
     document.getElementById("kota").textContent = profile.kota || "-";
+
+    // Tampilkan foto profil dari API
+    // --- PERBAIKAN 2: URL Foto Profil ---
+    // Jika 'profile.foto' mengembalikan nama file (misal: "gambar.jpg"),
+    // maka URL lengkapnya harus menjadi BASE_API_URL/uploads/gambar.jpg
+    const profileImageUrl = profile.foto ? `${BASE_API_URL}/uploads/${profile.foto}` : "../img/profile.jpeg";
+    document.querySelectorAll(".profile-avatar-card, #preview-profile-pic").forEach(img => {
+      img.src = profileImageUrl;
+    });
   }
 
   // Fungsi untuk mengisi form edit dengan data profil
@@ -53,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Ambil data profil dari API
-  fetch("https://previously-notable-hound.ngrok-free.app/profile", {
+  fetch(`${BASE_API_URL}/profile`, { // --- PERBAIKAN 3: Gunakan BASE_API_URL ---
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -78,28 +69,46 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   // Fungsi umum untuk update profil via API
-function updateProfile(updatedData) {
-  if (!userId) {
-    alert("ID pengguna tidak ditemukan.");
-    return Promise.reject("User ID null");
-  }
+  async function updateProfile(updatedData, file = null) { // --- PERBAIKAN 4: Tambahkan parameter 'file' ---
+    if (!userId) {
+      alert("ID pengguna tidak ditemukan.");
+      return Promise.reject("User ID null");
+    }
 
-  return fetch(`https://previously-notable-hound.ngrok-free.app/users/${userId}`, {
-    method: "PUT",
-    headers: {
+    let bodyData;
+    let headers = {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
       "ngrok-skip-browser-warning": "true"
-    },
-    body: JSON.stringify(updatedData)
-  })
-    .then(res => {
-      if (!res.ok) throw new Error("Gagal update profil");
-      return res.json();
-    })
-    .then(() => {
+    };
+
+    if (file) {
+      // Jika ada file, gunakan FormData dan masukkan semua data
+      bodyData = new FormData();
+      for (const key in updatedData) {
+        bodyData.append(key, updatedData[key]);
+      }
+      bodyData.append("foto", file); // 'foto' harus sesuai dengan nama field di backend
+      // Jangan set 'Content-Type' untuk FormData, browser akan mengaturnya otomatis
+    } else {
+      // Jika tidak ada file, kirim sebagai JSON
+      bodyData = JSON.stringify(updatedData);
+      headers["Content-Type"] = "application/json"; // Set Content-Type untuk JSON
+    }
+
+    try {
+      const res = await fetch(`${BASE_API_URL}/users/${userId}`, { // --- PERBAIKAN 5: Gunakan BASE_API_URL dan rute PUT /users/{id} ---
+        method: "PUT", // --- PERBAIKAN 6: Menggunakan metode PUT ---
+        headers: headers,
+        body: bodyData
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text(); // Ambil teks error dari respons
+        throw new Error(`Gagal update profil: ${res.status} - ${errorText}`);
+      }
+
       // Setelah update berhasil, ambil ulang profil lengkap
-      return fetch("https://previously-notable-hound.ngrok-free.app/profile", {
+      const profileRes = await fetch(`${BASE_API_URL}/profile`, { // --- PERBAIKAN 7: Gunakan BASE_API_URL ---
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -107,27 +116,26 @@ function updateProfile(updatedData) {
           "ngrok-skip-browser-warning": "true"
         }
       });
-    })
-    .then(res => {
-      if (!res.ok) throw new Error("Gagal mengambil profil setelah update");
-      return res.json();
-    })
-    .then(data => {
+
+      if (!profileRes.ok) {
+        throw new Error("Gagal mengambil profil setelah update");
+      }
+
+      const data = await profileRes.json();
       const updatedProfile = data.data || {};
       updateProfileUI(updatedProfile);
       fillEditForm(updatedProfile);
       alert("Profil berhasil diperbarui!");
       document.getElementById("popup-edit-profile").classList.remove("active");
-    })
-    .catch(err => {
+    } catch (err) {
       console.error("Gagal update atau ambil ulang profil:", err);
-      alert("Gagal memperbarui profil.");
-    });
-}
+      alert(`Gagal memperbarui profil: ${err.message}`);
+    }
+  }
 
 
-  // Event listener untuk form general-popup (update nama, alamat)
-  document.getElementById("general-popup").addEventListener("submit", function (e) {
+  // Event listener untuk form general-popup (update nama, alamat, dan foto)
+  document.getElementById("general-popup").addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const updatedData = {
@@ -135,8 +143,12 @@ function updateProfile(updatedData) {
       alamat: document.getElementById("alamat-detail").value.trim(),
     };
 
-    updateProfile(updatedData);
+    const file = document.getElementById("profile-pic-upload").files[0];
+
+    // --- PERBAIKAN 8: Panggil updateProfile dengan file ---
+    updateProfile(updatedData, file); // Kirim updatedData dan file bersamaan
   });
+
 
   // Event listener untuk form personal-popup (update nama_belakang, email, telepon)
   document.getElementById("personal-popup").addEventListener("submit", function (e) {
@@ -149,7 +161,7 @@ function updateProfile(updatedData) {
       telepon: document.getElementById("telepon-detail").value.trim(),
     };
 
-    updateProfile(updatedData);
+    updateProfile(updatedData); // Panggil tanpa file
   });
 
   // Event listener untuk form address-popup (update negara, kota)
@@ -161,6 +173,6 @@ function updateProfile(updatedData) {
       kota: document.getElementById("kota-detail").value.trim()
     };
 
-    updateProfile(updatedData);
+    updateProfile(updatedData); // Panggil tanpa file
   });
 });
