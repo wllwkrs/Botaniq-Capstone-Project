@@ -21,10 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("negara").textContent = profile.negara || "-";
     document.getElementById("kota").textContent = profile.kota || "-";
 
-    // Tampilkan foto profil dari API
-    // --- PERBAIKAN 2: URL Foto Profil ---
-    // Jika 'profile.foto' mengembalikan nama file (misal: "gambar.jpg"),
-    // maka URL lengkapnya harus menjadi BASE_API_URL/uploads/gambar.jpg
+    
     const profileImageUrl = profile.foto ? `${BASE_API_URL}/uploads/${profile.foto}` : "../img/profile.jpeg";
     document.querySelectorAll(".profile-avatar-card, #preview-profile-pic").forEach(img => {
       img.src = profileImageUrl;
@@ -44,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Ambil data profil dari API
-  fetch(`${BASE_API_URL}/profile`, { // --- PERBAIKAN 3: Gunakan BASE_API_URL ---
+  fetch(`${BASE_API_URL}/profile`, { 
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -69,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   // Fungsi umum untuk update profil via API
-  async function updateProfile(updatedData, file = null) { // --- PERBAIKAN 4: Tambahkan parameter 'file' ---
+  async function updateProfile(updatedData, file = null) { 
     if (!userId) {
       alert("ID pengguna tidak ditemukan.");
       return Promise.reject("User ID null");
@@ -87,8 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
       for (const key in updatedData) {
         bodyData.append(key, updatedData[key]);
       }
-      bodyData.append("foto", file); // 'foto' harus sesuai dengan nama field di backend
-      // Jangan set 'Content-Type' untuk FormData, browser akan mengaturnya otomatis
+      bodyData.append("foto", file); 
     } else {
       // Jika tidak ada file, kirim sebagai JSON
       bodyData = JSON.stringify(updatedData);
@@ -96,8 +92,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     try {
-      const res = await fetch(`${BASE_API_URL}/users/${userId}`, { // --- PERBAIKAN 5: Gunakan BASE_API_URL dan rute PUT /users/{id} ---
-        method: "PUT", // --- PERBAIKAN 6: Menggunakan metode PUT ---
+      const res = await fetch(`${BASE_API_URL}/users/${userId}`, { 
+        method: "PUT", 
         headers: headers,
         body: bodyData
       });
@@ -108,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       // Setelah update berhasil, ambil ulang profil lengkap
-      const profileRes = await fetch(`${BASE_API_URL}/profile`, { // --- PERBAIKAN 7: Gunakan BASE_API_URL ---
+      const profileRes = await fetch(`${BASE_API_URL}/profile`, { 
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -145,8 +141,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const file = document.getElementById("profile-pic-upload").files[0];
 
-    // --- PERBAIKAN 8: Panggil updateProfile dengan file ---
-    updateProfile(updatedData, file); // Kirim updatedData dan file bersamaan
+    
+    updateProfile(updatedData, file); 
   });
 
 

@@ -64,6 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
 document.getElementById("signup-button").addEventListener("click", function() {
     window.location.href = "register.html";
 });
+document.getElementById("start").addEventListener("click", function() {
+    window.location.href = "register.html";
+});
 document.getElementById("signin-button").addEventListener("click", function() {
     window.location.href = "login.html";
 });
