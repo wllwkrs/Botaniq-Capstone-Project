@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("negara").textContent = profile.negara || "-";
     document.getElementById("kota").textContent = profile.kota || "-";
 
-    const profileImageUrl = profile.foto ? `${BASE_API_URL}/uploads/${profile.foto}` : "../img/profile.jpeg";
+    const profileImageUrl = profile.foto ? `${BASE_API_URL}/uploads/${profile.foto}` : "assets/img/profile.jpeg";
     document.querySelectorAll(".profile-avatar-card, #preview-profile-pic").forEach(img => {
       img.src = profileImageUrl;
     });
@@ -162,3 +162,12 @@ document.addEventListener("DOMContentLoaded", function () {
     updateProfile(updatedData); 
   });
 });
+
+document.querySelectorAll('.edit-popup-form').forEach(form => {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        this.closest('.edit-popup-overlay').style.display = 'none';
+        document.querySelector('.overlay').style.display = 'none';
+    });
+});
+

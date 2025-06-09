@@ -1,7 +1,7 @@
 import Map from './map.js';
 import 'leaflet/dist/leaflet.css';
 import '../css/beranda.css';
-
+// import '../img/profile.jpeg';
 document.addEventListener('DOMContentLoaded', function () {
     const token = localStorage.getItem("token");
     const BASE_API_URL = 'https://previously-notable-hound.ngrok-free.app'; 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const nama = profile.nama || "Pengguna";
         document.getElementById("greeting").textContent = `Selamat Datang ${nama} 👋`;
 
-        const profileImageUrl = profile.foto ? `${BASE_API_URL}/uploads/${profile.foto}` : "../img/profile.jpeg";
+        const profileImageUrl = profile.foto ? `${BASE_API_URL}/uploads/${profile.foto}` : "assets/img/profile.jpeg";
         document.querySelectorAll(".profile-circle img").forEach(img => { 
             img.src = profileImageUrl;
         });
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error("Gagal ambil data user atau profil:", err);
         document.getElementById("greeting").textContent = "Gagal memuat profil ❌";
         document.querySelectorAll(".profile-circle img, .profile-avatar-card").forEach(img => {
-            img.src = "../img/profile.jpeg"; // Path ke gambar default 
+            img.src = "assets/img/profile.jpeg"; // Path ke gambar default 
         });
     });
    

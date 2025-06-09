@@ -2,6 +2,9 @@
   "name": "capstone-project-webpack",
   "version": "1.0.0",
   "main": "index.js",
+   "babel": {
+    "presets": ["@babel/preset-env"]
+  },
   "scripts": {
     "start": "webpack serve --open",
     "build": "webpack"

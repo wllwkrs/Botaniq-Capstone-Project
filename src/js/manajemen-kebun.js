@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(data => {
         const profile = data.data || {}; 
 
-        const profileImageUrl = profile.foto ? `${BASE_API_URL}/uploads/${profile.foto}` : "../img/profile.jpeg";
+        const profileImageUrl = profile.foto ? `${BASE_API_URL}/uploads/${profile.foto}` : "assets/img/profile.jpeg";
         document.querySelectorAll(".profile-circle img").forEach(img => { 
             img.src = profileImageUrl;
         });
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error("Gagal ambil data user atau profil:", err);
         document.getElementById("greeting").textContent = "Gagal memuat profil ❌";
         document.querySelectorAll(".profile-circle img, .profile-avatar-card").forEach(img => {
-            img.src = "../img/profile.jpeg"; // Path ke gambar default 
+            img.src = "assets/img/profile.jpeg"; // Path ke gambar default 
         });
     });
 

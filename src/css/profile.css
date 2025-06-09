@@ -1231,3 +1231,9 @@ body.sidebar-open .overlay {
     font-size: 14px;
     font-weight: 500;
 }
+
+input[readonly] {
+  background-color: #e0e0e0; 
+  color: #666666;            
+  cursor: not-allowed;       
+}
