@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const pages = [
   'beranda',
@@ -37,6 +38,9 @@ module.exports = {
         { from: 'src/img', to: 'assets/img' }
       ],
     }),
+    new MiniCssExtractPlugin({
+    filename: 'assets/css/[name].css',
+  }),
   ],
   devServer: {
     static: {
@@ -53,7 +57,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.js$/i,

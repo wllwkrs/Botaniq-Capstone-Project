@@ -1,0 +1,171 @@
+/*!************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/register.css ***!
+  \************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap);
+/*!****************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/register.css (1) ***!
+  \****************************************************************************/
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0; /* Light grey background */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-y: hidden; /* Prevent vertical scroll */
+}
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.register-container .form-section {
+    width: 730px;
+    height: fit-content;
+    padding: 40px 20px; /* Reduced horizontal padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.register-container .login-header {
+    text-align: center; /* Center header content */
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.register-container .login-header h2,
+.register-container .login-header .slogan{
+    margin: 0 0 10px 0;
+    text-decoration: none; /* Adjust spacing */
+}
+
+.register-container .login-header .slogan a {
+    text-decoration: none; /* Remove underline */
+    color: #129990; /* Set link color */
+}
+
+.register-container .form-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.register-container .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.register-container .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.register-container .input-wrapper input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    padding: 5px 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: transparent; /* Set background to transparent */
+}
+
+.register-container .input-wrapper .icon {
+    margin-right: 10px;
+    color: #888;
+}
+
+.register-container .input-wrapper .toggle-password {
+    cursor: pointer;
+    color: #888;
+}
+
+.register-container .form-group small {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+    font-size: 0.8em;
+    text-align: left;
+}
+
+.register-container .privacy-text {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.register-container .login-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #129990; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-container .login-button:hover {
+    background-color: #1a8f86;
+}
+
+.register-logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 80px; /* Adjust size as needed */
+    z-index: 10; /* Ensure logo is above other content */
+}
+
+.password-strength-feedback {
+    display: block;
+    font-size: 0.85em;
+    color: #666; /* Warna default */
+    margin-top: 5px;
+    text-align: left;
+}
+.password-strength-feedback.invalid {
+    color: red;
+}
+.form-group input#password:invalid {
+    border-color: red;
+}
+.form-group input#password:valid {
+    border-color: green; 
+}
+
+/* Responsive adjustments for register page */
+@media (max-width: 1280px) {
+    .register-container {
+        padding: 10px;
+    }
+
+    .register-container .form-section {
+        width: 95%;
+        padding: 20px;
+    }
+}

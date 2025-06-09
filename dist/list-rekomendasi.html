@@ -6,7 +6,7 @@
     <title>BotaniQ - Hasil Rekomendasi</title>
     <!-- <link rel="stylesheet" href="assets/css/list-rekomendasi.css"> Link the dedicated CSS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For icons -->
-<script defer src="list-rekomendasi.bundle.js"></script></head>
+<script defer src="list-rekomendasi.bundle.js"></script><link href="assets/css/list-rekomendasi.css" rel="stylesheet"></head>
 <body>
 
     <!-- Navigation Bar -->
@@ -18,15 +18,16 @@
             <nav class="desktop-nav">
                 <ul>
                     <li><a href="beranda.html">Home</a></li>
-                    <li><a href="#">Manajemen Kebun</a></li>
-                    <li><a href="rekomendasi.html">Rekomendasi</a></li>
+                    <li><a href="manajemen-kebun.html">Manajemen Kebun</a></li>
+                    <li><a href="list-rekomendasi.html">Rekomendasi</a></li>
                 </ul>
             </nav>
             <div class="profile-section">
-                <div class="profile-circle">
-                    <i class="fas fa-user"></i>
+                    <div class="profile-circle">
+                        <!-- <i class="fas fa-user"></i> -->
+                         <img id="profileImage" class="profile-avatar-card" src="assets/img/profile.jpeg" alt="Foto Profil">
+                    </div>
                 </div>
-            </div>
             <!-- Mobile menu icon will be added here by CSS based on screen size -->
             <div class="mobile-menu-icon">
                 <i class="fas fa-bars"></i> <!-- Hamburger icon -->
@@ -43,7 +44,7 @@
         <nav class="mobile-nav">
             <ul>
                 <li><a href="beranda.html">Home</a></li>
-                <li><a href="#">Manajemen Kebun</a></li>
+                <li><a href="manajemen-kebun.html">Manajemen Kebun</a></li>
                 <li><a href="rekomendasi.html">Rekomendasi</a></li>
             </ul>
         </nav>
@@ -131,7 +132,7 @@
                     <img src="assets/img/a50f38827a2283b25d9640bc9572da77 1.png" alt="Plant Image">
                 </div>
                 <div class="card-actions">
-                    <button class="action-button">Tanam dan Pantau</button>
+                    <button class="action-button" id="tanam" >Tanam dan Pantau</button>
                 </div>
                 <div class="plant-details">
                     <p>Suhu : x-x</p>

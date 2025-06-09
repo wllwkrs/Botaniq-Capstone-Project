@@ -6,7 +6,7 @@
     <title>Register Page</title>
     <!-- <link rel="stylesheet" href="assets/css/register.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<script defer src="register.bundle.js"></script></head>
+<script defer src="register.bundle.js"></script><link href="assets/css/register.css" rel="stylesheet"></head>
 <body>
     <div class="register-container">
         <img src="assets/img/image 6.svg" alt="BotaniQ Logo" class="register-logo">
@@ -30,14 +30,22 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-key icon"></i>
-                        <input type="password" id="password" placeholder="Masukkan Password Anda" required>
-                        <i class="fas fa-eye-slash toggle-password" id="togglePassword"></i>
-                    </div>
-                     <small>Gunakan 8 karakter atau lebih dengan campuran huruf, angka & simbol</small>
-                </div>
+    <label for="password">Password</label>
+    <div class="input-wrapper">
+        <i class="fas fa-key icon"></i>
+        <input
+    type="password"
+    id="password"
+    placeholder="Masukkan Password Anda"
+    required
+    minlength="8"
+    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9\s]).{8,}"
+    title="Gunakan 8 karakter atau lebih dengan campuran huruf kecil, huruf besar, angka & simbol."
+>
+        <i class="fas fa-eye-slash toggle-password" id="togglePassword"></i>
+    </div>
+    <small id="password-feedback" class="password-strength-feedback">Gunakan 8 karakter atau lebih dengan campuran huruf, angka & simbol</small>
+    </div>
                  <p class="privacy-text">Dengan membuat akun, Anda menyetujui Ketentuan Penggunaan dan Kebijakan Privasi.</p>
                 <button type="submit" class="login-button">Buat Akun</button>
             </form>

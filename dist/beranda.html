@@ -6,7 +6,7 @@
     <title>BotaniQ - Grow With Confidence</title>
     <!-- <link rel="stylesheet" href="assets/css/beranda.css">  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For icons -->
-<script defer src="beranda.bundle.js"></script></head>
+<script defer src="beranda.bundle.js"></script><link href="assets/css/beranda.css" rel="stylesheet"></head>
 <body>
 
     <!-- Navigation Bar -->
@@ -22,10 +22,11 @@
                 </ul>
             </nav>
             <div class="profile-section">
-                <div class="profile-circle">
-                    <i class="fas fa-user" id="profil" ></i>
+                    <div class="profile-circle">
+                        <!-- <i class="fas fa-user"></i> -->
+                         <img id="profileImage" class="profile-avatar-card" src="assets/img/profile.jpeg" alt="Foto Profil">
+                    </div>
                 </div>
-            </div>
             <div class="mobile-menu-icon">
                 <i class="fas fa-bars"></i> <!-- Hamburger icon -->
             </div>
@@ -144,20 +145,20 @@
                     </div>                
                 </div>
             </div>
-            <nav class="bottom-nav" aria-label="Bottom navigation">
-                <div class="nav-item profil" tabindex="0">
+            <nav class="bottom-nav" aria-label="Bottom navigation" >
+                <div class="nav-item profil" tabindex="0" id="profile">
                   <div class="icon-circle" aria-hidden="true">
                     <i class="fas fa-user-friends"></i>
                   </div>
                   <span>Profil </span>
                 </div>
-                <div class="nav-item rekomendasi" tabindex="0">
+                <div class="nav-item rekomendasi" tabindex="0" id="rekomendasi">
                   <div class="icon-circle" aria-hidden="true">
                     <i class="fas fa-seedling"></i>
                   </div>
                   <span>Rekomendasi Tanaman</span>
                 </div>
-                <div class="nav-item manajemen" tabindex="0">
+                <div class="nav-item manajemen" tabindex="0" id="manajemen">
                   <div class="icon-circle" aria-hidden="true">
                     <i class="fas fa-stethoscope"></i>
                   </div>
