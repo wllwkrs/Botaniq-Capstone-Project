@@ -55,14 +55,60 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log('Longitude:', longitude);
 
                 // Simpan lokasi di localStorage / kirim ke backend / tampilkan
-            },
-            function (error) {
-                console.error('Gagal mendapatkan lokasi:', error.message);
-            }
-        );
-    } else {
-        console.error('Geolocation tidak didukung browser ini.');
-    }
+
+                const API_KEY = 'a290da4bf85a0b886d5b613a2dbecd23';
+                const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric&lang=id`;
+                
+                fetch(weatherUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.main || !data.weather || !data.weather[0]) {
+                        throw new Error("Data cuaca tidak lengkap atau salah.");
+                    }
+
+                    const suhu = data.main.temp;
+                    const kelembapan = data.main.humidity;
+                    const tekanan = data.main.pressure;
+                    const kecepatanAngin = data.wind.speed;
+                    const kondisiCuaca = data.weather[0].description;
+                    const namaKota = data.name;
+                    const iconCode = data.weather[0].icon;
+                    const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+                    console.log(`Suhu: ${suhu}°C`);
+                    console.log(`Kelembapan: ${kelembapan}%`);
+                    console.log(`Tekanan udara: ${tekanan} hPa`);
+                    console.log(`Kecepatan angin: ${kecepatanAngin} m/s`);
+                    console.log(`Cuaca: ${kondisiCuaca}`);
+                    console.log(`Lokasi: ${namaKota}`);
+
+                    // const weatherInfo = document.getElementById("weather-info");
+                    // if (weatherInfo) {
+                    //     weatherInfo.innerHTML = `
+                    //         <h3>Cuaca di ${namaKota}</h3>
+                    //         <img src="${iconUrl}" alt="Icon Cuaca" />
+                    //         <p>${kondisiCuaca}, ${suhu}°C</p>
+                    //         <p>Kelembapan: ${kelembapan}%</p>
+                    //         <p>Tekanan udara: ${tekanan} hPa</p>
+                    //         <p>Kecepatan angin: ${kecepatanAngin} m/s</p>
+                    //     `;
+                    // }
+                })
+                // .catch(error => {
+                //     console.error("Gagal mengambil data cuaca:", error);
+                // });
+
+                },
+                function (error) {
+                    console.error('Gagal mendapatkan lokasi:', error.message);
+                }
+                );
+                } else {
+                    console.error('Geolocation tidak didukung browser ini.');
+                }
+            
+    
+    
     
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('password');
@@ -131,3 +177,4 @@ document.getElementById("profileImage")?.addEventListener("click", function() {
         window.location.href = "profile-revisi.html";
     });
 }); 
+
