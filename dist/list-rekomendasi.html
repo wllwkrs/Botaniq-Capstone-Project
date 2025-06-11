@@ -67,10 +67,11 @@
                 <input type="text" placeholder="Cari tanaman...">
                 <button>Cari</button>
             </div>
+            <!-- <div id="weather-info">Memuat cuaca...</div> -->
 
             <div class="filter-dropdowns">
                 <div class="filter-dropdown">
-                    <select class="filter-select">
+                    <select class="filter-select" id="growth">
                         <option value="">Growth Rate</option>
                         <option value="slow">Slow</option>
                         <option value="fast">Fast</option>
@@ -79,7 +80,7 @@
                     <button class="clear-filter" title="Clear selection">×</button>
                 </div>
                 <div class="filter-dropdown">
-                    <select class="filter-select">
+                    <select class="filter-select" id="soil">
                         <option value="">Soil Type</option>
                         <option value="sandy">Sandy</option>
                         <option value="well-drained">Well-drained</option>
@@ -90,31 +91,31 @@
                     <button class="clear-filter" title="Clear selection">×</button>
                 </div>
                 <div class="filter-dropdown">
-                    <select class="filter-select">
+                    <select class="filter-select" id="sunlight">
                         <option value="">Sunlight</option>
-                        <option value="indirect">Indirect Sunlight</option>
-                        <option value="full">Full Sunlight</option>
-                        <option value="partial">Partial Sunlight</option>
+                        <option value="indirect sunlight">Indirect Sunlight</option>
+                        <option value="full sunlight">Full Sunlight</option>
+                        <option value="partial sunlight">Partial Sunlight</option>
                     </select>
                     <button class="clear-filter" title="Clear selection">×</button>
                 </div>
                 <div class="filter-dropdown">
-                    <select class="filter-select">
+                    <select class="filter-select" id="watering">
                         <option value="">Watering</option>
-                        <option value="weekly">Water Weekly</option>
-                        <option value="evenly-moist">Keep Soil Evenly Moist</option>
-                        <option value="dry-between">Let Soil Dry Between Watering</option>
-                        <option value="consistently-moist">Keep Soil Consistently Moist</option>
-                        <option value="topsoil-dry">Water When Topsoil is Dry</option>
+                        <option value="water weekly">Water Weekly</option>
+                        <option value="Keep Soil Evenly Moist">Keep Soil Evenly Moist</option>
+                        <option value="Let Soil Dry Between Watering">Let Soil Dry Between Watering</option>
+                        <option value="Keep Soil Consistently Moist">Keep Soil Consistently Moist</option>
+                        <option value="Water When Topsoil is Dry">Water When Topsoil is Dry</option>
                     </select>
                     <button class="clear-filter" title="Clear selection">×</button>
                 </div>
                 <div class="filter-dropdown">
-                    <select class="filter-select">
+                    <select class="filter-select" id="fertilizer">
                         <option value="">Fertilization</option>
                         <option value="balanced">Balanced</option>
                         <option value="organic">Organic</option>
-                        <option value="no">No Fertilization</option>
+                        <option value="no fertilazition">No Fertilization</option>
                         <option value="low-nitrogen">Low-nitrogen</option>
                         <option value="acidic">Acidic</option>
                     </select>
@@ -123,7 +124,7 @@
             </div>
 
             <!-- Plant recommendation cards will go here -->
-            <div class="recommendation-grid">
+            <div class="recommendation-grid" id="plantContainer">
             <div class="recommendation-card">
                 <div class="plant-details">
                     <h3>Rafflesia arnoldii</h3>
@@ -135,13 +136,14 @@
                     <button class="action-button" id="tanam" >Tanam dan Pantau</button>
                 </div>
                 <div class="plant-details">
-                    <p>Suhu : x-x</p>
-                    <p>Informasi x: xxxxxxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxxxxxx</p>
-                    <p>Informasi x: xxxxxxxxxxxxxx</p>
+                    <p id="suhu">Suhu : x-x</p>
+                    <p id="plant name">Plant Name: xxxxxxxxxxxxxx</p>
+                    <p id="growth">Growth: xxxxxxxxxxxxxx</p>
+                    <p id="soil">Soil: xxxxxxxxxxxxxx</p>
+                    <p id="sunlight">Sunlight: xxxxxxxxxxxxxx</p>
+                    <p id="watering">Watering: xxxxxxxxxxxxxx</p>
+                    <p id="fertilization-type">Fertilization Type: xxxxxxxxxxxxxx</p>
+                    <p id="family">Family: xxxxxxxxxxxxxx</p>
                 </div>
             </div>
 
@@ -187,12 +189,12 @@
                 </div>
             </div>
             
-            <div class="recommendation-card">
+            <!-- <div class="recommendation-card">
                 <div class="plant-details">
                     <h3>Rafflesia arnoldii</h3>
                 </div>
                 <div class="plant-image">
-                    <img src="assets/img/a50f38827a2283b25d9640bc9572da77 1.png" alt="Plant Image">
+                    <img src="../img/a50f38827a2283b25d9640bc9572da77 1.png" alt="Plant Image">
                 </div>
                 <div class="card-actions">
                     <button class="action-button">Tanam dan Pantau</button>
@@ -213,7 +215,7 @@
                     <h3>Rafflesia arnoldii</h3>
                 </div>
                 <div class="plant-image">
-                    <img src="assets/img/a50f38827a2283b25d9640bc9572da77 1.png" alt="Plant Image">
+                    <img src="../img/a50f38827a2283b25d9640bc9572da77 1.png" alt="Plant Image">
                 </div>
                 <div class="card-actions">
                     <button class="action-button">Tanam dan Pantau</button>
@@ -227,7 +229,7 @@
                     <p>Informasi x: xxxxxxxxxxxxxx</p>
                     <p>Informasi x: xxxxxxxxxxxxxx</p>
                 </div>
-            </div>
+            </div> -->
 
             </div>
 

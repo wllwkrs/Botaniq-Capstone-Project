@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BotaniQ - Grow With Confidence</title>
-    <!-- <link rel="stylesheet" href="assets/css/rekomendasi.css">  -->
-
+    <title>BotaniQ - Hasil Rekomendasi</title>
+    <!-- <link rel="stylesheet" href="assets/css/list-rekomendasi.css"> Link the dedicated CSS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For icons -->
 <script defer src="rekomendasi.bundle.js"></script><link href="assets/css/rekomendasi.css" rel="stylesheet"></head>
 <body>
@@ -14,26 +13,34 @@
     <header>
         <div class="container nav-container">
             <div class="logo">
-                <img src="assets/img/image 6.svg" alt="BotaniQ Logo" id="beranda">
+                <img src="assets/img/image 6.svg" alt="BotaniQ Logo">
             </div>
             <nav class="desktop-nav">
                 <ul>
-                    <li><a href="/manajemen-kebun.html">Manajemen Kebun</a></li>
-                    <li><a href="/list-rekomendasi.html">Rekomendasi</a></li>
+                    <li><a href="beranda.html">Home</a></li>
+                    <li><a href="manajemen-kebun.html">Manajemen Kebun</a></li>
+                    <li><a href="list-rekomendasi.html">Rekomendasi</a></li>
                 </ul>
             </nav>
-            <div class="profile-section">
-                <div class="profile-circle">
-                    <i class="fas fa-user"></i>
+           <div class="profile-section">
+                    <div class="profile-circle">
+                        <!-- <i class="fas fa-user"></i> -->
+                         <img id="profileImage" class="profile-avatar-card" src="assets/img/profile.jpeg" alt="Foto Profil">
+                    </div>
+                    <div class="profile-dropdown">
+                    <a href="profile-revisi.html"><i class="fas fa-user"></i> Profile</a>
+                    <div class="divider"></div>
+                    <a href="home.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
             </div>
+            <!-- Mobile menu icon will be added here by CSS based on screen size -->
             <div class="mobile-menu-icon">
                 <i class="fas fa-bars"></i> <!-- Hamburger icon -->
             </div>
         </div>
     </header>
 
-    <!-- Mobile Sidebar -->
+    <!-- Mobile Sidebar (structure similar to rekomendasi.html) -->
     <div class="mobile-sidebar">
         <div class="sidebar-header">
             <img src="assets/img/image 6.svg" alt="BotaniQ Logo">
@@ -41,99 +48,166 @@
         </div>
         <nav class="mobile-nav">
             <ul>
-                <li><a href="/manajemen-kebun.html">Manajemen Kebun</a></li>
-                <li><a href="/rekomendasi.html">Rekomendasi</a></li>
+                <li><a href="beranda.html">Home</a></li>
+                <li><a href="manajemen-kebun.html">Manajemen Kebun</a></li>
+                <li><a href="rekomendasi.html">Rekomendasi</a></li>
             </ul>
         </nav>
     </div>
 
-    <!-- Overlay to darken background when sidebar is open -->
+    <!-- Overlay for mobile sidebar -->
     <div class="overlay"></div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
+    <!-- Main Content Section -->
+    <section class="main-content">
         <div class="container">
-            <div class="rekomendasi-card">
-                <h2>Rekomendasi Tanaman</h2>
-                <p>Silakan jawab beberapa pertanyaan untuk mendapatkan rekomendasi tanaman yang cocok.</p>
-
-                <div class="questions-section">
-                    <!-- Placeholder dropdowns -->
-                    <div class="question">
-                        <label for="q1">Seberapa sering Anda dapat merawat tanaman?</label>
-                        <select id="q1">
-                            <option value="">Pilih Jawaban</option>
-                            <!-- Add more options here -->
-                        </select>
-                    </div>
-                    <div class="question">
-                        <label for="q2">Seberapa sering Anda dapat merawat tanaman?</label>
-                        <select id="q2">
-                            <option value="">Pilih Jawaban</option>
-                            <!-- Add more options here -->
-                        </select>
-                    </div>
-                    <div class="question">
-                        <label for="q3">Seberapa sering Anda dapat merawat tanaman?</label>
-                        <select id="q3">
-                            <option value="">Pilih Jawaban</option>
-                            <!-- Add more options here -->
-                        </select>
-                    </div>
-                     <div class="question">
-                        <label for="q4">Seberapa sering Anda dapat merawat tanaman?</label>
-                        <select id="q4">
-                            <option value="">Pilih Jawaban</option>
-                            <!-- Add more options here -->
-                        </select>
-                    </div>
-                    <div class="question">
-                        <label for="q5">Seberapa sering Anda dapat merawat tanaman?</label>
-                        <select id="q5">
-                            <option value="">Pilih Jawaban</option>
-                            <!-- Add more options here -->
-                        </select>
-                    </div>
-                    <div class="question">
-                        <label for="q6">Seberapa sering Anda dapat merawat tanaman?</label>
-                        <select id="q6">
-                            <option value="">Pilih Jawaban</option>
-                            <!-- Add more options here -->
-                        </select>
-                    </div>
-                    <div class="question">
-                        <label for="q7">Seberapa sering Anda dapat merawat tanaman?</label>
-                        <select id="q7">
-                            <option value="">Pilih Jawaban</option>
-                            <!-- Add more options here -->
-                        </select>
-                    </div>
-                </div>
-
-                <div class="location-section">
-                    <!-- Placeholder for map -->
-                    <div class="map-placeholder">
-                        <!-- Map will be embedded here -->
-                        <img src="https://via.placeholder.com/600x300?text=Map+Placeholder" alt="Satellite Map Placeholder">
-                    </div>
-                    <div class="coordinates">
-                        <div class="coord-input">
-                            <label for="longitude">Longitude:</label>
-                            <input type="text" id="longitude" value="" placeholder="xxxxxxxxx">
-                        </div>
-                        <div class="coord-input">
-                            <label for="latitude">Latitude:</label>
-                            <input type="text" id="latitude" value="" placeholder="xxxxxxxxx">
-                        </div>
-                    </div>
-                </div>
-
-                <button class="search-button">Cari Rekomendasi</button>
+            <div class="recommendation-header">
+                <a href="rekomendasi.html" class="back-link">
+                    <i class="fas fa-chevron-left"></i> Ditemukan Tanaman yang Cocok untuk Kamu
+                </a>
             </div>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" placeholder="Cari tanaman...">
+                <button>Cari</button>
+            </div>
+            <!-- <div id="weather-info">Memuat cuaca...</div> -->
+
+            <div class="filter-dropdowns">
+                <div class="filter-dropdown">
+                    <select class="filter-select" id="growth">
+                        <option value="">Growth Rate</option>
+                        <option value="slow">Slow</option>
+                        <option value="fast">Fast</option>
+                        <option value="moderate">Moderate</option>
+                    </select>
+                    <button class="clear-filter" title="Clear selection">×</button>
+                </div>
+                <div class="filter-dropdown">
+                    <select class="filter-select" id="soil">
+                        <option value="">Soil Type</option>
+                        <option value="sandy">Sandy</option>
+                        <option value="well-drained">Well-drained</option>
+                        <option value="loamy">Loamy</option>
+                        <option value="acidic">Acidic</option>
+                        <option value="moist">Moist</option>
+                    </select>
+                    <button class="clear-filter" title="Clear selection">×</button>
+                </div>
+                <div class="filter-dropdown">
+                    <select class="filter-select" id="sunlight">
+                        <option value="">Sunlight</option>
+                        <option value="indirect sunlight">Indirect Sunlight</option>
+                        <option value="full sunlight">Full Sunlight</option>
+                        <option value="partial sunlight">Partial Sunlight</option>
+                    </select>
+                    <button class="clear-filter" title="Clear selection">×</button>
+                </div>
+                <div class="filter-dropdown">
+                    <select class="filter-select" id="watering">
+                        <option value="">Watering</option>
+                        <option value="water weekly">Water Weekly</option>
+                        <option value="Keep Soil Evenly Moist">Keep Soil Evenly Moist</option>
+                        <option value="Let Soil Dry Between Watering">Let Soil Dry Between Watering</option>
+                        <option value="Keep Soil Consistently Moist">Keep Soil Consistently Moist</option>
+                        <option value="Water When Topsoil is Dry">Water When Topsoil is Dry</option>
+                    </select>
+                    <button class="clear-filter" title="Clear selection">×</button>
+                </div>
+                <div class="filter-dropdown">
+                    <select class="filter-select" id="fertilizer">
+                        <option value="">Fertilization</option>
+                        <option value="balanced">Balanced</option>
+                        <option value="organic">Organic</option>
+                        <option value="no fertilazition">No Fertilization</option>
+                        <option value="low-nitrogen">Low-nitrogen</option>
+                        <option value="acidic">Acidic</option>
+                    </select>
+                    <button class="clear-filter" title="Clear selection">×</button>
+                </div>
+            </div>
+
+            <!-- Plant recommendation cards will go here -->
+            <div class="recommendation-grid" id="plantContainer">
+            <div class="recommendation-card">
+                <div class="plant-details">
+                    <h3>Rafflesia arnoldii</h3>
+                </div>
+                <div class="plant-image">
+                    <img src="assets/img/a50f38827a2283b25d9640bc9572da77 1.png" alt="Plant Image">
+                </div>
+                <div class="card-actions">
+                    <button class="action-button" id="tanam" >Tanam dan Pantau</button>
+                </div>
+                <div class="plant-details">
+                    <p id="suhu">Suhu : x-x</p>
+                    <p id="plant name">Plant Name: xxxxxxxxxxxxxx</p>
+                    <p id="growth">Growth: xxxxxxxxxxxxxx</p>
+                    <p id="soil">Soil: xxxxxxxxxxxxxx</p>
+                    <p id="sunlight">Sunlight: xxxxxxxxxxxxxx</p>
+                    <p id="watering">Watering: xxxxxxxxxxxxxx</p>
+                    <p id="fertilization-type">Fertilization Type: xxxxxxxxxxxxxx</p>
+                    <p id="family">Family: xxxxxxxxxxxxxx</p>
+                </div>
+            </div>
+
+            <div class="recommendation-card">
+                <div class="plant-details">
+                    <h3>Rafflesia arnoldii</h3>
+                </div>
+                <div class="plant-image">
+                    <img src="assets/img/ba5d5232acf911e647e12359ed69e535 1.png" alt="Plant Image">
+                </div>
+                <div class="card-actions">
+                    <button class="action-button">Tanam dan Pantau</button>
+                </div>
+                <div class="plant-details">
+                    <p id="suhu">Suhu : x-x</p>
+                    <p id="plant name">Plant Name: xxxxxxxxxxxxxx</p>
+                    <p id="growth">Growth: xxxxxxxxxxxxxx</p>
+                    <p id="soil">Soil: xxxxxxxxxxxxxx</p>
+                    <p id="sunlight">Sunlight: xxxxxxxxxxxxxx</p>
+                    <p id="watering">Watering: xxxxxxxxxxxxxx</p>
+                    <p id="fertilization-type">Fertilization Type: xxxxxxxxxxxxxx</p>
+                    <p id="family">Family: xxxxxxxxxxxxxx</p>
+                </div>
+            </div>
+
+            <div class="recommendation-card">
+                <div class="plant-details">
+                    <h3>Rafflesia arnoldii</h3>
+                </div>
+                <div class="plant-image">
+                    <img src="assets/img/a50f38827a2283b25d9640bc9572da77 1.png" alt="Plant Image">
+                </div>
+                <div class="card-actions">
+                    <button class="action-button">Tanam dan Pantau</button>
+                </div>
+                <div class="plant-details">
+                    <p id="suhu">Suhu : x-x</p>
+                    <p id="plant name">Plant Name: xxxxxxxxxxxxxx</p>
+                    <p id="growth">Growth: xxxxxxxxxxxxxx</p>
+                    <p id="soil">Soil: xxxxxxxxxxxxxx</p>
+                    <p id="sunlight">Sunlight: xxxxxxxxxxxxxx</p>
+                    <p id="watering">Watering: xxxxxxxxxxxxxx</p>
+                    <p id="fertilization-type">Fertilization Type: xxxxxxxxxxxxxx</p>
+                    <p id="family">Family: xxxxxxxxxxxxxx</p>
+                </div>
+            </div>
+            
+            </div>
+
         </div>
+
+        <div class="scroll-buttons-container">
+            <button id="prevBtn" class="scroll-button"><i class="fas fa-chevron-left"></i></button>
+            <button id="nextBtn" class="scroll-button"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
     </section>
 
-    <!-- Footer -->
+    <!-- Footer (structure similar to rekomendasi.html) -->
     <footer>
         <div class="container footer-container">
             <div class="footer-about">
@@ -186,6 +260,24 @@
         </div>
     </footer>
 
-    <!-- <script src="assets/js/rekomendasi.js"></script> -->
+    <!-- <script src="assets/js/list-rekomendasi.js"></script> Assuming shared JS for mobile menu -->
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileCircle = document.querySelector('.profile-circle');
+            const profileDropdown = document.querySelector('.profile-dropdown');
+
+            profileCircle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!profileCircle.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+        });
+     </script>
 </body>
 </html>
