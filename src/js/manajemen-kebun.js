@@ -1,86 +1,155 @@
 import '../css/manajemen-kebun.css';
 
+const BASE_API_URL = 'https://previously-notable-hound.ngrok-free.app';
+const ML_API_URL = 'https://intimate-admittedly-kangaroo.ngrok-free.app';
+
+async function getWikipediaImage(plantName, latinName) {
+    const tryFetch = async (title) => {
+        const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=pageimages&format=json&pithumbsize=300&origin=*`;
+        try {
+            const res = await fetch(apiUrl);
+            const data = await res.json();
+            const pages = data.query.pages;
+            const page = Object.values(pages)[0];
+            return page.thumbnail?.source || null;
+        } catch (err) {
+            console.error("Gagal ambil gambar Wikipedia untuk", title, err);
+            return null;
+        }
+    };
+
+    return await tryFetch(plantName) || await tryFetch(latinName) || "assets/img/no-picture.jpeg";
+}
+
+async function fetchUserPlants(userId, token) {
+    try {
+        const [res1, res2] = await Promise.all([
+            fetch(`${BASE_API_URL}/user_plants/${userId}`, {
+                method: 'GET',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "ngrok-skip-browser-warning": "true"
+                }
+            }),
+            fetch(`${BASE_API_URL}/user_plantsandfamily/${userId}`, {
+                method: 'GET',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "ngrok-skip-browser-warning": "true"
+                }
+            })
+        ]);
+
+        const data1 = await res1.json();
+        const data2 = await res2.json();
+
+        return [
+            ...(data1.data || []).map(plant => ({
+                name: plant.latin,
+                imageKey: plant.latin
+            })),
+            ...(data2.data || []).map(plant => ({
+                name: plant.PlantName,
+                imageKey: plant.PlantName
+                
+            }
+        ))
+            
+        ];
+
+    } catch (err) {
+        console.error("Gagal mengambil data tanaman user:", err);
+        return [];
+    }
+}
+
+function createPlantCard(name, imageUrl, index) {
+    const card = document.createElement('div');
+    card.className = 'plant-card';
+
+    const imgWrapper = document.createElement('div');
+    imgWrapper.className = 'plant-image';
+
+    const img = document.createElement('img');
+    img.src = imageUrl;
+    img.alt = name;
+    imgWrapper.appendChild(img);
+
+    const title = document.createElement('h3');
+    title.textContent = name;
+
+    const button = document.createElement('button');
+    button.className = 'monitor-button';
+    button.id = `tanam${index}`;
+    button.textContent = 'Pantau';
+    button.addEventListener('click', () => {
+        window.location.href = 'detail-kebun.html';
+    });
+
+    card.appendChild(imgWrapper);
+    card.appendChild(title);
+    card.appendChild(button);
+
+    return card;
+}
+
+async function renderUserPlants(token) {
+    const userId = localStorage.getItem('user_id');
+    if (!userId) return console.error("User ID tidak ditemukan.");
+
+    const container = document.getElementById("plantcontainer");
+    const grid = document.createElement("div");
+    grid.className = "plant-card-grid";
+
+    loading.style.display = "block";
+
+    const userPlants = await fetchUserPlants(userId, token);
+
+    for (let i = 0; i < userPlants.length; i++) {
+        const plant = userPlants[i];
+        const imageUrl = await getWikipediaImage(plant.name, plant.imageKey);
+        const card = createPlantCard(plant.name, imageUrl, i + 1);
+        grid.appendChild(card);
+    }
+
+    const existingGrid = document.querySelector(".plant-card-grid");
+    if (existingGrid) existingGrid.remove();
+    container.appendChild(grid);
+
+    loading.style.display = "none";
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     const token = localStorage.getItem("token");
-    const BASE_API_URL = 'https://previously-notable-hound.ngrok-free.app'; 
     if (!token) {
         alert("Token tidak ditemukan. Silakan login ulang.");
-        window.location.href = "login.html"; 
+        window.location.href = "login.html";
         return;
-    } 
-    fetch(`${BASE_API_URL}/profile`, { 
+    }
+
+    fetch(`${BASE_API_URL}/profile`, {
         method: 'GET',
         headers: {
             "Authorization": `Bearer ${token}`,
             "ngrok-skip-browser-warning": "true"
         }
     })
-    .then(res => {
-        if (!res.ok) {
-            if (res.status === 401) {
-                alert("Sesi Anda telah berakhir, silakan login ulang.");
-                localStorage.removeItem("token");
-                window.location.href = "login.html";
-            }
-            throw new Error(`Gagal mengambil profil: ${res.statusText}`);
-        }
-        return res.json();
-    })
+    .then(res => res.json())
     .then(data => {
-        const profile = data.data || {}; 
-
+        const profile = data.data || {};
         const profileImageUrl = profile.foto ? `${BASE_API_URL}/uploads/${profile.foto}` : "assets/img/profile.jpeg";
-        document.querySelectorAll(".profile-circle img").forEach(img => { 
+        document.querySelectorAll(".profile-circle img, .profile-avatar-card").forEach(img => {
             img.src = profileImageUrl;
         });
-        document.querySelectorAll(".profile-avatar-card").forEach(img => {
-            img.src = profileImageUrl;
-        });
+        if (profile.id) {
+            localStorage.setItem("user_id", profile.id);
+            renderUserPlants(token);
+        }
     })
     .catch(err => {
         console.error("Gagal ambil data user atau profil:", err);
-        document.getElementById("greeting").textContent = "Gagal memuat profil ❌";
-        document.querySelectorAll(".profile-circle img, .profile-avatar-card").forEach(img => {
-            img.src = "assets/img/profile.jpeg"; // Path ke gambar default 
-        });
     });
 
-
-    if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(
-            function (position) {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
-
-                console.log('Latitude:', latitude);
-                console.log('Longitude:', longitude);
-
-                // Simpan lokasi di localStorage / kirim ke backend / tampilkan
-            },
-            function (error) {
-                console.error('Gagal mendapatkan lokasi:', error.message);
-            }
-        );
-    } else {
-        console.error('Geolocation tidak didukung browser ini.');
-    }
-    
-    const togglePassword = document.getElementById('togglePassword');
-    const passwordInput = document.getElementById('password');
-
-    if (togglePassword && passwordInput) {
-        togglePassword.addEventListener('click', function () {
-            // toggle the type attribute
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-
-            // toggle the eye icon
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
-        });
-    }
-
-    // Mobile Sidebar Toggle
     const mobileMenuIcon = document.querySelector('.mobile-menu-icon');
     const mobileSidebar = document.querySelector('.mobile-sidebar');
     const closeSidebar = document.querySelector('.close-sidebar');
@@ -91,81 +160,46 @@ document.addEventListener('DOMContentLoaded', function () {
         mobileSidebar.style.left = '0';
         overlay.style.display = 'block';
         body.classList.add('sidebar-open');
-        body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+        body.style.overflow = 'hidden';
     }
 
     function closeSidebarMenu() {
         mobileSidebar.style.left = '-250px';
         overlay.style.display = 'none';
         body.classList.remove('sidebar-open');
-        body.style.overflow = ''; // Restore scrolling
+        body.style.overflow = '';
     }
 
-    // Open sidebar when clicking the menu icon
-    mobileMenuIcon.addEventListener('click', openSidebar);
+    mobileMenuIcon?.addEventListener('click', openSidebar);
+    closeSidebar?.addEventListener('click', closeSidebarMenu);
+    overlay?.addEventListener('click', closeSidebarMenu);
 
-    // Close sidebar when clicking the close button
-    closeSidebar.addEventListener('click', closeSidebarMenu);
-
-    // Close sidebar when clicking the overlay
-    overlay.addEventListener('click', closeSidebarMenu);
-
-    // Close sidebar when clicking a navigation link
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
-    mobileNavLinks.forEach(link => {
+    document.querySelectorAll('.mobile-nav a').forEach(link => {
         link.addEventListener('click', closeSidebarMenu);
     });
 
-    // You can add form submission handling here if needed
-    // const loginForm = document.getElementById('loginForm');
-    // if (loginForm) {
-    //     loginForm.addEventListener('submit', function (event) {
-    //         event.preventDefault();
-    //         // Handle login logic here
-    //         console.log('Form submitted');
-    //     });
-    // }
-    document.getElementById("profileImage")?.addEventListener("click", function() {
-    window.location.href = "profile-revisi.html";
-
-    document.getElementById('logoutbtn').addEventListener('click', function (e) {
-    e.preventDefault();
-    localStorage.removeItem('token'); // ganti 'token' sesuai nama penyimpananmu
-    sessionStorage.removeItem('token');
-
-    fetch(`${BASE_API_URL}/logout`, {  
-        method: 'POST'
-    }).then(res => res.json()).then(data => {
-        console.log(data.message); 
-       
-        window.location.href = 'home.html'; 
-    }).catch(err => {
-        console.error('Logout error:', err);
-        window.location.href = 'home.html'
+    document.getElementById("profileImage")?.addEventListener("click", function () {
+        window.location.href = "profile-revisi.html";
     });
-});
-});
-document.getElementById("beranda").addEventListener("click", function() {
-    window.location.href = "beranda.html";
-});
 
-}); 
-document.getElementById("tanam1").addEventListener("click", function() {
-    window.location.href = "detail-kebun.html";
-});
+    document.getElementById('logoutbtn')?.addEventListener('click', function (e) {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
 
-document.getElementById("tanam2").addEventListener("click", function() {
-    window.location.href = "detail-kebun.html";
-});
-document.getElementById("tanam3").addEventListener("click", function() {
-    window.location.href = "detail-kebun.html";
-});
-document.getElementById("tanam4").addEventListener("click", function() {
-    window.location.href = "detail-kebun.html";
-});
-document.getElementById("tanam5").addEventListener("click", function() {
-    window.location.href = "detail-kebun.html";
-});
-document.getElementById("tanam6").addEventListener("click", function() {
-    window.location.href = "detail-kebun.html";
+        fetch(`${BASE_API_URL}/logout`, { method: 'POST' })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.message);
+            window.location.href = 'home.html';
+        })
+        .catch(err => {
+            console.error('Logout error:', err);
+            window.location.href = 'home.html';
+        });
+    });
+
+    document.getElementById("beranda")?.addEventListener("click", function () {
+        window.location.href = "beranda.html";
+    });
 });

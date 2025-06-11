@@ -1,7 +1,4 @@
 
-    
-
-
 import '../css/list-rekomendasi.css';
 
 let allPlants = [];
@@ -44,6 +41,8 @@ async function renderPlants() {
         const imageUrl = await getWikipediaImage(plant.PlantName || plant.latin, plant.latin);
         const isFromFilter = !!plant.PlantName; // if PlantName exists, it's from /predict/custom
 
+        loading.style.display = "block";
+
         return `
             <div class="recommendation-card">
                 <div class="plant-details"><h3>${plant.PlantName || plant.latin}</h3></div>
@@ -71,10 +70,81 @@ async function renderPlants() {
                     `}
                 </div>
             </div>`;
-    });
+            
+    });loading.style.display = "none";
 
     const cardsHTML = await Promise.all(cardPromises);
     container.innerHTML = cardsHTML.join('');
+
+    // Setelah menampilkan kartu
+document.querySelectorAll('.action-button').forEach((btn, index) => {
+    btn.addEventListener('click', async () => {
+        const plant = filteredPlants[currentIndex + index];
+        const token = localStorage.getItem("token");
+
+        let url = "";
+        let payload = {};
+
+        if (plant.PlantName) {
+            // Dari filter → ke /user_plantsandfamily
+            url = `${BASE_API_URL}/user_plantsandfamily`;
+            payload = {
+                PlantName: plant.PlantName,
+                Growth: plant.Growth,
+                Soil: plant.Soil,
+                Sunlight: plant.Sunlight,
+                Watering: plant.Watering,
+                FertilizationType: plant.FertilizationType,
+                family: plant.family
+            };
+        } else if (plant.latin) {
+            // Dari lokasi → ke /user_plants
+            url = `${BASE_API_URL}/user_plants`;
+            payload = {
+                latin: plant.latin,
+                category: plant.category,
+                Soil: plant.Soil,
+                climate: plant.climate,
+                use: plant.use,
+                insects: plant.insects,
+                family: plant.family,
+                temp_avg: plant.temp_avg,
+                ideallight: plant.ideallight,
+                toleratedlight: plant.toleratedlight,
+                watering: plant.watering,
+                tempmax_celsius: plant.tempmax_celsius,
+                tempmin_celsius: plant.tempmin_celsius,
+                combined: plant.combined
+            };
+        } else {
+            console.error("Data tanaman tidak valid:", plant);
+            return;
+        }
+
+        try {
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                    "ngrok-skip-browser-warning": "true"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await res.json();
+            if (res.ok) {
+                window.location.href = "manajemen-kebun.html";
+            } else {
+                alert("Gagal menyimpan tanaman: " + result.message);
+            }
+        } catch (err) {
+            console.error("Error saat menyimpan tanaman:", err);
+            alert("Terjadi kesalahan saat menyimpan tanaman.");
+        }
+    });
+});
+
 }
 window.updatePage = async function updatePage() {
     // Ambil ulang rekomendasi berdasarkan lokasi
