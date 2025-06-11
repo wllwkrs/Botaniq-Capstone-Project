@@ -364,4 +364,64 @@ document.addEventListener('DOMContentLoaded', async function () {
     console.log("Rekomendasi ML terbaru (next):", filteredPlants.map(p => p.latin || p.PlantName));
 
 });
+
+document.getElementById('searchInput').addEventListener('input', debounce(handleSearch, 300));
+
+async function handleSearch(e) {
+    const keyword = e.target.value.toLowerCase().trim();
+    const token = localStorage.getItem("token");
+
+    if (!keyword) {
+        filteredPlants = [];
+        await renderPlants(); // Kosongkan jika input kosong
+        return;
+    }
+
+    try {
+        // Ambil dari kedua tabel
+        const [res1, res2] = await Promise.all([
+            fetch(`${BASE_API_URL}/plants`, {
+                method: 'GET',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "ngrok-skip-browser-warning": "true"
+                }
+            }),
+            fetch(`${BASE_API_URL}/plantsandfamily`, {
+                method: 'GET',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "ngrok-skip-browser-warning": "true"
+                }
+            })
+        ]);
+
+        const data1 = (await res1.json()).data || [];
+        const data2 = (await res2.json()).data || [];
+
+        // Gabungkan dan cari yang mengandung keyword di latin atau PlantName
+        const allResults = [...data1, ...data2];
+        filteredPlants = allResults.filter(p => {
+            const latin = p.latin?.toLowerCase() || '';
+            const plantName = p.PlantName?.toLowerCase() || '';
+            return latin.includes(keyword) || plantName.includes(keyword);
+        });
+
+        currentIndex = 0;
+        await renderPlants();
+    } catch (err) {
+        console.error("Gagal ambil atau filter data pencarian:", err);
+        filteredPlants = [];
+        await renderPlants();
+    }
+}
+function debounce(fn, delay) {
+    let timer = null;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+}
+
+
 });

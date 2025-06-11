@@ -1,7 +1,7 @@
 import '../css/manajemen-kebun.css';
 
 const BASE_API_URL = 'https://previously-notable-hound.ngrok-free.app';
-const ML_API_URL = 'https://intimate-admittedly-kangaroo.ngrok-free.app';
+// const ML_API_URL = 'https://intimate-admittedly-kangaroo.ngrok-free.app';
 
 async function getWikipediaImage(plantName, latinName) {
     const tryFetch = async (title) => {
@@ -43,19 +43,21 @@ async function fetchUserPlants(userId, token) {
         const data1 = await res1.json();
         const data2 = await res2.json();
 
-        return [
-            ...(data1.data || []).map(plant => ({
-                name: plant.latin,
-                imageKey: plant.latin
-            })),
-            ...(data2.data || []).map(plant => ({
-                name: plant.PlantName,
-                imageKey: plant.PlantName
-                
-            }
-        ))
-            
-        ];
+       return [
+    ...(data1.data || []).map(plant => ({
+        id: plant.id,
+        name: plant.latin,
+        imageKey: plant.latin,
+        source: 'user_plants'
+    })),
+    ...(data2.data || []).map(plant => ({
+        id: plant.id,
+        name: plant.PlantName,
+        imageKey: plant.PlantName,
+        source: 'user_plantsandfamily'
+    }))
+];
+
 
     } catch (err) {
         console.error("Gagal mengambil data tanaman user:", err);
@@ -63,9 +65,40 @@ async function fetchUserPlants(userId, token) {
     }
 }
 
-function createPlantCard(name, imageUrl, index) {
+function createPlantCard(name, imageUrl, index, plantId, source, token) {
     const card = document.createElement('div');
     card.className = 'plant-card';
+
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'archive-button';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.title = 'Arsipkan tanaman';
+    closeBtn.addEventListener('click', async (e) => {
+        e.stopPropagation(); // supaya tidak trigger pantau
+        const confirmArsip = confirm("Yakin ingin mengarsipkan tanaman ini?");
+        if (!confirmArsip) return;
+
+        const archiveUrl = `${BASE_API_URL}/${source}/archive/${plantId}`;
+        try {
+            const res = await fetch(archiveUrl, {
+                method: 'PATCH',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "ngrok-skip-browser-warning": "true"
+                }
+            });
+            const result = await res.json();
+            if (res.ok) {
+                alert("Tanaman berhasil diarsipkan.");
+                card.remove(); // hapus dari UI
+            } else {
+                alert("Gagal mengarsipkan: " + result.message);
+            }
+        } catch (err) {
+            console.error("Error saat mengarsipkan:", err);
+            alert("Terjadi kesalahan saat mengarsipkan tanaman.");
+        }
+    });
 
     const imgWrapper = document.createElement('div');
     imgWrapper.className = 'plant-image';
@@ -85,7 +118,8 @@ function createPlantCard(name, imageUrl, index) {
     button.addEventListener('click', () => {
         window.location.href = 'detail-kebun.html';
     });
-
+    
+    card.appendChild(closeBtn);
     card.appendChild(imgWrapper);
     card.appendChild(title);
     card.appendChild(button);
@@ -108,7 +142,7 @@ async function renderUserPlants(token) {
     for (let i = 0; i < userPlants.length; i++) {
         const plant = userPlants[i];
         const imageUrl = await getWikipediaImage(plant.name, plant.imageKey);
-        const card = createPlantCard(plant.name, imageUrl, i + 1);
+        const card = createPlantCard(plant.name, imageUrl, i + 1, plant.id, plant.source, token);
         grid.appendChild(card);
     }
 
