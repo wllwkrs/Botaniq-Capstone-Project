@@ -41,7 +41,6 @@ async function renderPlants() {
         const imageUrl = await getWikipediaImage(plant.PlantName || plant.latin, plant.latin);
         const isFromFilter = !!plant.PlantName; // if PlantName exists, it's from /predict/custom
 
-        loading.style.display = "block";
 
         return `
             <div class="recommendation-card">
@@ -71,7 +70,7 @@ async function renderPlants() {
                 </div>
             </div>`;
             
-    });loading.style.display = "none";
+    });
 
     const cardsHTML = await Promise.all(cardPromises);
     container.innerHTML = cardsHTML.join('');

@@ -29,7 +29,11 @@
                         <!-- <i class="fas fa-user"></i> -->
                          <img id="profileImage" class="profile-avatar-card" src="assets/img/profile.jpeg" alt="Foto Profil">
                     </div>
-                </div>
+                    <div class="profile-dropdown">
+                    <a href="profile-revisi.html"><i class="fas fa-user"></i> Profile</a>
+                    <div class="divider"></div>
+                    <a href='#' id="logoutbtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
             <!-- Mobile menu icon will be added here by CSS based on screen size -->
             <div class="mobile-menu-icon">
                 <i class="fas fa-bars"></i> <!-- Hamburger icon -->
@@ -47,7 +51,7 @@
             <ul>
                 <li><a href="beranda.html">Home</a></li>
                 <li><a href="manajemen-kebun.html">Manajemen Kebun</a></li>
-                <li><a href="list-rekomendasi.html">Rekomendasi</a></li>
+                <li><a href="rekomendasi.html">Rekomendasi</a></li>
             </ul>
         </nav>
     </div>
@@ -178,5 +182,24 @@
     <!-- <script src="assets/js/detail-kebun.js"></script> Link the specific JS file -->
     <!-- Link for Vanilla Calendar JS -->
     <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.4/build/vanilla-calendar.min.js"></script>
+    
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            const profileCircle = document.querySelector('.profile-circle');
+            const profileDropdown = document.querySelector('.profile-dropdown');
+
+            profileCircle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!profileCircle.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
