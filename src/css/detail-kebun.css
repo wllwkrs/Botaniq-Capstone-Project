@@ -65,6 +65,7 @@ nav ul li a:hover {
     margin-left: auto;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .profile-circle {
@@ -98,10 +99,156 @@ nav ul li a:hover {
     font-size: 20px;
 }
 
-.profile-circle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+.profile-circle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
+
+
+
+.profile-circle:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(145deg, #fff, #FFFBDE);
+}
+
+.profile-circle:hover::before {
+    opacity: 1;
+}
+
+.profile-circle:hover i {
+    transform: scale(1.1);
+    color: #0e7e75;
+}
+
+/* Profile Dropdown Styles */
+.profile-dropdown {
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    padding: 10px 0;
+    min-width: 200px;
+    display: none;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-dropdown.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.profile-dropdown a {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    color: #2c3e50;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-dropdown a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: #129990;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.profile-dropdown a i {
+    margin-right: 12px;
+    font-size: 18px;
+    color: #129990;
+    width: 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.profile-dropdown a:hover {
+    background: linear-gradient(to right, rgba(18, 153, 144, 0.05), transparent);
+    color: #129990;
+    padding-left: 24px;
+}
+
+.profile-dropdown a:hover::before {
+    transform: scaleY(1);
+}
+
+.profile-dropdown a:hover i {
+    transform: scale(1.1);
+    color: #0e7e75;
+}
+
+.profile-dropdown .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #eaeaea, transparent);
+    margin: 8px 0;
+}
+
+/* Add a small arrow at the top of dropdown */
+.profile-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 24px;
+    width: 16px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    transform: rotate(45deg);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Add subtle animation for dropdown items */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.profile-dropdown.active a {
+    animation: slideIn 0.3s ease forwards;
+}
+
+.profile-dropdown.active a:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.profile-dropdown.active a:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
 
 /* Styles for Detail Kebun Page */
 .main-content {
