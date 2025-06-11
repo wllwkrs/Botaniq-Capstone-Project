@@ -161,6 +161,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateProfile(updatedData); 
   });
+
+  document.getElementById('logoutbtn').addEventListener('click', function (e) {
+    e.preventDefault();
+    localStorage.removeItem('token'); // ganti 'token' sesuai nama penyimpananmu
+    sessionStorage.removeItem('token');
+
+    fetch(`${BASE_API_URL}/logout`, {  
+        method: 'POST'
+    }).then(res => res.json()).then(data => {
+        console.log(data.message); 
+       
+        window.location.href = 'home.html'; 
+    }).catch(err => {
+        console.error('Logout error:', err);
+        window.location.href = 'home.html'
+    });
+});
 });
 
 document.querySelectorAll('.edit-popup-form').forEach(form => {

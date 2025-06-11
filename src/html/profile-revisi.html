@@ -23,12 +23,16 @@
                         <li><a href="/profile-revisi.html">Profil</a></li>
                     </ul>
                 </nav>
-                <div class="profile-section">
+            <div class="profile-section">
                     <div class="profile-circle">
                         <!-- <i class="fas fa-user"></i> -->
                          <img id="profileImage" class="profile-avatar-card" src="../img/profile.jpeg" alt="Foto Profil">
                     </div>
-                </div>
+                    <div class="profile-dropdown">
+                    <a href="profile-revisi.html"><i class="fas fa-user"></i> Profile</a>
+                    <div class="divider"></div>
+                    <a href='#' id="logoutbtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
                 <div class="mobile-menu-icon">
                     <i class="fas fa-bars"></i> <!-- Hamburger icon -->
                 </div>
@@ -266,6 +270,22 @@
                     reader.readAsDataURL(file);
                 }
             });
-        </script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileCircle = document.querySelector('.profile-circle');
+            const profileDropdown = document.querySelector('.profile-dropdown');
+
+            profileCircle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!profileCircle.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+        });
+     </script>
     </body>
 </html>
