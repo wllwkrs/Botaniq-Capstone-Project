@@ -1,4 +1,4 @@
-<h1 align="left">Halo, kami Botaniq</h1>
+<h1 align="left">Halo, kami BotaniQ👋</h1>
 
 ###
 
@@ -10,7 +10,7 @@
 
 ##
 <div align="center">
-  <img src="https://raw.githubusercontent.com/wllwkrs/Botaniq-Capstone-Project/main/asset/Logo.png" width="700" style="border-radius: 50%;"> 
+  <img src="https://github.com/ayalya/analisis-sentimen-sbms/blob/main/Logo.jpg" width="700"> 
 </div>
 
 ##
@@ -32,7 +32,7 @@
 
 ##
 
-<h3 align="center">Fornt End</h3>
+<h3 align="center">FEBE Tools</h3>
 
 ###
 
@@ -42,20 +42,6 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css/css-original.svg" height="40" alt="css logo"  />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo"  />
-</div>
-
-###
-
-<h3 align="center">Backend Tools</h3>
-
-###
-
-<div align="center">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" height="40" alt="tensorflow logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" height="40" alt="jupyter logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="40" alt="python logo"  />
 </div>
 
 ###
@@ -77,7 +63,7 @@
 <h2 align='center'>Flowchart Aplikasi</h2>
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/wllwkrs/Botaniq-Capstone-Project/main/asset/Flowchart.png" width="700" style="border-radius: 50%;"> 
+  <img src="https://github.com/ayalya/analisis-sentimen-sbms/blob/main/Flowchart.jpg" width="700"> 
 </div>
 
 ###
