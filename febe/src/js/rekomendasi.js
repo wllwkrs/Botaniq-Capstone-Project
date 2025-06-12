@@ -83,6 +83,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                         return allPlants.find(p => typeof p.latin === 'string' && p.latin.trim().toLowerCase() === nameFromML);
                     }).filter(Boolean);
 
+                    if (filteredPlants.length > 0) {
+                        if (historyIndex === -1 || JSON.stringify(filteredPlants) !== JSON.stringify(historyRekomendasi[historyIndex])) {
+                            historyRekomendasi.push(filteredPlants);
+                            historyIndex = historyRekomendasi.length - 1;
+                        }
+                    }
                     initialFiltered = [...filteredPlants];
                     renderPlants();
                 } catch (err) {
@@ -320,6 +326,28 @@ document.querySelector('.back-link').addEventListener('click', function (e) {
     history.back(); // atau history.go(-1);
 });
 
+    // Mobile Sidebar Toggle
+    const mobileMenuIcon = document.querySelector('.mobile-menu-icon');
+    const mobileSidebar = document.querySelector('.mobile-sidebar');
+    const closeSidebar = document.querySelector('.close-sidebar');
+    const overlay = document.querySelector('.overlay');
+    const body = document.body;
+
+    function toggleSidebar(state) {
+        mobileSidebar.classList.toggle('open', state);
+        overlay.style.display = state ? 'block' : 'none';
+        body.classList.toggle('sidebar-open', state);
+    }
+
+    mobileMenuIcon.addEventListener('click', () => toggleSidebar(true));
+    closeSidebar.addEventListener('click', () => toggleSidebar(false));
+    overlay.addEventListener('click', () => toggleSidebar(false));
+
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => toggleSidebar(false));
+    });
+
 });
 function showLoading() {
     const container = document.getElementById('plantContainer');
@@ -517,7 +545,9 @@ window.updatePage = async function updatePage() {
     } catch (err) {
         console.error("Gagal refresh rekomendasi:", err);
     }
+    
 };
+
   document.getElementById('logoutbtn').addEventListener('click', function (e) {
     e.preventDefault();
     localStorage.removeItem('token'); // ganti 'token' sesuai nama penyimpananmu
