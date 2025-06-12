@@ -51,7 +51,7 @@
             <ul>
                 <li><a href="beranda.html">Home</a></li>
                 <li><a href="manajemen-kebun.html">Manajemen Kebun</a></li>
-                <li><a href="rekomendasi.html">Rekomendasi</a></li>
+                <li><a href="list-rekomendasi.html">Rekomendasi</a></li>
             </ul>
         </nav>
     </div>
@@ -82,17 +82,16 @@
 
                 <!-- Schedule Section -->
                 <div class="detail-card schedule-section">
-                    <h3>Jadwal Perawatan</h3>
+                    <h3>Jadwal Perawatan (Real-time)</h3>
+                    <form id="form-aktivitas-perawatan" style="margin-bottom: 1em;">
+                        <input type="text" id="input-aktivitas" placeholder="Tambah aktivitas perawatan (misal: Siram Tanaman, Pemupukan, Pembersihan)" required>
+                        <button type="submit">Tambah</button>
+                    </form>
                     <div class="schedule-list">
-                        <p class="schedule-day-label">Hari ini</p>
-                        <h4 class="schedule-date">Senin, 3 Februari 2027</h4>
-                        <!-- Example schedule item -->
-                        <div class="schedule-item">
-                            <div class="time">08:00</div>
-                            <div class="vertical-line"></div>
-                            <div class="event-description">
-                                <p>Siram Tanaman</p>
-                            </div>
+                        <p class="schedule-day-label" id="realtime-day-label">Hari ini</p>
+                        <h4 class="schedule-date" id="realtime-date">Senin, 3 Februari 2027</h4>
+                        <div id="list-aktivitas-perawatan">
+                            <!-- Daftar aktivitas akan muncul di sini, setiap aktivitas akan ada tombol hapus -->
                         </div>
                     </div>
                 </div>
@@ -101,16 +100,32 @@
                 <div class="detail-card update-condition-section">
                     <h3>Perbarui Kondisi Tanaman</h3>
                     <div class="input-group">
-                        <label for="update-question-1">Pertanyaan</label>
-                        <input type="text" id="update-question-1" placeholder="Pertanyaan">
+                        <label for="pertumbuhan">Pertumbuhan</label>
+                        <select id="pertumbuhan">
+                            <option value="">Pilih...</option>
+                            <option value="Lambat">Lambat</option>
+                            <option value="Sedang">Sedang</option>
+                            <option value="Cepat">Cepat</option>
+                        </select>
                     </div>
                     <div class="input-group">
-                        <label for="update-question-2">Pertanyaan</label>
-                        <input type="text" id="update-question-2" placeholder="Pertanyaan">
+                        <label for="pengairan">Pengairan</label>
+                        <select id="pengairan">
+                            <option value="">Pilih...</option>
+                            <option value="Siram mingguan">Siram mingguan</option>
+                            <option value="Siram sampai tanah lembap">Siram sampai tanah lembap</option>
+                            <option value="Siram saat tanah kering">Siram saat tanah kering</option>
+                            <option value="Siram secara teratur">Siram secara teratur</option>
+                        </select>
                     </div>
-                     <div class="input-group">
-                        <label for="update-question-3">Pertanyaan</label>
-                        <input type="text" id="update-question-3" placeholder="Pertanyaan">
+                    <div class="input-group">
+                        <label for="sinar-matahari">Sinar Matahari</label>
+                        <select id="sinar-matahari">
+                            <option value="">Pilih...</option>
+                            <option value="Sinar matahari tidak langsung">Sinar matahari tidak langsung</option>
+                            <option value="Sinar matahari penuh">Sinar matahari penuh</option>
+                            <option value="Sinar matahari sebagian">Sinar matahari sebagian</option>
+                        </select>
                     </div>
                     <button class="update-button">Perbarui</button>
                 </div>

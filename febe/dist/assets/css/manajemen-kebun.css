@@ -1165,10 +1165,10 @@ body.sidebar-open .overlay {
 
 .loading-spinner {
     border: 8px solid #f3f3f3;
-    border-top: 8px solid #4CAF50;
+    border-top: 8px solid #129990;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     animation: spin 1s linear infinite;
     margin: 20px auto;
 }
@@ -1178,4 +1178,20 @@ body.sidebar-open .overlay {
     100% { transform: rotate(360deg); }
 }
 
+.archive-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: transparent;
+    border: none;
+    color: rgb(62, 95, 81);
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.plant-card {
+    position: relative;
+    /* existing styles... */
+}
 

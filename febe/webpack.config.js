@@ -7,7 +7,6 @@ const pages = [
   'beranda',
   'detail-kebun',
   'home',
-  'list-rekomendasi',
   'login',
   'manajemen-kebun',
   'profile-revisi',

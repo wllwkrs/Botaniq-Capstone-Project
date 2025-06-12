@@ -410,13 +410,14 @@ nav ul li a:hover {
 }
 
 .schedule-item {
-    background-color: #fff; /* White background as in the image */
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 15px;
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Vertically center items */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    background: #f8fffd;
+    border-radius: 10px;
+    padding: 8px 14px;
+    box-shadow: 0 1px 6px rgba(18,153,144,0.04);
 }
 
 .schedule-item p {
@@ -473,42 +474,50 @@ nav ul li a:hover {
 
 /* Update Condition Section Styles */
 .update-condition-section .input-group {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .update-condition-section label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-    color: #333;
+    font-weight: 600;
+    margin-bottom: 7px;
+    color: #129990;
 }
 
-.update-condition-section input[type="text"],
-.update-condition-section textarea {
+.update-condition-section select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
+    padding: 10px 14px;
+    border: 1.5px solid #129990;
+    border-radius: 8px;
+    font-size: 15px;
+    background: #f6fffd;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.update-condition-section select:focus {
+    border-color: #0e7e75;
+    background: #fff;
 }
 
 .update-condition-section .update-button {
-    background-color: #129990;
+    background: linear-gradient(90deg, #129990 60%, #0e7e75 100%);
     color: #fff;
-    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    padding: 12px 0;
+    width: 100%;
     font-size: 16px;
+    font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%; /* Full width button */
-    box-sizing: border-box;
-    margin-top: 15px; /* Space above button */
+    margin-top: 8px;
+    box-shadow: 0 2px 8px rgba(18,153,144,0.08);
+    transition: background 0.2s, transform 0.2s;
 }
 
 .update-condition-section .update-button:hover {
-    background-color: #0e7e75;
+    background: linear-gradient(90deg, #0e7e75 60%, #129990 100%);
+    transform: translateY(-2px) scale(1.03);
 }
 
 /* Current Condition Section Styles */
@@ -1163,5 +1172,63 @@ body.sidebar-open .overlay {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+}
+
+/* Tambahan & penyesuaian untuk menu tambah aktivitas perawatan */
+#form-aktivitas-perawatan {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+#form-aktivitas-perawatan input[type="text"] {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid #129990;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s;
+}
+#form-aktivitas-perawatan input[type="text"]:focus {
+  border-color: #0e7e75;
+  background: #f6fffd;
+}
+#form-aktivitas-perawatan button[type="submit"] {
+  background: #129990;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(18,153,144,0.08);
+}
+#form-aktivitas-perawatan button[type="submit"]:hover {
+  background: #0e7e75;
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Jadwal perawatan: tombol hapus */
+.hapus-aktivitas-btn {
+  background: #fff0f0;
+  color: #e74c3c;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  margin-left: 12px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(231,76,60,0.08);
+}
+.hapus-aktivitas-btn:hover {
+  background: #e74c3c;
+  color: #fff;
 }
 
