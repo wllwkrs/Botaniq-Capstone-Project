@@ -10,6 +10,16 @@ let initialFiltered = [];
 let historyRekomendasi = [];
 let historyIndex = -1; // -1 artinya belum ada yang tersimpan
 
+function showLoading() {
+    const container = document.getElementById('plantContainer');
+    container.innerHTML = `
+        <div class="loading-wrapper">
+            <div class="spinner"></div>
+            <p>Memuat rekomendasi tanaman...</p>
+        </div>
+    `;
+}
+
 
 const BASE_API_URL = 'https://previously-notable-hound.ngrok-free.app';
 const ML_API_URL = 'https://intimate-admittedly-kangaroo.ngrok-free.app';
@@ -63,7 +73,7 @@ async function renderPlants() {
                         <p>Soil: ${plant.Soil}</p>
                         <p>Climate: ${plant.climate}</p>
                         <p>use: ${plant.use}</p>
-                        <p>Insect: ${plant.insect}</p>
+                        <p>Insects: ${plant.insects}</p>
                         <p>Family: ${plant.family?.trim()}</p>
                         <p>Temperatur: ${plant.temp_avg}</p>
                     `}
@@ -165,6 +175,7 @@ window.updatePage = async function updatePage() {
                 else if (kondisiCuaca.includes("Rain")) climate = "Tropical";
                 else if (["Clear", "Clouds"].some(x => kondisiCuaca.includes(x))) climate = "Subtropical";
 
+                showLoading();
                 const mlRes = await fetch(`${ML_API_URL}/predict/lokasi`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -174,6 +185,7 @@ window.updatePage = async function updatePage() {
                 const mlData = await mlRes.json();
                 const rekomendasiLatin = mlData.recommendations || [];
                 const rekomendasiLower = rekomendasiLatin.map(n => n.trim().toLowerCase());
+                
                 filteredPlants = rekomendasiLower.map(nameFromML => {
                     return allPlants.find(p => typeof p.latin === 'string' && p.latin.trim().toLowerCase() === nameFromML);
                 }).filter(Boolean);
@@ -199,6 +211,7 @@ window.updatePage = async function updatePage() {
 
 
 document.addEventListener('DOMContentLoaded', async function () {
+    showLoading();
     const token = localStorage.getItem("token");
     if (!token) {
         alert("Token tidak ditemukan. Silakan login ulang.");
@@ -290,7 +303,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     });
 
-    document.querySelector('.search-bar button').addEventListener('click', applyFilters);
+    // document.querySelector('.search-bar button').addEventListener('click', applyFilters);
 
     async function applyFilters() {
         const growth = document.querySelector('#growth').value;
@@ -302,6 +315,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const isFilterUsed = growth || soil || sunlight || watering || fertilizer;
 
         if (isFilterUsed) {
+            showLoading();
             try {
                 const response = await fetch(`${ML_API_URL}/predict/custom`, {
                     method: 'POST',
@@ -367,18 +381,94 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 document.getElementById('searchInput').addEventListener('input', debounce(handleSearch, 300));
 
+// async function handleSearch(e) {
+//     const keyword = e.target.value.toLowerCase().trim();
+//     const token = localStorage.getItem("token");
+
+    
+//     if (!keyword) {
+//         showLoading();
+//         // Tampilkan ulang rekomendasi awal (berdasarkan lokasi)
+//         filteredPlants = [...initialFiltered];
+//         currentIndex = 0;
+//         await renderPlants();
+//         return;
+//     }
+
+//     try {
+//         // Ambil dari kedua tabel
+//         const [res1, res2] = await Promise.all([
+//             fetch(`${BASE_API_URL}/plants`, {
+//                 method: 'GET',
+//                 headers: {
+//                     "Authorization": `Bearer ${token}`,
+//                     "ngrok-skip-browser-warning": "true"
+//                 }
+//             }),
+//             fetch(`${BASE_API_URL}/plantsandfamily`, {
+//                 method: 'GET',
+//                 headers: {
+//                     "Authorization": `Bearer ${token}`,
+//                     "ngrok-skip-browser-warning": "true"
+//                 }
+//             })
+//         ]);
+
+//         const data1 = (await res1.json()).data || [];
+//         const data2 = (await res2.json()).data || [];
+
+//         // Gabungkan dan cari yang mengandung keyword di latin atau PlantName
+//         const allResults = [...data1, ...data2];
+//         filteredPlants = allResults.filter(p => {
+//             const latin = p.latin?.toLowerCase() || '';
+//             const plantName = p.PlantName?.toLowerCase() || '';
+//             return latin.includes(keyword) || plantName.includes(keyword);
+//         });
+
+//         currentIndex = 0;
+//         await renderPlants();
+//     } catch (err) {
+//         console.error("Gagal ambil atau filter data pencarian:", err);
+//         filteredPlants = [];
+//         await renderPlants();
+//     }
+// }
+
 async function handleSearch(e) {
     const keyword = e.target.value.toLowerCase().trim();
     const token = localStorage.getItem("token");
 
+    const plantContainer = document.getElementById('plantContainer');
+    plantContainer.innerHTML = `
+        <div class="loading-wrapper">
+            <div class="spinner"></div>
+            <p>Memuat rekomendasi tanaman...</p>
+        </div>
+    `;
+
     if (!keyword) {
-        filteredPlants = [];
-        await renderPlants(); // Kosongkan jika input kosong
+        try {
+            // Ambil ulang rekomendasi by lokasi
+            const res = await fetch(`${BASE_API_URL}/predict`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "ngrok-skip-browser-warning": "true"
+                }
+            });
+            const result = await res.json();
+            initialFiltered = result.data || [];
+            filteredPlants = [...initialFiltered];
+            currentIndex = 0;
+            await renderPlants();
+        } catch (err) {
+            console.error("Gagal ambil ulang data lokasi:", err);
+            plantContainer.innerHTML = `<p style="text-align:center;">Gagal memuat data rekomendasi</p>`;
+        }
         return;
     }
 
     try {
-        // Ambil dari kedua tabel
         const [res1, res2] = await Promise.all([
             fetch(`${BASE_API_URL}/plants`, {
                 method: 'GET',
@@ -399,7 +489,6 @@ async function handleSearch(e) {
         const data1 = (await res1.json()).data || [];
         const data2 = (await res2.json()).data || [];
 
-        // Gabungkan dan cari yang mengandung keyword di latin atau PlantName
         const allResults = [...data1, ...data2];
         filteredPlants = allResults.filter(p => {
             const latin = p.latin?.toLowerCase() || '';
@@ -415,6 +504,7 @@ async function handleSearch(e) {
         await renderPlants();
     }
 }
+
 function debounce(fn, delay) {
     let timer = null;
     return function (...args) {

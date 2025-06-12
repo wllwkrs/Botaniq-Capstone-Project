@@ -171,3 +171,101 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Real-time Date, Time, and Activity for Jadwal Perawatan
+function updateRealtimeSchedule() {
+    const dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const monthNames = [
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    ];
+    const now = new Date();
+    const day = dayNames[now.getDay()];
+    const date = now.getDate();
+    const month = monthNames[now.getMonth()];
+    const year = now.getFullYear();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    
+    // Update DOM
+    const dateLabel = document.getElementById('realtime-date');
+    const timeLabel = document.getElementById('realtime-time');
+    if (dateLabel) dateLabel.textContent = `${day}, ${date} ${month} ${year}`;
+    if (timeLabel) timeLabel.textContent = `${hours}:${minutes}`;
+
+    // Ambil aktivitas dari localStorage (atau gunakan default)
+    const activity = localStorage.getItem('jadwal_perawatan_aktivitas') || 'Siram Tanaman';
+    const activityLabel = document.getElementById('realtime-activity');
+    if (activityLabel) activityLabel.textContent = activity;
+}
+
+setInterval(updateRealtimeSchedule, 1000);
+document.addEventListener('DOMContentLoaded', updateRealtimeSchedule);
+
+// Jadwal Perawatan: Input & List Aktivitas Manual
+function getTodayKey() {
+    const now = new Date();
+    return `jadwal_perawatan_${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}`;
+}
+
+function loadAktivitasPerawatan() {
+    const key = getTodayKey();
+    const aktivitas = JSON.parse(localStorage.getItem(key) || '[]');
+    return aktivitas;
+}
+
+function saveAktivitasPerawatan(aktivitas) {
+    const key = getTodayKey();
+    localStorage.setItem(key, JSON.stringify(aktivitas));
+}
+
+function renderAktivitasPerawatan() {
+    const aktivitas = loadAktivitasPerawatan();
+    const listDiv = document.getElementById('list-aktivitas-perawatan');
+    if (!listDiv) return;
+    listDiv.innerHTML = '';
+    if (aktivitas.length === 0) {
+        listDiv.innerHTML = '<p style="color: #888;">Belum ada aktivitas perawatan hari ini.</p>';
+        return;
+    }
+    aktivitas.forEach((item, idx) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'schedule-item';
+        itemDiv.innerHTML = `
+            <div class=\"time\">${item.time}</div>
+            <div class=\"vertical-line\"></div>
+            <div class=\"event-description\"><p>${item.text}</p></div>
+            <button class=\"hapus-aktivitas-btn\" data-idx=\"${idx}\" title=\"Hapus\">🗑️</button>
+        `;
+        listDiv.appendChild(itemDiv);
+    });
+    // Event listener untuk hapus
+    listDiv.querySelectorAll('.hapus-aktivitas-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const idx = parseInt(this.getAttribute('data-idx'));
+            const aktivitas = loadAktivitasPerawatan();
+            aktivitas.splice(idx, 1);
+            saveAktivitasPerawatan(aktivitas);
+            renderAktivitasPerawatan();
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    renderAktivitasPerawatan();
+    const form = document.getElementById('form-aktivitas-perawatan');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = document.getElementById('input-aktivitas');
+            if (!input.value.trim()) return;
+            const now = new Date();
+            const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            const aktivitas = loadAktivitasPerawatan();
+            aktivitas.push({ text: input.value.trim(), time });
+            saveAktivitasPerawatan(aktivitas);
+            input.value = '';
+            renderAktivitasPerawatan();
+        });
+    }
+});
+
