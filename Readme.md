@@ -32,7 +32,7 @@
 
 ##
 
-<h3 align="center">FEBE Tools</h3>
+<h3 align="center">Front-End Tools</h3>
 
 ###
 
@@ -42,6 +42,20 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="40" alt="css3 logo"  />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo"  />
+</div>
+
+###
+
+<h3 align="center">Back-End Tools</h3>
+
+###
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/hapijs/assets/master/images/hapi.png" height="40" alt="hapi logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg" height="40" alt="wabpack logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-plain-wordmark.svg" height="40" alt="nodejs logo"  />
 </div>
 
 ###
@@ -63,7 +77,7 @@
 <h2 align='center'>Flowchart Aplikasi</h2>
 
 <div align="center">
-  <img src="https://github.com/ayalya/analisis-sentimen-sbms/blob/main/Flowchart.jpg" width="700"> 
+  <img src="https://github.com/ayalya/analisis-sentimen-sbms/blob/main/Flowchart Apps.jpg" width="700"> 
 </div>
 
 ###
