@@ -72,10 +72,10 @@ function createPlantCard(name, imageUrl, index, plantId, source, token) {
     const closeBtn = document.createElement('button');
     closeBtn.className = 'archive-button';
     closeBtn.innerHTML = '&times;';
-    closeBtn.title = 'Arsipkan tanaman';
+    closeBtn.title = 'Hapus tanaman';
     closeBtn.addEventListener('click', async (e) => {
         e.stopPropagation(); // supaya tidak trigger pantau
-        const confirmArsip = confirm("Yakin ingin mengarsipkan tanaman ini?");
+        const confirmArsip = confirm("Yakin ingin menghapus tanaman ini?");
         if (!confirmArsip) return;
 
         const archiveUrl = `${BASE_API_URL}/${source}/archive/${plantId}`;
@@ -89,14 +89,14 @@ function createPlantCard(name, imageUrl, index, plantId, source, token) {
             });
             const result = await res.json();
             if (res.ok) {
-                alert("Tanaman berhasil diarsipkan.");
+                alert("Tanaman berhasil dihapus.");
                 card.remove(); // hapus dari UI
             } else {
-                alert("Gagal mengarsipkan: " + result.message);
+                alert("Gagal menghapus: " + result.message);
             }
         } catch (err) {
-            console.error("Error saat mengarsipkan:", err);
-            alert("Terjadi kesalahan saat mengarsipkan tanaman.");
+            console.error("Error saat menghapus:", err);
+            alert("Terjadi kesalahan saat menghapus tanaman.");
         }
     });
 
