@@ -55,16 +55,49 @@ cd Botaniq-Capstone-Project/febe
 <pre><code>npm install
 </code></pre>
 
-<h3>4. Build Project dengan Webpack</h3>
+<h3>3. Build Project dengan Webpack</h3>
 <pre><code>npm run build
 </code></pre>
 
-<h3>3. Jalankan Project dengan Webpack</h3>
+<h3>4. Jalankan Project dengan Webpack</h3>
 <pre><code>npm run start
 </code></pre>
 
-<h3>4. Akses Aplikasi </h3>
-<p>Aplikasi akan berjalan pada (http://localhost:8080/)</p>
+<h3>5. Akses Aplikasi</h3>
+<p>Buka browser dan akses: <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></p>
+
+<h3> Alur Penggunaan Aplikasi</h3>
+
+<ol>
+  <li><strong>Landing Page</strong><br />
+    Saat pertama kali membuka aplikasi, pengguna akan diarahkan ke halaman Landing Page. Di sini terdapat informasi singkat tentang BotaniQ dan tombol <code>Login</code> atau <code>Register</code>.
+  </li>
+
+  <li><strong>Login / Register</strong><br />
+    Pengguna dapat membuat akun baru atau login dengan akun yang sudah terdaftar. Sistem autentikasi menggunakan JWT.
+  </li>
+
+  <li><strong>Beranda</strong><br />
+    Setelah login berhasil, pengguna diarahkan ke halaman Beranda. Halaman ini menampilkan lokasi pengguna serta ringkasan fitur aplikasi seperti rekomendasi tanaman dan status kebun.
+  </li>
+
+  <li><strong>Rekomendasi Tanaman</strong><br />
+    Pengguna dapat melihat tanaman yang direkomendasikan berdasarkan suhu atau iklim saat ini. Selain itu, pengguna juga bisa memilih tanaman berdasarkan filter seperti jenis atau famili.
+  </li>
+
+  <li><strong>Tambahkan ke Kebun</strong><br />
+    Tanaman yang dipilih dapat ditambahkan ke kebun pribadi pengguna dengan menekan tombol <code>Grow and Track</code>.
+  </li>
+
+  <li><strong>Manajemen Kebun</strong><br />
+    Di halaman ini, pengguna bisa melihat daftar tanaman yang telah mereka tambahkan. Setiap tanaman memiliki informasi nama dan gambar serta tombol untuk melihat atau mengatur jadwal perawatan.
+  </li>
+
+  <li><strong>Detail & Jadwal Perawatan Tanaman</strong><br />
+    Saat pengguna mengklik salah satu tanaman di kebun, mereka diarahkan ke halaman detail. Di sini terdapat informasi lengkap tanaman serta fitur untuk menambahkan aktivitas perawatan seperti menyiram, memupuk, atau mengganti pot.
+  </li>
+</ol>
+
 
 
 
