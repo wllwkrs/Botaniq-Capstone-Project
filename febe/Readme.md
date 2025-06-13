@@ -39,10 +39,47 @@
 - **Figma** – Desain UI/UX awal sebelum pengembangan.
 - **GitHub Pages** – Hosting front-end statis secara gratis.
 - **Laragon** - Membuat Database.
+- **NGROK** - deploy API
 
 
 
 ---
+
+<h1>🚀 Menjalankan API Botaniq</h1>
+
+<h3>1. Clone Repository</h3>
+<pre><code>git clone https://github.com/wllwkrs/Botaniq-Capstone-Project.git
+cd Botaniq-Capstone-Project/api_febe
+</code></pre>
+
+<h3>2. Install Dependencies</h3>
+<pre><code>npm install
+</code></pre>
+
+<h3>3. Jalankan Server</h3>
+<pre><code>node src/server.js
+</code></pre>
+
+<p>Pastikan server berjalan di <strong>port 5500</strong> dan tidak ada error.</p>
+
+<hr />
+
+<h2>🌐 Hosting API via Ngrok</h2>
+
+<p><strong>Syarat:</strong> Sudah menginstal <a href="https://ngrok.com/download" target="_blank">Ngrok</a> dan login dengan akunmu.</p>
+
+<h3>1. Hosting biasa (acak subdomain)</h3>
+<pre><code>ngrok http 5500
+</code></pre>
+
+<h3>2. Hosting dengan subdomain khusus (misalnya: previously-notable-hound.ngrok-free.app)</h3>
+<pre><code>
+ngrok config add-authtoken &lt;your_token&gt;
+ngrok http --domain=previously-notable-hound.ngrok-free.app 5500
+</code></pre>
+<p>Rubah URL API di code apabila kamu memiliki URL ngrok yang baru</p>
+<p>Jika kamu mengalami kendala, seperti server tidak merespons atau ngrok gagal, silakan cek kembali port, koneksi, atau token.</p>
+
 
 <h2>📦 Instalasi &amp; Setup Proyek (dengan Webpack)</h2>
 
@@ -65,6 +102,9 @@ cd Botaniq-Capstone-Project/febe
 
 <h3>5. Akses Aplikasi</h3>
 <p>Buka browser dan akses: <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></p>
+
+
+
 
 <h3> Alur Penggunaan Aplikasi</h3>
 
@@ -97,10 +137,5 @@ cd Botaniq-Capstone-Project/febe
     Saat pengguna mengklik salah satu tanaman di kebun, mereka diarahkan ke halaman detail. Di sini terdapat informasi lengkap tanaman serta fitur untuk menambahkan aktivitas perawatan seperti menyiram, memupuk, atau mengganti pot.
   </li>
 </ol>
-
-
-
-
-
 
 
