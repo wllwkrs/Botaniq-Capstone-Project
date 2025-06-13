@@ -8,21 +8,21 @@ Aplikasi BotaniQ menggunakan tiga jenis model machine learning yang dirancang un
 
 ### 1. Rekomendasi by Lokasi
 Memberikan rekomendasi tanaman yang cocok berdasarkan lokasi dan kondisi cuaca pengguna.  
-- **Pendekatan**: Content-Based Filtering  
-- **Input**: Lokasi pengguna, suhu, kelembaban, dan intensitas cahaya  
-- **Output**: Daftar tanaman yang cocok dengan kondisi lingkungan pengguna  
+- **Pendekatan**: Content-Based Filtering menggunakan TensorFlow Classifier (MLP)  
+- **Input**: Lokasi pengguna (suhu dan iklim)  
+- **Output**: Daftar tanaman yang sesuai dengan kondisi lingkungan pengguna  
 
 ### 2. Rekomendasi by Custom
-Menghasilkan rekomendasi tanaman sesuai dengan preferensi atau kriteria yang dimasukkan oleh pengguna.  
-- **Pendekatan**: Collaborative-Based Filtering dengan Multilayer Perception (MLP)
-- **Input**: Preferensi pengguna seperti tipe tanaman, kebutuhan perawatan, estetika  
-- **Output**: Rekomendasi tanaman yang sesuai dengan keinginan pengguna  
+Menghasilkan rekomendasi tanaman sesuai dengan preferensi atau kriteria yang dipilih oleh pengguna.  
+- **Pendekatan**: Content-Based Filtering menggunakan TensorFlow Classifier (MLP)  
+- **Input**: Preferensi pengguna seperti pertumbuhan, pencahayaan, penyiraman, jenis pupuk  
+- **Output**: Rekomendasi tanaman yang relevan dengan preferensi pengguna  
 
 ### 3. Model Manajemen Kebun
-Memberikan rekomendasi perawatan tanaman berdasarkan kondisi aktual lingkungan dan jenis tanaman yang dimiliki pengguna.  
-- **Pendekatan**: Collaborative-Based Filtering dengan Multilayer Perception (MLP)
-- **Input**: Jenis tanaman, suhu, kelembaban, penyinaran, dan riwayat perawatan  
-- **Output**: Jadwal dan tips perawatan tanaman yang dipersonalisasi  
+Memberikan rekomendasi perawatan berdasarkan jenis tanaman yang dipilih pengguna untuk dikembangkan.  
+- **Pendekatan**: Content-Based Filtering dengan arsitektur TensorFlow MLP Encoder-Decoder  
+- **Input**: Nama tanaman, kondisi lingkungan (suhu, cahaya, kelembaban), dan riwayat perawatan  
+- **Output**: Jadwal dan tips perawatan yang dipersonalisasi, seperti pola penyiraman, jenis pupuk, dan potensi hama  
 
 ---
 
