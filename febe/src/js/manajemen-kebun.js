@@ -114,7 +114,8 @@ function createPlantCard(name, imageUrl, index, plantId, source, token) {
     button.id = `tanam${index}`;
     button.textContent = 'Monitor';
     button.addEventListener('click', () => {
-        window.location.href = 'detail-kebun.html';
+        const encodedName = encodeURIComponent(name);
+        window.location.href = `detail-kebun.html?plant=${encodedName}`;
     });
 
     card.appendChild(closeBtn);

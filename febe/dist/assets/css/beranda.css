@@ -923,6 +923,8 @@ nav ul li a:hover {
     justify-content: initial;
     align-items: initial;
     position: relative;
+    flex: 1;
+    min-width: 0;
 }
 
 .hero .card .container {
@@ -940,7 +942,7 @@ nav ul li a:hover {
     margin-top: 70px;
     background-color: #129990;
     width: 971px;
-    height: 240px;
+    height: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -951,7 +953,7 @@ nav ul li a:hover {
     margin-bottom: 40px;
 }
 
-.hero .card .container .card-title-hero h1 {
+.hero .card .container .card-title-hero h2 {
     color: #FFFBDE;
     margin-bottom: 5px;
     font-size: 64px;
@@ -968,7 +970,7 @@ nav ul li a:hover {
     margin-bottom: 50px;
 }
 
-.hero h1 {
+.hero h2 {
     margin-top: 40px;
     font-size: 36px;
     margin-bottom: 20px;
@@ -1622,7 +1624,7 @@ body.sidebar-open .overlay {
         right: -10px;
     }
 
-    .hero h1 {
+    .hero h2 {
         font-size: 16px;
         margin-bottom: 15px;
     }
@@ -1672,7 +1674,7 @@ body.sidebar-open .overlay {
         margin-top: 0;
     }
 
-    .hero .card .container .card-title-hero h1 {
+    .hero .card .container .card-title-hero h2 {
         font-size: 45px;
     }
 
@@ -1829,7 +1831,7 @@ body.sidebar-open .overlay {
 }
 
 @media (max-width: 468px) {
-    .hero h1 {
+    .hero h2 {
         font-size: 16px;
     }
 
@@ -1846,7 +1848,7 @@ body.sidebar-open .overlay {
         margin-top: -30px;
     }
 
-    .hero .card .container .card-title-hero h1 {
+    .hero .card .container .card-title-hero h2{
         font-size: 28px;
         margin-left: 10px;
         margin-right: 10px;
@@ -2068,3 +2070,35 @@ body.sidebar-open .overlay {
     font-size: 20px;
 }
 
+
+
+
+
+
+.footer-social {
+  display: flex;
+  justify-content: center; /* atau flex-start/end sesuai kebutuhan */
+  gap: 5px; /* jarak antar logo */
+}
+
+.footer-social .STMIK {
+  width: 150px;
+  height: auto;
+  opacity: 0.9; 
+  margin-top: 105px;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3)); /* efek bayangan */
+}
+
+.footer-social .POLIWANGI {
+  width: 75px;
+  height: auto;
+  margin: 0 10px;
+  margin-top: 90px;
+}
+
+.footer-social .USAT {
+  width: 65px;
+  height: auto;
+  border-radius: 8px; /* misal sudut membulat */
+  margin-top: 93px;
+}

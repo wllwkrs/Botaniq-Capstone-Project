@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const token = localStorage.getItem("token");
     const BASE_API_URL = 'https://previously-notable-hound.ngrok-free.app'; 
     if (!token) {
-        alert("Token tidak ditemukan. Silakan login ulang.");
+        alert("Token not found. Please log in again.");
         window.location.href = "login.html"; 
         return;
     } 
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(res => {
         if (!res.ok) {
             if (res.status === 401) {
-                alert("Sesi Anda telah berakhir, silakan login ulang.");
+                alert("Your session has expired. Please log in again.");
                 localStorage.removeItem("token");
                 window.location.href = "login.html";
             }
@@ -37,32 +37,42 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     })
     .catch(err => {
-        console.error("Gagal ambil data user atau profil:", err);
-        document.getElementById("greeting").textContent = "Gagal memuat profil ❌";
+        console.error("Failed to fetch user or profile data:", err);
+        document.getElementById("greeting").textContent = "Failed to load profile ❌";
         document.querySelectorAll(".profile-circle img, .profile-avatar-card").forEach(img => {
             img.src = "assets/img/profile.jpeg"; // Path ke gambar default 
         });
     });
 
-
-    if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(
-            function (position) {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
-
-                console.log('Latitude:', latitude);
-                console.log('Longitude:', longitude);
-
-                // Simpan lokasi di localStorage / kirim ke backend / tampilkan
-            },
-            function (error) {
-                console.error('Gagal mendapatkan lokasi:', error.message);
-            }
-        );
-    } else {
-        console.error('Geolocation tidak didukung browser ini.');
+    // Ambil parameter 'plant' dari URL dan tampilkan di judul
+    const urlParams = new URLSearchParams(window.location.search);
+    const plantName = urlParams.get('plant');
+    if (plantName) {
+        const decodedName = decodeURIComponent(plantName);
+        const titleEl = document.getElementById('plant-title');
+        const backLinkTextEl = document.getElementById('plant-back-link-text');
+        if (titleEl) titleEl.textContent = decodedName;
+        if (backLinkTextEl) backLinkTextEl.textContent = decodedName;
     }
+
+if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(
+        function (position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            console.log('Latitude:', latitude);
+            console.log('Longitude:', longitude);
+
+            // Tampilkan kondisi terkini berdasarkan lokasi
+            handleLocationBasedCondition(latitude, longitude);
+        },
+        function (error) {
+            console.error('Failed to get location:', error.message);
+        }
+    );
+}
+
     
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('password');
@@ -171,101 +181,172 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Real-time Date, Time, and Activity for Jadwal Perawatan
-function updateRealtimeSchedule() {
-    const dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-    const monthNames = [
-        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-    ];
+// Tanggal real-time
+function updateScheduleDate() {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const now = new Date();
-    const day = dayNames[now.getDay()];
+    const dayName = days[now.getDay()];
     const date = now.getDate();
-    const month = monthNames[now.getMonth()];
+    const monthName = months[now.getMonth()];
     const year = now.getFullYear();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    
-    // Update DOM
-    const dateLabel = document.getElementById('realtime-date');
-    const timeLabel = document.getElementById('realtime-time');
-    if (dateLabel) dateLabel.textContent = `${day}, ${date} ${month} ${year}`;
-    if (timeLabel) timeLabel.textContent = `${hours}:${minutes}`;
-
-    // Ambil aktivitas dari localStorage (atau gunakan default)
-    const activity = localStorage.getItem('jadwal_perawatan_aktivitas') || 'Siram Tanaman';
-    const activityLabel = document.getElementById('realtime-activity');
-    if (activityLabel) activityLabel.textContent = activity;
+    const scheduleDate = document.getElementById('schedule-date');
+    if (scheduleDate) scheduleDate.textContent = `${dayName}, ${date} ${monthName} ${year}`;
 }
+updateScheduleDate();
+setInterval(updateScheduleDate, 1000 * 60);
 
-setInterval(updateRealtimeSchedule, 1000);
-document.addEventListener('DOMContentLoaded', updateRealtimeSchedule);
-
-// Jadwal Perawatan: Input & List Aktivitas Manual
-function getTodayKey() {
-    const now = new Date();
-    return `jadwal_perawatan_${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}`;
+// Fungsi aktivitas manual
+function getActivities() {
+    const plantName = new URLSearchParams(window.location.search).get('plant') || 'default';
+    return JSON.parse(localStorage.getItem('activities_' + plantName)) || [];
 }
-
-function loadAktivitasPerawatan() {
-    const key = getTodayKey();
-    const aktivitas = JSON.parse(localStorage.getItem(key) || '[]');
-    return aktivitas;
+function saveActivities(activities) {
+    const plantName = new URLSearchParams(window.location.search).get('plant') || 'default';
+    localStorage.setItem('activities_' + plantName, JSON.stringify(activities));
 }
-
-function saveAktivitasPerawatan(aktivitas) {
-    const key = getTodayKey();
-    localStorage.setItem(key, JSON.stringify(aktivitas));
-}
-
-function renderAktivitasPerawatan() {
-    const aktivitas = loadAktivitasPerawatan();
-    const listDiv = document.getElementById('list-aktivitas-perawatan');
-    if (!listDiv) return;
-    listDiv.innerHTML = '';
-    if (aktivitas.length === 0) {
-        listDiv.innerHTML = '<p style="color: #888;">Belum ada aktivitas perawatan hari ini.</p>';
-        return;
-    }
-    aktivitas.forEach((item, idx) => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'schedule-item';
-        itemDiv.innerHTML = `
-            <div class=\"time\">${item.time}</div>
-            <div class=\"vertical-line\"></div>
-            <div class=\"event-description\"><p>${item.text}</p></div>
-            <button class=\"hapus-aktivitas-btn\" data-idx=\"${idx}\" title=\"Hapus\">🗑️</button>
+function renderActivities() {
+    const activityList = document.getElementById('activity-list');
+    if (!activityList) return;
+    activityList.innerHTML = '';
+    const activities = getActivities();
+    activities.forEach((act, idx) => {
+        const li = document.createElement('li');
+        li.style.listStyle = 'none';
+        li.innerHTML = `
+            <div class="schedule-item" style="display:flex;align-items:center;gap:10px;">
+                <div class="time" style="min-width:48px;text-align:right;">${act.time}</div>
+                <div class="vertical-line" style="width:4px;height:32px;background:#129990;border-radius:2px;"></div>
+                <div class="event-description" style="background:#e6f6f5;padding:8px 18px;border-radius:8px;flex:1;display:flex;align-items:center;justify-content:space-between;">
+                    <p style="margin:0;">${act.desc}</p>
+                    <button class="delete-activity-btn" data-idx="${idx}" style="margin-left:12px;background:#fff;border:1px solid #129990;color:#129990;border-radius:4px;padding:2px 8px;cursor:pointer;">Delete</button>
+                </div>
+            </div>
         `;
-        listDiv.appendChild(itemDiv);
+        activityList.appendChild(li);
     });
     // Event listener untuk hapus
-    listDiv.querySelectorAll('.hapus-aktivitas-btn').forEach(btn => {
+    document.querySelectorAll('.delete-activity-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const idx = parseInt(this.getAttribute('data-idx'));
-            const aktivitas = loadAktivitasPerawatan();
-            aktivitas.splice(idx, 1);
-            saveAktivitasPerawatan(aktivitas);
-            renderAktivitasPerawatan();
+            const activities = getActivities();
+            activities.splice(idx, 1);
+            saveActivities(activities);
+            renderActivities();
         });
     });
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    renderAktivitasPerawatan();
-    const form = document.getElementById('form-aktivitas-perawatan');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const input = document.getElementById('input-aktivitas');
-            if (!input.value.trim()) return;
-            const now = new Date();
-            const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-            const aktivitas = loadAktivitasPerawatan();
-            aktivitas.push({ text: input.value.trim(), time });
-            saveAktivitasPerawatan(aktivitas);
-            input.value = '';
-            renderAktivitasPerawatan();
-        });
+document.getElementById('add-activity-btn')?.addEventListener('click', function() {
+    const input = document.getElementById('new-activity-input');
+    if (input && input.value.trim()) {
+        const now = new Date();
+        const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+        const activities = getActivities();
+        activities.push({ time, desc: input.value.trim() });
+        saveActivities(activities);
+        input.value = '';
+        renderActivities();
     }
 });
+renderActivities();
+
+// === Integrasi API Machine Learning untuk Perbarui Kondisi Tanaman ===
+function getPlantName() {
+    const input = document.getElementById('plant-name-input');
+    if (input && input.value.trim()) {
+        return input.value.trim();
+    }
+    // fallback ke URL
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('plant') || '';
+}
+
+async function fetchMLPrediction(plantName) {
+    const res = await fetch('https://intimate-admittedly-kangaroo.ngrok-free.app/predict/kebun', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nama_tanaman: plantName })
+    });
+    if (!res.ok) throw new Error('Gagal mendapatkan prediksi');
+    return await res.json();
+}
+
+async function handlePredict() {
+    const plantName = getPlantName();
+    if (!plantName) {
+        alert('Plant name must be provided!');
+        return;
+    }
+    const resultDiv = document.getElementById('ml-result');
+    resultDiv.innerHTML = 'Loading...';
+    try {
+        const data = await fetchMLPrediction(plantName);
+        resultDiv.innerHTML = `
+            <p><strong>Plant Function:</strong> ${data['Fungsi Tanaman']}</p>
+            <p><strong>Light Type:</strong> ${data['Jenis Cahaya']}</p>
+            <p><strong>Watering Pattern:</strong> ${data['Pola Penyiraman']}</p>
+            <p><strong>Insects:</strong> ${data['Serangga']}</p>
+            <p><strong>Fertilizer Type:</strong> ${data['Tipe Pupuk']}</p>
+        `;
+    } catch (err) {
+        resultDiv.innerHTML = 'Failed to load prediction.';
+    }
+}
+
+document.getElementById('predict-btn')?.addEventListener('click', handlePredict);
+
+// Auto-load prediksi jika nama tanaman ada di URL
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('plant')) {
+    const input = document.getElementById('plant-name-input');
+    if (input) input.value = urlParams.get('plant');
+    handlePredict();
+}
+
+// async function fetchCurrentCondition(latitude, longitude) {
+//     const response = await fetch('https://intimate-admittedly-kangaroo.ngrok-free.app/predict/location', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ latitude, longitude })
+//     });
+
+//     if (!response.ok) throw new Error('Gagal mengambil kondisi berdasarkan lokasi');
+//     return await response.json();
+// }
+
+async function handleLocationBasedCondition(latitude, longitude) {
+    const kondisiDiv = document.getElementById('kondisi');
+    kondisiDiv.innerHTML = 'Loading current condition...';
+
+    const API_KEY = 'a290da4bf85a0b886d5b613a2dbecd23'; // Gantilah dengan API key kamu
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric&lang=id`;
+
+    try {
+        const res = await fetch(weatherUrl);
+        if (!res.ok) throw new Error('Gagal memuat data cuaca');
+
+        const weather = await res.json();
+        const suhu = weather.main.temp;
+        const kelembaban = weather.main.humidity;
+        const kondisiCuaca = weather.weather[0].main;
+
+        let climate = "Tropical";
+        if (kondisiCuaca.includes("Snow")) climate = "Polar";
+        else if (kondisiCuaca.includes("Rain")) climate = "Tropical";
+        else if (["Clear", "Clouds"].includes(kondisiCuaca)) climate = "Subtropical";
+        else climate = "Temperate";
+
+        kondisiDiv.innerHTML = `
+            <p><strong>Temperature:</strong> ${suhu.toFixed(1)}°C</p>
+            <p><strong>Humidity:</strong> ${kelembaban}%</p>
+            <p><strong>Weather:</strong> ${kondisiCuaca}</p>
+            <p><strong>Climate:</strong> ${climate}</p>
+        `;
+    } catch (err) {
+        console.error('Gagal memuat kondisi cuaca:', err);
+        kondisiDiv.innerHTML = 'Unable to load location condition.';
+    }
+}
 
