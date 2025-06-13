@@ -3,7 +3,7 @@ import '../css/profile.css';
 document.addEventListener("DOMContentLoaded", function () {
   const token = localStorage.getItem("token");
   if (!token) {
-    alert("Token tidak ditemukan. Silakan login ulang.");
+    alert("Token not found. Please log in again.");
     return;
   }
 
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   })
   .then(res => {
-    if (!res.ok) throw new Error("Gagal mengambil profil");
+    if (!res.ok) throw new Error("Failed to fetch profile");
     return res.json();
   })
   .then(data => {
@@ -60,14 +60,14 @@ document.addEventListener("DOMContentLoaded", function () {
     fillEditForm(profile);
   })
   .catch(err => {
-    console.error("Gagal mengambil profil:", err);
-    alert("Gagal mengambil profil, silakan coba lagi.");
+    console.error("Failed to fetch profile:", err);
+    alert("Failed to retrieve profile, please try again.");
   });
 
   
   async function updateProfile(updatedData, file = null) {
     if (!userId) {
-      alert("ID pengguna tidak ditemukan.");
+      alert("User ID not found.");
       return Promise.reject("User ID null");
     }
 
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!res.ok) {
         const errorText = await res.text();
-        throw new Error(`Gagal update profil: ${res.status} - ${errorText}`);
+        throw new Error(`Failed to update profile: ${res.status} - ${errorText}`);
       }
 
       
@@ -107,18 +107,18 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       if (!profileRes.ok) {
-        throw new Error("Gagal mengambil profil setelah update");
+        throw new Error("Failed to fetch profile after update");
       }
 
       const data = await profileRes.json();
       const updatedProfile = data.data || {};
       updateProfileUI(updatedProfile);
       fillEditForm(updatedProfile);
-      alert("Profil berhasil diperbarui!");
+      alert("Profile updated successfully!");
       document.getElementById("popup-edit-profile").classList.remove("active");
     } catch (err) {
-      console.error("Gagal update atau ambil ulang profil:", err);
-      alert(`Gagal memperbarui profil: ${err.message}`);
+      console.error("Failed to update or refetch profile:", err);
+      alert(`Failed to update profile: ${err.message}`);
     }
   }
 

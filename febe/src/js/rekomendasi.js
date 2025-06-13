@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     showLoading();
     const token = localStorage.getItem("token");
     if (!token) {
-        alert("Token tidak ditemukan. Silakan login ulang.");
+        alert("Token not found. Please log in again.");
         window.location.href = "login.html";
         return;
     }
@@ -250,7 +250,7 @@ async function handleSearch(e) {
     plantContainer.innerHTML = `
         <div class="loading-wrapper">
             <div class="spinner"></div>
-            <p>Memuat rekomendasi tanaman...</p>
+            <p>Loading plant recommendations...</p>
         </div>
     `;
 
@@ -271,7 +271,7 @@ async function handleSearch(e) {
             await renderPlants();
         } catch (err) {
             console.error("Gagal ambil ulang data lokasi:", err);
-            plantContainer.innerHTML = `<p style="text-align:center;">Gagal memuat data rekomendasi</p>`;
+            plantContainer.innerHTML = `<p style="text-align:center;">Failed to load recommendation data</p>`;
         }
         return;
     }
@@ -354,7 +354,7 @@ function showLoading() {
     container.innerHTML = `
         <div class="loading-wrapper">
             <div class="spinner"></div>
-            <p>Memuat rekomendasi tanaman...</p>
+            <p>Loading plant recommendations...</p>
         </div>
     `;
 }
@@ -372,7 +372,7 @@ async function getWikipediaImage(plantName, latinName) {
             const page = Object.values(pages)[0];
             return page.thumbnail?.source || null;
         } catch (err) {
-            console.error("Gagal ambil gambar Wikipedia untuk", title, err);
+            console.error("Failed to fetch Wikipedia image for", title, err);
             return null;
         }
     };
@@ -395,7 +395,7 @@ async function renderPlants() {
                 <div class="plant-details"><h3>${plant.PlantName || plant.latin}</h3></div>
                 <div class="plant-image"><img src="${imageUrl}" alt="Plant Image"></div>
                 <div class="card-actions">
-                    <button class="action-button">Tanam dan Pantau</button>
+                    <button class="action-button">Grow and Track</button>
                 </div>
                 <div class="plant-details">
                     <p>Suhu: ${suhu !== null ? suhu + "°C" : "N/A"}</p>
@@ -464,7 +464,7 @@ document.querySelectorAll('.action-button').forEach((btn, index) => {
                 combined: plant.combined
             };
         } else {
-            console.error("Data tanaman tidak valid:", plant);
+            console.error("Invalid plant data:", plant);
             return;
         }
 
@@ -483,11 +483,11 @@ document.querySelectorAll('.action-button').forEach((btn, index) => {
             if (res.ok) {
                 window.location.href = "manajemen-kebun.html";
             } else {
-                alert("Gagal menyimpan tanaman: " + result.message);
+                alert("Failed to save plant: " + result.message);
             }
         } catch (err) {
             console.error("Error saat menyimpan tanaman:", err);
-            alert("Terjadi kesalahan saat menyimpan tanaman.");
+            alert("An error occurred while saving the plant.");
         }
     });
 });

@@ -1226,3 +1226,37 @@ body.sidebar-open .overlay {
   background: #e74c3c;
   color: #fff;
 }
+
+
+
+
+
+
+
+.footer-social {
+  display: flex;
+  justify-content: center; /* atau flex-start/end sesuai kebutuhan */
+  gap: 5px; /* jarak antar logo */
+}
+
+.footer-social .STMIK {
+  width: 150px;
+  height: auto;
+  opacity: 0.9; 
+  margin-top: 105px;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3)); /* efek bayangan */
+}
+
+.footer-social .POLIWANGI {
+  width: 75px;
+  height: auto;
+  margin: 0 10px;
+  margin-top: 90px;
+}
+
+.footer-social .USAT {
+  width: 65px;
+  height: auto;
+  border-radius: 8px; /* misal sudut membulat */
+  margin-top: 93px;
+}

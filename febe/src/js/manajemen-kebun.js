@@ -13,7 +13,7 @@ async function getWikipediaImage(plantName, latinName) {
             const page = Object.values(pages)[0];
             return page.thumbnail?.source || null;
         } catch (err) {
-            console.error("Gagal ambil gambar Wikipedia untuk", title, err);
+            console.error("Failed to fetch Wikipedia image for", title, err);
             return null;
         }
     };
@@ -43,24 +43,22 @@ async function fetchUserPlants(userId, token) {
         const data1 = await res1.json();
         const data2 = await res2.json();
 
-       return [
-    ...(data1.data || []).map(plant => ({
-        id: plant.id,
-        name: plant.latin,
-        imageKey: plant.latin,
-        source: 'user_plants'
-    })),
-    ...(data2.data || []).map(plant => ({
-        id: plant.id,
-        name: plant.PlantName,
-        imageKey: plant.PlantName,
-        source: 'user_plantsandfamily'
-    }))
-];
-
-
+        return [
+            ...(data1.data || []).map(plant => ({
+                id: plant.id,
+                name: plant.latin,
+                imageKey: plant.latin,
+                source: 'user_plants'
+            })),
+            ...(data2.data || []).map(plant => ({
+                id: plant.id,
+                name: plant.PlantName,
+                imageKey: plant.PlantName,
+                source: 'user_plantsandfamily'
+            }))
+        ];
     } catch (err) {
-        console.error("Gagal mengambil data tanaman user:", err);
+        console.error("Failed to fetch user's plant data:", err);
         return [];
     }
 }
@@ -72,11 +70,11 @@ function createPlantCard(name, imageUrl, index, plantId, source, token) {
     const closeBtn = document.createElement('button');
     closeBtn.className = 'archive-button';
     closeBtn.innerHTML = '&times;';
-    closeBtn.title = 'Hapus tanaman';
+    closeBtn.title = 'Delete plant';
     closeBtn.addEventListener('click', async (e) => {
-        e.stopPropagation(); // supaya tidak trigger pantau
-        const confirmArsip = confirm("Yakin ingin menghapus tanaman ini?");
-        if (!confirmArsip) return;
+        e.stopPropagation(); // prevent triggering monitor button
+        const confirmDelete = confirm("Are you sure you want to delete this plant?");
+        if (!confirmDelete) return;
 
         const archiveUrl = `${BASE_API_URL}/${source}/archive/${plantId}`;
         try {
@@ -89,14 +87,14 @@ function createPlantCard(name, imageUrl, index, plantId, source, token) {
             });
             const result = await res.json();
             if (res.ok) {
-                alert("Tanaman berhasil dihapus.");
-                card.remove(); // hapus dari UI
+                alert("Plant successfully deleted.");
+                card.remove(); // remove from UI
             } else {
-                alert("Gagal menghapus: " + result.message);
+                alert("Failed to delete: " + result.message);
             }
         } catch (err) {
-            console.error("Error saat menghapus:", err);
-            alert("Terjadi kesalahan saat menghapus tanaman.");
+            console.error("Error while deleting:", err);
+            alert("An error occurred while deleting the plant.");
         }
     });
 
@@ -114,11 +112,11 @@ function createPlantCard(name, imageUrl, index, plantId, source, token) {
     const button = document.createElement('button');
     button.className = 'monitor-button';
     button.id = `tanam${index}`;
-    button.textContent = 'Pantau';
+    button.textContent = 'Monitor';
     button.addEventListener('click', () => {
         window.location.href = 'detail-kebun.html';
     });
-    
+
     card.appendChild(closeBtn);
     card.appendChild(imgWrapper);
     card.appendChild(title);
@@ -129,7 +127,7 @@ function createPlantCard(name, imageUrl, index, plantId, source, token) {
 
 async function renderUserPlants(token) {
     const userId = localStorage.getItem('user_id');
-    if (!userId) return console.error("User ID tidak ditemukan.");
+    if (!userId) return console.error("User ID not found.");
 
     const container = document.getElementById("plantcontainer");
     const grid = document.createElement("div");
@@ -156,7 +154,7 @@ async function renderUserPlants(token) {
 document.addEventListener('DOMContentLoaded', function () {
     const token = localStorage.getItem("token");
     if (!token) {
-        alert("Token tidak ditemukan. Silakan login ulang.");
+        alert("Token not found. Please log in again.");
         window.location.href = "login.html";
         return;
     }
@@ -181,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
     .catch(err => {
-        console.error("Gagal ambil data user atau profil:", err);
+        console.error("Failed to fetch user or profile data:", err);
     });
 
     const mobileMenuIcon = document.querySelector('.mobile-menu-icon');

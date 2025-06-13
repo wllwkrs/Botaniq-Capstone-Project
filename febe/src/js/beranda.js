@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const BASE_API_URL = 'https://previously-notable-hound.ngrok-free.app'; 
    
     if (!token) {
-        alert("Token tidak ditemukan. Silakan login ulang.");
+        alert("Token not found. Please log in again.");
         window.location.href = "login.html"; 
         return;
     }
@@ -22,18 +22,18 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(res => {
         if (!res.ok) {
             if (res.status === 401) {
-                alert("Sesi Anda telah berakhir, silakan login ulang.");
+                alert("Your session has expired, please log in again.");
                 localStorage.removeItem("token");
                 window.location.href = "login.html";
             }
-            throw new Error(`Gagal mengambil profil: ${res.statusText}`);
+            throw new Error(`Failed to fetch profile: ${res.statusText}`);
         }
         return res.json();
     })
     .then(data => {
         const profile = data.data || {}; 
         const nama = profile.nama || "Pengguna";
-        document.getElementById("greeting").textContent = `Selamat Datang ${nama} 👋`;
+        document.getElementById("greeting").textContent = `Welcome ${nama} 👋`;
 
         const profileImageUrl = profile.foto ? `${BASE_API_URL}/uploads/${profile.foto}` : "assets/img/profile.jpeg";
         document.querySelectorAll(".profile-circle img").forEach(img => { 
@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     })
     .catch(err => {
-        console.error("Gagal ambil data user atau profil:", err);
-        document.getElementById("greeting").textContent = "Gagal memuat profil ❌";
+        console.error("Failed to fetch user data or profile:", err);
+        document.getElementById("greeting").textContent = "Failed to load profile ❌";
         document.querySelectorAll(".profile-circle img, .profile-avatar-card").forEach(img => {
             img.src = "assets/img/profile.jpeg"; // Path ke gambar default 
         });
@@ -89,29 +89,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     Map.build('#map', { locate: true, zoom: 13 })
       .then(instance => {
-          console.log('Peta berhasil dimuat');
+          console.log('Map successfully loaded');
 
           
           if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(
                   position => {
                       const userCoordinate = [position.coords.latitude, position.coords.longitude];
-                      const markerOptions = { alt: "Posisi Saya" };
-                      const popupOptions = { content: "Anda berada di sini!" };
+                      const markerOptions = { alt: "My Position" };
+                      const popupOptions = { content: "You are here!" };
 
                       instance.addMarker(userCoordinate, markerOptions, popupOptions);
-                      console.log(`Marker ditambahkan pada lokasi pengguna: ${userCoordinate}`);
+                      console.log(`Marker added at user's location: ${userCoordinate}`);
                   },
                   error => {
-                      console.error("Gagal mendapatkan lokasi pengguna:", error);
+                      console.error("Failed to get user's location:", error);
                   }
               );
           } else {
-              console.warn("Geolocation tidak didukung oleh browser ini.");
+              console.warn("Geolocation is not supported by this browser.");
           }
       })
       .catch(err => {
-          console.error('Gagal memuat peta:', err);
+          console.error('Failed to load map:', err);
       });
 
     // Navigasi halaman

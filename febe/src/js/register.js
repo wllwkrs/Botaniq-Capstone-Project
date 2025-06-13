@@ -54,12 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const password = passwordInput.value;
 
         if (!name || !email || !password) {
-            alert("Semua field harus diisi.");
+            alert("All fields are required.");
             return;
         }
 
         if (password.length < 8) {
-            alert("Password harus minimal 8 karakter.");
+            alert("Password must be at least 8 characters long.");
             return;
         }
 
@@ -81,14 +81,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const result = await response.json();
 
             if (response.ok) {
-                alert("Registrasi berhasil!");
+                alert("Registration successful!");
                 window.location.href = "login.html";
             } else {
-                alert(result.message || "Registrasi gagal.");
+                alert(result.message || "Registration failed.");
             }
         } catch (error) {
             console.error("Error:", error);
-            alert("Terjadi kesalahan saat registrasi.");
+            alert("An error occurred during registration.");
         }
     });
 });

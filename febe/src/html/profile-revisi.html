@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Profil - Profil Saya</title>
+        <title>Profil - My Profile</title>
         <!-- <link rel="stylesheet" href="assets/css/profile.css"> -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         </head>
@@ -18,9 +18,9 @@
                     <ul>
                         
                         <li><a href="beranda.html">Home</a></li>
-                        <li><a href="rekomendasi.html">Rekomendasi Tanaman</a></li>
-                        <li><a href="manajemen-kebun.html">Manajemen Kebun</a></li>
-                        <li><a href="profile-revisi.html">Profil</a></li>
+                        <li><a href="rekomendasi.html">Plant Recommendation</a></li>
+                        <li><a href="manajemen-kebun.html">My Garden</a></li>
+                      
                     </ul>
                 </nav>
             <div class="profile-section">
@@ -47,8 +47,8 @@
             </div>
             <nav class="mobile-nav">
                 <ul>
-                    <li><a href="rekomendasi.html">Rekomendasi Tanaman</a></li>
-                    <li><a href="manajemen-kebun.html">Manajemen Kebun</a></li>
+                    <li><a href="rekomendasi.html">Plant Recommendation</a></li>
+                    <li><a href="manajemen-kebun.html">My Garden</a></li>
                 </ul>
             </nav>
         </div>
@@ -63,9 +63,9 @@
                 <div class="card-header">
                     <img src="../img/profile.jpeg" alt="Profile Avatar" class="profile-avatar-card">
                     <div class="profile-info-header">
-                        <span class="profile-name" id="nama-profile">Memuat...</span>
-                        <span class="profile-role">Petani</span>
-                        <span class="profile-location" id="alamat">Memuat...</span>
+                        <span class="profile-name" id="nama-profile">Loading...</span>
+                        <span class="profile-role">Farmer</span>
+                        <span class="profile-location" id="alamat">Loading...</span>
                     </div>
                     <button class="edit-card-btn" data-popup="general">Edit <i class="fas fa-pencil-alt"></i></button>
                 </div>
@@ -80,28 +80,28 @@
                 <div class="card-details">
                     <div class="detail-row">
                         <div class="detail-item">
-                            <span class="detail-label-card">Nama Depan</span>
-                            <span class="detail-value-card" id="nama-depan" >Memuat...</span>
+                            <span class="detail-label-card">First Name</span>
+                            <span class="detail-value-card" id="nama-depan" >Loading...</span>
                         </div>
                         <div class="detail-item">
-                            <span class="detail-label-card">Nama Belakang</span>
-                            <span class="detail-value-card" id="nama-belakang">memuat...</span>
+                            <span class="detail-label-card">Last Name</span>
+                            <span class="detail-value-card" id="nama-belakang">Loading...</span>
                         </div>
                     </div>
                     <div class="detail-row">
                         <div class="detail-item">
                             <span class="detail-label-card">Email</span>
-                            <span class="detail-value-card" id="email">memuat...</span>
+                            <span class="detail-value-card" id="email">Loading...</span>
                         </div>
                         <div class="detail-item">
-                            <span class="detail-label-card">Telepon</span>
-                            <span class="detail-value-card" id="telepon">memuat...</span>
+                            <span class="detail-label-card">Phone</span>
+                            <span class="detail-value-card" id="telepon">Loading...</span>
                         </div>
                     </div>
                      <div class="detail-row">
                         <div class="detail-item full-width">
                             <span class="detail-label-card">Role</span>
-                            <span class="detail-value-card">Petani</span>
+                            <span class="detail-value-card">Farmer</span>
                         </div>
                     </div>
                 </div>
@@ -116,12 +116,12 @@
                  <div class="card-details">
                     <div class="detail-row">
                         <div class="detail-item">
-                            <span class="detail-label-card">Negara</span>
-                            <span class="detail-value-card" id="negara">memuat...</span>
+                            <span class="detail-label-card">Country</span>
+                            <span class="detail-value-card" id="negara">Loading...</span>
                         </div>
                          <div class="detail-item">
-                            <span class="detail-label-card">Kota</span>
-                            <span class="detail-value-card" id="kota">memuat...</span>
+                            <span class="detail-label-card">City</span>
+                            <span class="detail-value-card" id="kota">Loading...</span>
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="fullName">Nama</label>
+                        <label for="fullName">Name</label>
                         <input type="text" id="nama-detail" name="fullName" value="nama">
                     </div>
                     <div class="form-group">
@@ -157,7 +157,7 @@
                         <input type="text" id="role" name="role" value="Petani" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="location">Alamat</label>
+                        <label for="location">Address</label>
                         <input type="text" id="alamat-detail" name="location" value="alamat">
                     </div>
                     <div class="popup-buttons">
@@ -177,11 +177,11 @@
                 </div>
                 <form class="edit-popup-form">
                     <div class="form-group">
-                        <label for="firstName">Nama Depan</label>
+                        <label for="firstName">First Name</label>
                         <input type="text" id="nama-depan-detail" name="firstName" value="nama">
                     </div>
                     <div class="form-group">
-                        <label for="lastName">Nama Belakang</label>
+                        <label for="lastName">Last Name</label>
                         <input type="text" id="nama-belakang-detail" name="lastName" value="nama_belakang">
                     </div>
                     <div class="form-group">
@@ -189,7 +189,7 @@
                         <input type="email" id="email-detail" name="email" value="email" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Telepon</label>
+                        <label for="phone">Phone</label>
                         <input type="tel" id="telepon-detail" name="phone" value="telepon">
                     </div>
                     <div class="popup-buttons">
@@ -209,11 +209,11 @@
                 </div>
                 <form class="edit-popup-form">
                     <div class="form-group">
-                        <label for="country">Negara</label>
+                        <label for="country">Country</label>
                         <input type="text" id="negara-detail" name="country" value="negara">
                     </div>
                     <div class="form-group">
-                        <label for="cityState">Kota</label>
+                        <label for="cityState">City</label>
                         <input type="text" id="kota-detail" name="cityState" value="kota">
                     </div>
                     <div class="popup-buttons">

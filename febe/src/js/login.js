@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = passwordInput.value;
 
     if (!email || !password) {
-      alert("Email dan password harus diisi.");
+      alert("Email and password are required.");
       return;
     }
 
@@ -41,8 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!contentType.includes("application/json")) {
         const text = await response.text();
-        console.error("Respon bukan JSON:", text);
-        alert("Server mengembalikan format tidak valid.");
+        console.error("Response is not JSON:", text);
+        alert("Server returned an invalid format.");
         return;
       }
 
@@ -50,20 +50,20 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Login Response:", result);
 
       if (response.ok) {
-        alert("Login berhasil!");
+        alert("Login successful!");
 
         if (result.token) {
           localStorage.setItem("token", result.token);
           window.location.href = "beranda.html";
         } else {
-          alert("Token tidak ditemukan di response.");
+          alert("Token not found in response.");
         }
       } else {
-        alert(result.message || "Login gagal.");
+        alert(result.message || "Login failed.");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Terjadi kesalahan saat login.");
+      alert("An error occurred during login.");
     }
   });
 });
