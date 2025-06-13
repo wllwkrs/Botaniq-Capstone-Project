@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BotaniQ - My Garden</title>
+    <!-- <link rel="stylesheet" href="assets/css/manajemen-kebun.css"> Link the specific CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For icons -->
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="../img/image 6.svg" alt="BotaniQ Logo">
+            </div>
+            <nav class="desktop-nav">
+                 <ul>
+                    <li><a href="beranda.html">Home</a></li>
+                    <li><a href="manajemen-kebun.html">My Garden</a></li>
+                    <li><a href="rekomendasi.html">Recommendations</a></li>
+                </ul>
+            </nav>
+            <div class="profile-section">
+                    <div class="profile-circle">
+                        <!-- <i class="fas fa-user"></i> -->
+                         <img id="profileImage" class="profile-avatar-card" src="../img/profile.jpeg" alt="Profile Photo">
+                    </div>
+                    <div class="profile-dropdown">
+                    <a href="profile-revisi.html"><i class="fas fa-user"></i> Profile</a>
+                    <div class="divider"></div>
+                    <a href='#' id="logoutbtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>         <!-- Mobile menu icon will be added here by CSS based on screen size -->
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i> <!-- Hamburger icon -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar (structure similar to other pages) -->
+    <div class="mobile-sidebar">
+        <div class="sidebar-header">
+            <img src="../img/image 6.svg" alt="BotaniQ Logo">
+            <i class="fas fa-times close-sidebar"></i> <!-- Close icon -->
+        </div>
+        <nav class="mobile-nav">
+             <ul>
+                    <li><a href="beranda.html">Home</a></li>
+                    <li><a href="manajemen-kebun.html">My Garden</a></li>
+                    <li><a href="rekomendasi.html">Recommendations</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Overlay for mobile sidebar -->
+    <div class="overlay"></div>
+
+    <!-- Main Content Section -->
+    <section class="main-content">
+        <div class="container" id="plantcontainer">
+            <h2 class="page-title">My Garden</h2>
+            <div id="loading" class="loading-spinner" style="display: none;"></div>
+        </div>
+    </section>
+
+    <!-- Footer (structure similar to other pages) -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="../img/image 6.svg" alt="BotaniQ Logo">
+                    <h3>BotaniQ</h3>
+                </div>
+                <p>Whether you're just getting started or a seasoned grower, we provide the tools, insights, and support you need to nurture your green space with ease and confidence.</p>
+                
+            </div>
+            
+                
+                
+            <div class="footer-social">
+                <a href="https://antarbangsa.ac.id/"><img src="https://storage.daqu.id/web-antarbangsa/2021/02/logo-stmikkk.png" alt="STMIK" class="STMIK"></a>
+                <a href="https://poliwangi.ac.id/"><img src="../img/POLIWANGI.png" alt="POLIWANGI" class="POLIWANGI"></a>
+                <a href="https://untirta.ac.id/"><img src="../img/USAT.png" alt="USAT" class="USAT"></a>
+            </div>
+
+        </div>
+        <div class="copyright">
+            <p>© 2025 BotaniQ. Let's grow something beautiful together. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- <script src="assets/js/manajemen-kebun.js"></script> Assuming shared JS for mobile menu -->
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileCircle = document.querySelector('.profile-circle');
+            const profileDropdown = document.querySelector('.profile-dropdown');
+
+            profileCircle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!profileCircle.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+        });
+     </script>
+</body>
+</html>

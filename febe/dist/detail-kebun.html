@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BotaniQ - Detail Kebun</title>
+    <!-- <link rel="stylesheet" href="assets/css/detail-kebun.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For icons -->
+    <!-- Link for Vanilla Calendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.4/build/vanilla-calendar.min.css" rel="stylesheet">
+<script defer src="detail-kebun.bundle.js"></script><link href="assets/css/detail-kebun.css" rel="stylesheet"></head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="assets/img/image 6.svg" alt="BotaniQ Logo">
+            </div>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="beranda.html">Home</a></li>
+                    <li><a href="manajemen-kebun.html">Manajemen Kebun</a></li>
+                    <li><a href="rekomendasi.html">Rekomendasi</a></li>
+                </ul>
+            </nav>
+            <div class="profile-section">
+                    <div class="profile-circle">
+                        <!-- <i class="fas fa-user"></i> -->
+                         <img id="profileImage" class="profile-avatar-card" src="assets/img/profile.jpeg" alt="Foto Profil">
+                    </div>
+                    <div class="profile-dropdown">
+                    <a href="profile-revisi.html"><i class="fas fa-user"></i> Profile</a>
+                    <div class="divider"></div>
+                    <a href='#' id="logoutbtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+            <!-- Mobile menu icon will be added here by CSS based on screen size -->
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i> <!-- Hamburger icon -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar (structure similar to other pages) -->
+    <div class="mobile-sidebar">
+        <div class="sidebar-header">
+            <img src="assets/img/image 6.svg" alt="BotaniQ Logo">
+            <i class="fas fa-times close-sidebar"></i> <!-- Close icon -->
+        </div>
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="beranda.html">Home</a></li>
+                <li><a href="manajemen-kebun.html">Manajemen Kebun</a></li>
+                <li><a href="list-rekomendasi.html">Rekomendasi</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Overlay for mobile sidebar -->
+    <div class="overlay"></div>
+
+    <!-- Main Content Section -->
+    <section class="main-content">
+        <div class="container">
+            <!-- Content for specific plant details will go here -->
+            <div class="plant-detail-header">
+                <a href="manajemen-kebun.html" class="back-link">
+                    <i class="fas fa-chevron-left"></i> Rafflesia Arnoldii
+                </a>
+                <h2>Rafflesia Arnoldii</h2> <!-- Placeholder plant name -->
+            </div>
+
+            <div class="detail-sections-grid">
+                <!-- Calendar Section -->
+                <div class="detail-card calendar-section">
+                    <h3>Kalender</h3>
+                    <!-- Calendar container -->
+                    <div class="calendar-container">
+                        <!-- Calendar will be rendered here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Schedule Section -->
+                <div class="detail-card schedule-section">
+                    <h3>Jadwal Perawatan (Real-time)</h3>
+                    <form id="form-aktivitas-perawatan" style="margin-bottom: 1em;">
+                        <input type="text" id="input-aktivitas" placeholder="Tambah aktivitas perawatan (misal: Siram Tanaman, Pemupukan, Pembersihan)" required>
+                        <button type="submit">Tambah</button>
+                    </form>
+                    <div class="schedule-list">
+                        <p class="schedule-day-label" id="realtime-day-label">Hari ini</p>
+                        <h4 class="schedule-date" id="realtime-date">Senin, 3 Februari 2027</h4>
+                        <div id="list-aktivitas-perawatan">
+                            <!-- Daftar aktivitas akan muncul di sini, setiap aktivitas akan ada tombol hapus -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Update Condition Section -->
+                <div class="detail-card update-condition-section">
+                    <h3>Perbarui Kondisi Tanaman</h3>
+                    <div class="input-group">
+                        <label for="pertumbuhan">Pertumbuhan</label>
+                        <select id="pertumbuhan">
+                            <option value="">Pilih...</option>
+                            <option value="Lambat">Lambat</option>
+                            <option value="Sedang">Sedang</option>
+                            <option value="Cepat">Cepat</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="pengairan">Pengairan</label>
+                        <select id="pengairan">
+                            <option value="">Pilih...</option>
+                            <option value="Siram mingguan">Siram mingguan</option>
+                            <option value="Siram sampai tanah lembap">Siram sampai tanah lembap</option>
+                            <option value="Siram saat tanah kering">Siram saat tanah kering</option>
+                            <option value="Siram secara teratur">Siram secara teratur</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="sinar-matahari">Sinar Matahari</label>
+                        <select id="sinar-matahari">
+                            <option value="">Pilih...</option>
+                            <option value="Sinar matahari tidak langsung">Sinar matahari tidak langsung</option>
+                            <option value="Sinar matahari penuh">Sinar matahari penuh</option>
+                            <option value="Sinar matahari sebagian">Sinar matahari sebagian</option>
+                        </select>
+                    </div>
+                    <button class="update-button">Perbarui</button>
+                </div>
+
+                <!-- Current Condition Section -->
+                <div class="detail-card current-condition-section">
+                    <h3>Kondisi Terkini</h3>
+                    <p>Kelembaban: <strong>65 %</strong></p>
+                    <p>Kondisi Daun: <strong>Berlubang</strong></p>
+                    <p>Kondisi Cuaca: <strong>Panas Terik</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (structure similar to other pages) -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="assets/img/image 6.svg" alt="BotaniQ Logo">
+                    <h3>BotaniQ</h3>
+                </div>
+                <p>Whether you're just getting started or a seasoned grower, we provide the tools, insights, and support you need to nurture your green space with ease and confidence.</p>
+                <div class="subscribe">
+                    <input type="text" placeholder="Type your text....">
+                    <button><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Solutions</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Jobs</h3>
+                    <ul>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Out Team</a></li>
+                        <li><a href="#">Press Release</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h3>Terms of Use</h3>
+                    <ul>
+                        <li><a href="#">Cookies Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2025 BotaniQ. Let's grow something beautiful together. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- <script src="assets/js/detail-kebun.js"></script> Link the specific JS file -->
+    <!-- Link for Vanilla Calendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@2.9.4/build/vanilla-calendar.min.js"></script>
+    
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+            const profileCircle = document.querySelector('.profile-circle');
+            const profileDropdown = document.querySelector('.profile-dropdown');
+
+            profileCircle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!profileCircle.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
